@@ -1,6 +1,6 @@
 import React from "react";
 import "./Collection.css";
-import { useCollectionAria } from "./hooks/useCollectionAria";
+import { createCollectionAria } from "./utils/createCollectionAria";
 
 const Item = ({
   children,
@@ -152,8 +152,8 @@ const Collection = React.forwardRef(
     const actualLevel = level || 1;
     const actualIsNestedInItem = _isNestedInItem || false;
 
-    // Initialize ARIA hook - always call for React rules compliance
-    const aria = useCollectionAria({
+    // Initialize ARIA factory function
+    const aria = createCollectionAria({
       role: role,
       pattern: pattern,
       parentRole,

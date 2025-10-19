@@ -35,11 +35,13 @@ const BasicListExample = () => {
               5.2
               <Collection as="ul" itemAs="li">
                 <Collection.Item>5.2.1</Collection.Item>
-                <Collection.Item>5.2.2</Collection.Item>
-                <Collection as="ul" itemAs="li">
-                  <Collection.Item>5.2.2.1</Collection.Item>
-                  <Collection.Item>5.2.2.2</Collection.Item>
-                </Collection>
+                <Collection.Item aria-expanded="true">
+                  5.2.2
+                  <Collection as="ul" itemAs="li">
+                    <Collection.Item>5.2.2.1</Collection.Item>
+                    <Collection.Item>5.2.2.2</Collection.Item>
+                  </Collection>
+                </Collection.Item>
               </Collection>
             </Collection.Item>
             <Collection.Item>5.3</Collection.Item>
