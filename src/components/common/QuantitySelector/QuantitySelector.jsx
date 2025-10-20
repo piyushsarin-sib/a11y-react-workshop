@@ -60,7 +60,7 @@ const QuantitySelector = ({
       <Button
         onClick={handleDecrease}
         variant="ghost"
-        className={`${currentSize.button} bg-gray-200 hover:bg-gray-300 text-black font-bold rounded-none ${isDecreaseDisabled ? 'opacity-50' : ''}`}
+        className={`${currentSize.button} bg-gray-200 hover:bg-gray-300 text-black font-bold rounded-none focus:ring-offset-2 focus:z-10 ${isDecreaseDisabled ? 'opacity-50' : ''}`}
         ariaLabel="Decrease quantity"
         disabled={isDecreaseDisabled}
       >
@@ -76,7 +76,7 @@ const QuantitySelector = ({
       <Button
         onClick={handleIncrease}
         variant="ghost"
-        className={`${currentSize.button} bg-gray-200 hover:bg-gray-300 text-black font-bold rounded-none ${isIncreaseDisabled ? 'opacity-50' : ''}`}
+        className={`${currentSize.button} bg-gray-200 hover:bg-gray-300 text-black font-bold rounded-none focus:ring-offset-2 focus:z-10 ${isIncreaseDisabled ? 'opacity-50' : ''}`}
         ariaLabel="Increase quantity"
         disabled={isIncreaseDisabled}
       >

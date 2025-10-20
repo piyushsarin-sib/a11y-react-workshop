@@ -40,16 +40,23 @@ if [[ -z "$base_file" ]]; then
   exit 1
 fi
 
-# Folder path
-base_dir="src/solved/${base_file}"
 
 # Extract numeric step
 current_step_number=${step//step/}
 prev_step_number=$((current_step_number - 1))
 
+# Extract numeric ex
+current_ex_number=${exercise//ex/}
+
+
+# Folder path
+base_dir="src/playground/Ex${current_ex_number}-${base_file}"
+
+
+
 # File paths
-file_prev="${base_dir}/${base_file}-step-${prev_step_number}.jsx"
-file_curr="${base_dir}/${base_file}-step-${current_step_number}.jsx"
+file_prev="${base_dir}/Step-${prev_step_number}.jsx"
+file_curr="${base_dir}/Step-${current_step_number}.jsx"
 
 # Handle step0 case (no previous file)
 if [[ "$current_step_number" -eq 0 ]]; then

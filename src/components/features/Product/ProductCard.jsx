@@ -35,7 +35,7 @@ const ProductCard = ({
         >
           {name}
         </Link>
-        <p className="text-gray-600 text-sm mb-2 flex-grow">{description}</p>
+        <p className="text-gray-700 text-sm mb-2 flex-grow">{description}</p>
         <div className="flex justify-between items-center mt-auto">
           <span className="font-bold">${price.toFixed(2)}</span>
           <Button

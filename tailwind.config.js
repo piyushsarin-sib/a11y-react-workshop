@@ -5,6 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1.5rem',
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1920px', // Increased from default 1536px to allow wider layouts
+      },
+    },
     extend: {
       animation: {
         'fadeIn': 'fadeIn 0.5s ease-in-out',

@@ -62,24 +62,10 @@ const Carousel = ({
       aria-label="Image carousel"
       ref={carouselRef}
     >
-      {/* Hidden but accessible controls for keyboard users */}
-      <div className="sr-only">
-        <button 
-          onClick={goToPrevious} 
-          aria-label="Previous slide"
-          onKeyDown={(e) => {
-            if (e.key === 'ArrowLeft') goToPrevious();
-            if (e.key === 'ArrowRight') goToNext();
-          }}
-        >
-          Previous slide
-        </button>
-        <button 
-          onClick={goToNext} 
-          aria-label="Next slide"
-        >
-          Next slide
-        </button>
+      {/* Live region for slide changes */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        Slide {currentIndex + 1} of {totalItems}
+        {items[currentIndex]?.title ? `: ${items[currentIndex].title}` : ''}
       </div>
       
       <div 
@@ -145,7 +131,7 @@ const Carousel = ({
             <button
               key={`dot-${item.id || index}`}
               onClick={() => goToIndex(index)}
-              className={`w-3 h-3 rounded-full ${
+              className={`w-3 h-3 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                 index === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
               }`}
               aria-label={`Go to slide ${index + 1}`}

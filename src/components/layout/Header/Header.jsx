@@ -5,16 +5,8 @@ import CartButton from "../../features/Cart/CartButton";
 const Header = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Skip link (hidden until focused) */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-600 text-white px-4 py-2 rounded-md z-50"
-      >
-        Skip to main content
-      </a>
-
       <nav
-        className="container mx-auto px-4 py-4 flex justify-between items-center"
+        className="container mx-auto px-10 py-4 flex justify-between items-center"
         aria-label="Main navigation"
       >
         <div className="flex items-center space-x-3">

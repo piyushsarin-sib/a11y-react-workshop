@@ -1,10 +1,11 @@
-// STEP: 2 - fix image and alt accessibility issues
+// STEP: 1 - fix syntactic accessibility issues (semantic HTML elements)
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import PropTypes from "prop-types";
 
 export const Card = ({ id, title, description, price, imageSrc }) => {
   const handleAddToCart = () => {
-    alert(`${title} added to cart`);
+    alert("Success");
   };
 
   return (
@@ -28,14 +29,13 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
 
         <button
           onClick={handleAddToCart}
-          aria-label="add"
           className="outline-none bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 text-sm w-full transition-colors rounded"
         >
           Add to Cart
         </button>
+        {/* ❌ ISSUE 2: Focus-visible not used, outline-none hides focus */}
         {/* ❌ ISSUE 3: No ARIA associations (aria-labelledby/aria-describedby) */}
-        {/* ❌ ISSUE 4: Focus-visible not used, outline-none hides focus */}
-        {/* ❌ ISSUE 5: Motion-reduce preference ignored in transitions */}
+        {/* ❌ ISSUE 4: Motion-reduce preference ignored in transitions */}
       </article>
     </li>
   );

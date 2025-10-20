@@ -34,7 +34,7 @@ const CartModal = () => {
     >
       {cart.length === 0 ? (
         <div className="text-center py-8">
-          <p className="text-gray-500 mb-4">Your cart is empty</p>
+          <p className="text-gray-700 mb-4">Your cart is empty</p>
           <Button onClick={cartModalState.close} variant="primary">
             Continue Shopping
           </Button>
@@ -50,7 +50,7 @@ const CartModal = () => {
                 <div className="ml-4 flex-grow">
                   <h3 className="font-medium">{item.name}</h3>
                   <div className="flex justify-between mt-1">
-                    <p className="text-gray-600">{item.price}</p>
+                    <p className="text-gray-700">{item.price}</p>
                     <QuantitySelector
                       quantity={item.quantity}
                       onIncrease={() => updateCartItemQuantity(item.id, item.quantity + 1)}
@@ -65,7 +65,7 @@ const CartModal = () => {
                 </div>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="ml-4 text-red-500 p-1"
+                  className="ml-4 text-red-500 p-1 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded hover:bg-red-50 transition-colors"
                   aria-label={`Remove ${item.name} from cart`}
                 >
                   <svg
@@ -74,6 +74,7 @@ const CartModal = () => {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"
@@ -90,6 +91,10 @@ const CartModal = () => {
             <div className="flex justify-between mb-4">
               <span className="font-medium">Total:</span>
               <span className="font-bold">Rs {totalPrice.toFixed(2)}</span>
+            </div>
+            {/* Live region for total price updates */}
+            <div className="sr-only" aria-live="polite" aria-atomic="true">
+              Cart total: Rs {totalPrice.toFixed(2)}
             </div>
             <div className="flex justify-between">
               <Button

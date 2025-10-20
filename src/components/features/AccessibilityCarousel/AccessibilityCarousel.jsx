@@ -65,6 +65,13 @@ const AccessibilityCarousel = () => {
 
   return (
     <div className="mb-8">
+      {/* Skip link for carousel */}
+      <a 
+        href="#search-filter-heading" 
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:rounded focus:left-4 focus:top-4"
+      >
+        Skip carousel
+      </a>
       <h2 className="sr-only">Accessibility Showcase</h2>
       <Carousel 
         items={accessibilityInfo}

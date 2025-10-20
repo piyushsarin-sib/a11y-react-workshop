@@ -39,7 +39,7 @@ const GridActiveDescendant = () => {
       itemAs="li"
       pattern="grid"
       ariaLabel="Editable items grid"
-      className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6"
+      className="grid grid-cols-2  gap-4 p-6"
       {...gridNav.getCollectionProps()}
       ref={gridRef}
       onKeyDown={gridNav.handleKeyDown}

@@ -18,6 +18,8 @@
   --brand-forest-green-800: hsla(158, 100%, 20.8%, 1);
   --brand-forest-green-900: hsla(156, 100%, 12.9%, 1);
   --brand-forest-green-950: hsla(159, 100%, 9%, 1);
+  --brand-forest-green-accessible: #0d6b4d; /* High contrast green (5.1:1 ratio on white) for WCAG AA compliance */
+  --brand-forest-green-accessible-hover: #0a5239;
   --brand-iris-purple-100: hsla(244, 70%, 96.1%, 1);
   --brand-iris-purple-200: hsla(244, 65.2%, 91%, 1);
   --brand-iris-purple-300: hsla(245, 67%, 81%, 1);
@@ -95,7 +97,7 @@
   --sib-color_warning-background:var(--brand-coral-orange-100, hsla(16, 100%, 97.1%, 1));
   --sib-color_warning-background-dark:var(--brand-coral-orange-200, hsla(18, 100%, 91%, 1));
   --sib-color_content-primary:var(--brand-charcoal-grey-900, hsla(0, 0%, 10.6%, 1));
-  --sib-color_content-secondary:var(--brand-charcoal-grey-600, hsla(0, 0%, 41.2%, 1));
+  --sib-color_content-secondary:var(--brand-charcoal-grey-700, hsla(0, 0%, 27.8%, 1));
   --sib-color_content-white:var(--brand-white, hsla(0, 0%, 100%, 1));
   --sib-color_surface-white-background:var(--brand-white, hsla(0, 0%, 100%, 1));
   --sib-color_surface-sidebar-background:var(--brand-charcoal-grey-50, hsla(0, 0%, 96%, 1));

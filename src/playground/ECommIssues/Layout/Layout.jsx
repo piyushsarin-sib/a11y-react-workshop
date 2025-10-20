@@ -6,7 +6,7 @@ const Header = ({ totalItems, openCartModal }) => {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="container mx-auto px-4 py-4 flex justify-between items-center" aria-label="Main Navigation">
+      <nav className="container mx-auto px-10 py-4 flex justify-between items-center" aria-label="Main Navigation">
         <Link to="/" className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md">
           Accessible eCommerce
         </Link>

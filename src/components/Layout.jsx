@@ -6,10 +6,15 @@ import Footer from "./Footer";
 const Layout = ({ children, withLayout, showHeader, showFooter }) => {
     return (
       <>
+        {/* Skip to main content link - first focusable element */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         {showHeader && <Header />}
         <main 
           id="main-content"
           className={`${withLayout ? "flex flex-col items-center justify-center px-6 py-6 text-center" : ""}`}
+          tabIndex={-1}
         >
           {children}
         </main>

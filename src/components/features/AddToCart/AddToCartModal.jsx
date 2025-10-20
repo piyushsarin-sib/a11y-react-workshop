@@ -98,6 +98,12 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
           />
         </div>
         
+        {/* Live region for quantity updates */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          {quantity > 0 && `${product.name} quantity: ${quantity}`}
+          {quantity === 0 && cart.some(item => item.id === product.id) && `${product.name} will be removed from cart`}
+        </div>
+        
         <div className="flex justify-between items-center mb-4">
           {quantity === 0 && (
             <p className="text-red-600 text-sm">Setting quantity to 0 will remove the item from cart</p>

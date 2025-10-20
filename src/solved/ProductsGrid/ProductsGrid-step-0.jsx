@@ -73,7 +73,7 @@ const ProductsGrid = () => {
   }
 
   return (
-    <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <ul className="grid grid-cols-2  gap-4">
       {products.map((product) => (
         <li
           key={product.id}

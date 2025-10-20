@@ -78,7 +78,7 @@ const ProductsGrid = () => {
       itemAs="li"
       pattern="grid"
       ariaLabel="Product cards"
-      className="grid grid-cols-2 md:grid-cols-4 gap-4"
+      className="grid grid-cols-2  gap-4"
     >
       {products.map((product) => (
         //  ✅ STEP 2: Invoke Collection.Item as children of Collection & pass required props
@@ -89,7 +89,7 @@ const ProductsGrid = () => {
       ))}
     </Collection>
 
-    // <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    // <ul className="grid grid-cols-2  gap-4">
     //   {products.map((product) => (
     //     <li
     //       key={product.id}

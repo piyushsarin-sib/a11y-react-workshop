@@ -1,23 +1,19 @@
-// STEP: 3 - fix ARIA and interaction accessibility issues
+// STEP: 0 - CardWrapper component with accessibility issues
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import PropTypes from "prop-types";
 
 export const Card = ({ id, title, description, price, imageSrc }) => {
   const handleAddToCart = () => {
-    alert(`${title} added to cart`);
+    alert("Success");
   };
-
-  // IDs for ARIA associations
-  const titleId = `card-title-${id}`;
-  const descriptionId = `card-desc-${id}`;
-  const priceId = `card-price-${id}`;
 
   return (
     <li className="flex-shrink-0" id={`card-${id}`}>
-      <article
+      {/* ❌ ISSUE 1: using a div instead of article */}
+      <div
         className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 focus:ring-2 focus:ring-blue-500 w-[480px] md:w-[600px] lg:w-[620px]"
-        aria-labelledby={titleId}
-        aria-describedby={`${descriptionId} ${priceId}`}
       >
         <img
           src={imageSrc}
@@ -25,24 +21,29 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
           className="w-full h-20 md:h-28 lg:h-32 object-cover mb-3 rounded"
         />
 
-        <h2 id={titleId} className="text-lg font-semibold line-clamp-1">{title}</h2>
+        {/* ❌ ISSUE 1: using a div instead of h2 */}
+        <div className="text-lg font-semibold line-clamp-1">{title}</div>
 
-        <p id={descriptionId} className="mb-2 text-sm line-clamp-2 h-12 overflow-hidden">
+        {/* ❌ ISSUE 1: using a div instead of p */}
+        <div className="mb-2 text-sm line-clamp-2 h-12 overflow-hidden">
           {description}
-        </p>
+        </div>
 
-        <p id={priceId} className="block font-bold mb-2 text-blue-700">{price}</p>
+        {/* ❌ ISSUE 1: using a div instead of p */}
+        <div className="block font-bold mb-2 text-blue-700">{price}</div>
 
-        <button
+        {/* ❌ ISSUE 1: using a div instead of p */}
+        <div
           onClick={handleAddToCart}
-          aria-label={`Add ${title} to cart`}
+          aria-label="add"
           className="outline-none bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 text-sm w-full transition-colors rounded"
         >
           Add to Cart
-        </button>
-        {/* ❌ ISSUE 4: Focus-visible not used, outline-none hides focus */}
-        {/* ❌ ISSUE 5: Motion-reduce preference ignored in transitions */}
-      </article>
+        </div>
+        {/* ❌ ISSUE 2: Focus-visible not used, outline-none hides focus */}
+        {/* ❌ ISSUE 3: No ARIA associations (aria-labelledby/aria-describedby) */}
+        {/* ❌ ISSUE 4: Motion-reduce preference ignored in transitions */}
+      </div>
     </li>
   );
 };

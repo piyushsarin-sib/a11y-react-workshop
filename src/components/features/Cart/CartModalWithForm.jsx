@@ -86,7 +86,7 @@ const CartModalWithForm = () => {
     >
       {cart.length === 0 ? (
         <div className="text-center py-8">
-          <p className="text-gray-500 mb-4">Your cart is empty</p>
+          <p className="text-gray-700 mb-4">Your cart is empty</p>
           <Button
             onClick={closeCartModal}
             variant="primary"
@@ -109,7 +109,7 @@ const CartModalWithForm = () => {
                 <div className="ml-4 flex-grow">
                   <h3 className="font-medium">{item.name}</h3>
                   <div className="flex justify-between mt-1">
-                    <p className="text-gray-600">{item.price}</p>
+                    <p className="text-gray-700">{item.price}</p>
                     <div className="flex items-center">
                       <Button
                         onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
@@ -195,7 +195,7 @@ const CartModalWithForm = () => {
                   inputMode="numeric"
                   pattern="[0-9]{10}"
                 />
-                <div id="phone-hint" className="col-span-2 -mt-2 text-sm text-gray-500">
+                <div id="phone-hint" className="col-span-2 -mt-2 text-sm text-gray-700">
                   Please enter a 10-digit phone number
                 </div>
               </div>

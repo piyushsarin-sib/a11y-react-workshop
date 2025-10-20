@@ -12,7 +12,7 @@ const Button = React.forwardRef(({
   type = 'button',
   ...props
 }, ref) => {
-  const baseStyles = 'focus:outline-none focus:ring-2 focus:ring-blue-500';
+  const baseStyles = 'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded';
 
   const variantStyles = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700',

@@ -13,9 +13,33 @@ const Footer = () => (
       </a>
       <nav aria-label="Footer Navigation">
         <ul className="flex justify-center space-x-6">
-          <li><Link to="/" className="hover:underline">Help</Link></li>
-          <li><Link to="/" className="hover:underline">Contact Us</Link></li>
-          <li><Link to="/" className="hover:underline">Shipping & Returns</Link></li>
+          <li>
+            <Link 
+              to="/" 
+              className="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
+              aria-label="Go to homepage"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/best-practices" 
+              className="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
+              aria-label="View accessibility best practices"
+            >
+              Best Practices
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/references" 
+              className="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
+              aria-label="View reference materials"
+            >
+              Reference
+            </Link>
+          </li>
         </ul>
       </nav>
       <p className="text-center mt-4 text-sm">&copy; 2025 Brevo. All rights reserved.</p>

@@ -57,7 +57,7 @@ const FormGroup = ({
       {enhancedChildren}
       
       {helpText && (
-        <p id={helpTextId} className="mt-1 text-sm text-gray-500">
+        <p id={helpTextId} className="mt-1 text-sm text-gray-700">
           {helpText}
         </p>
       )}

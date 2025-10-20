@@ -1,4 +1,3 @@
-// STEP: 3 - Fix live region accessibility issues
 import { useState, useRef, useEffect } from "react";
 import Button from "@components/common/Button";
 
@@ -75,7 +74,7 @@ export default function AccessibilityWorkshopDemo() {
         </a>
 
         <nav
-          className="container mx-auto px-4 py-4 flex justify-between items-center"
+          className="container mx-auto px-10 py-4 flex justify-between items-center"
           aria-label="Main Navigation"
         >
           <a className="text-2xl font-bold" href="/">

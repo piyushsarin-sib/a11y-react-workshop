@@ -211,7 +211,7 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
       {/* Active filters display */}
       {(selectedCategories.length > 0 || selectedPrices.length > 0 || searchQuery) && (
         <div className="mt-4 flex flex-wrap items-center gap-2" aria-live="polite">
-          <span className="text-sm text-gray-600">Active filters:</span>
+          <span className="text-sm text-gray-700">Active filters:</span>
 
           {searchQuery && (
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-900">

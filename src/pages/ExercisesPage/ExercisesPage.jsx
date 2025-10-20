@@ -48,32 +48,34 @@ export default function ExercisesPage() {
       title: "Completely Accessible eCommerce",
       desc: "E-commerce page fully accessible",
     },
-    // Add more demo links here as needed
   ];
 
   return (
-    <main
-      className="bg-gray-50 flex flex-col items-center justify-center p-6"
-      style={{ width: "100%", minHeight: "60vh" }}
-    >
-      <h1 className="text-4xl font-bold mb-8" style={{ color: "rgb(35, 162, 120)" }}>
-        Let's do some hands-on Accessibility:
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+    <div className="bg-gray-50 flex flex-col items-center justify-center p-6" style={{ width: "100%", minHeight: "60vh" }}>
+      <header className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900">
+          Hands-On Accessibility Exercises
+        </h1>
+        <p className="text-lg text-gray-700 mt-4 text-center max-w-3xl">
+          Practice fixing accessibility issues with these interactive examples
+        </p>
+      </header>
+      <ul className="grid grid-cols-1 md:grid-cols-1 gap-8 w-full list-none p-0">
         {demoLinks.map((demo) => (
-          <Link
-            key={demo.to}
-            to={demo.to}
-            className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow w-full"
-            aria-label={`${demo.title}: ${demo.desc}`}
-          >
-            <h2 className="text-2xl font-semibold" style={{ color: "rgb(35, 162, 120)" }}>
-              {demo.title}
-            </h2>
-            <p className="mt-2 text-gray-600">{demo.desc}</p>
-          </Link>
+          <li key={demo.to}>
+            <Link
+              to={demo.to}
+              className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg hover:border-blue-500 border-2 border-transparent transition-all block w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              aria-label={`${demo.title}: ${demo.desc}`}
+            >
+              <h2 className="text-2xl font-semibold text-gray-900">
+                {demo.title}
+              </h2>
+              <p className="mt-2 text-gray-700">{demo.desc}</p>
+            </Link>
+          </li>
         ))}
-      </div>
-    </main>
+      </ul>
+    </div>
   );
 }

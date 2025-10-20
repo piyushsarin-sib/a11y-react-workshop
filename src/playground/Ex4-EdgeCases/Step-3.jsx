@@ -1,4 +1,4 @@
-// STEP: 0 - EdgeCases component with accessibility issues
+// STEP: 3 - Fix live region accessibility issues
 import { useState, useRef, useEffect } from "react";
 import Button from "@components/common/Button";
 
@@ -7,11 +7,26 @@ export default function AccessibilityWorkshopDemo() {
   const [cartOpen, setCartOpen] = useState(false);
   const cartRef = useRef(null);
   const cartButtonRef = useRef(null);
+  const firstAddToCartRef = useRef(null); // for skip link
+  const liveRegionRef = useRef(null); // live region for screen readers
 
   const products = [
     { id: 1, name: "Braille Keyboard", price: "Rs 45000" },
     { id: 2, name: "Wheelchair", price: "Rs 2500" },
   ];
+
+  // Skip link handler
+  const handleSkipToContent = (e) => {
+    e.preventDefault();
+    firstAddToCartRef.current?.focus();
+  };
+
+  // Update live region when cart changes
+  useEffect(() => {
+    if (liveRegionRef.current) {
+      liveRegionRef.current.textContent = `Cart updated: ${cartCount} item${cartCount !== 1 ? 's' : ''}`;
+    }
+  }, [cartCount]);
 
   // Focus trap inside modal
   useEffect(() => {
@@ -50,8 +65,17 @@ export default function AccessibilityWorkshopDemo() {
     <div>
       {/* Header Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-       <nav
-          className="container mx-auto px-4 py-4 flex justify-between items-center"
+        {/* Skip Link */}
+        <a
+          href="#mainContent"
+          onClick={handleSkipToContent}
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-2 py-1 rounded z-50"
+        >
+          Skip to main content
+        </a>
+
+        <nav
+          className="container mx-auto px-10 py-4 flex justify-between items-center"
           aria-label="Main Navigation"
         >
           <a className="text-2xl font-bold" href="/">
@@ -92,26 +116,35 @@ export default function AccessibilityWorkshopDemo() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <h3 className="text-3xl font-bold mb-4">Shop Products</h3>
+      <main id="mainContent" className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Shop Products</h1>
+
+        {/* Live Region */}
+        <div
+          ref={liveRegionRef}
+          className="sr-only"
+          aria-live="polite"
+          aria-atomic="true"
+        />
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          {products.map((product) => (
-            <section              
+          {products.map((product, index) => (
+            <section
               key={product.id}
               className="border p-4 rounded-md"
               aria-labelledby={`product-${product.id}-name`}
             >
-              <h3
+              <h2
                 id={`product-${product.id}-name`}
                 className="font-semibold"
               >
                 {product.name}
-              </h3>
+              </h2>
               <p>{product.price}</p>
 
               <Button
+                ref={index === 0 ? firstAddToCartRef : null} // first button for skip link
                 className="mt-2"
                 size="small"
                 onClick={() => setCartCount(cartCount + 1)}
@@ -189,9 +222,9 @@ export default function AccessibilityWorkshopDemo() {
   );
 }
 
-/*
-  EDGE CASE Issues Demo
-  1. ❌ Improper heading hierarchy
-  2. ❌ No skip link for keyboard users
-  3. ❌ No live region for screen readers
+/* 
+  FIXES APPLIED:
+  1. ✅ Proper heading hierarchy: <h1> → <h2> for product sections → <h3> for modal
+  2. ✅ Skip link added to jump to main content
+  3. ✅ Live region added to announce cart updates for screen readers
 */

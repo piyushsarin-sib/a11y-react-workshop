@@ -216,8 +216,14 @@ const ECommercePage = () => {
   return (
     <CartProvider>
       <div className="bg-gray-50 min-h-screen flex flex-col">
+        {/* Skip to main content link - first focusable element */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <Header />
-        <main className="flex-grow"><ECommerce/></main>
+        <main id="main-content" className="flex-grow" tabIndex={-1}>
+          <ECommerce/>
+        </main>
         <Footer />
       </div>
     </CartProvider>

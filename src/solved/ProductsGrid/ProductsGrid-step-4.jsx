@@ -85,7 +85,7 @@ const ProductsGrid = () => {
       itemAs="li"
       pattern="grid"
       ariaLabel="Product cards"
-      className="grid grid-cols-2 md:grid-cols-4 gap-4"
+      className="grid grid-cols-2  gap-4"
       //  ✅ STEP 4b:  Spread the returned prop getters on Collection
       {...gridNav.getCollectionProps()}
     >
@@ -116,7 +116,7 @@ const ProductsGrid = () => {
       ))}
     </Collection>
 
-    // <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    // <ul className="grid grid-cols-2  gap-4">
     //   {products.map((product) => (
     //     <li
     //       key={product.id}

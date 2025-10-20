@@ -9,16 +9,16 @@ import ReferencesPage from "./pages/ReferencesPage";
 // Playground imports
 import {
   CardWrapper,
+  CardWrapperSolved,
   ProductsGrid,
   FilterMenu,
   EdgeCases,
+  EdgeCasesSolved,
   ECommIssues,
   AddToCartModal,
 } from "./playground";
 
 import {
-  CardWrapper as CardWrapperSolved,
-  EdgeCases as EdgeCasesSolved,
   ProductsGrid as ProductsGridSolved,
   GridActiveDescendant,
   FilterMenu as FilterMenuSolved,

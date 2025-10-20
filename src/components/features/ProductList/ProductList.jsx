@@ -8,14 +8,14 @@ const ProductList = ({ products, onAddToCart }) => {
   const gridNav = useRovingIndex({
     items: products,
     orientation: "both",
-    columnsCount: 4, // Based on md:grid-cols-4 class
+    columnsCount: 4, // Based on  class
     defaultActiveKey: products.length > 0 ? products[0].id : null,
   });
 
   if (products.length === 0) {
     return (
       <div className="text-center py-8" aria-live="polite">
-        <p className="text-lg text-gray-600">No products match your search criteria.</p>
+        <p className="text-lg text-gray-700">No products match your search criteria.</p>
         <p className="mt-2">Try adjusting your filters or search terms.</p>
       </div>
     );
@@ -31,7 +31,7 @@ const ProductList = ({ products, onAddToCart }) => {
       <Collection
         as="ul"
         itemAs="li"
-        className="grid grid-cols-2 md:grid-cols-4 gap-4"
+        className="grid grid-cols-2  gap-4"
         pattern="grid"
         ariaLabel="Product cards"
         {...gridNav.getCollectionProps()}

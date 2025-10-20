@@ -48,12 +48,12 @@
 .best-practice-card h2 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--sib-color_content-primary, #1b1b1b);
   margin-bottom: 0.75rem;
 }
 
 .best-practice-card p {
-  color: #4b5563;
+  color: var(--sib-color_content-primary, #1b1b1b);
   line-height: 1.625;
 }
 
@@ -67,13 +67,13 @@
 }
 
 .testing-method h3 {
-  color: #111827;
+  color: var(--sib-color_content-primary, #1b1b1b);
   border-bottom: 1px solid #e5e7eb;
   padding-bottom: 0.5rem;
 }
 
 .testing-method ul {
-  color: #4b5563;
+  color: var(--sib-color_content-primary, #1b1b1b);
 }
 
 .testing-method li {
@@ -97,13 +97,13 @@
 .principle-card h3 {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--sib-color_content-primary, #1b1b1b);
   margin-bottom: 0.75rem;
   text-align: center;
 }
 
 .principle-card p {
-  color: #4b5563;
+  color: var(--sib-color_content-primary, #1b1b1b);
   font-size: 0.875rem;
   line-height: 1.625;
 }
@@ -117,13 +117,13 @@
 }
 
 .tool-item strong {
-  color: #111827;
+  color: var(--sib-color_content-primary, #1b1b1b);
   display: block;
   margin-bottom: 0.25rem;
 }
 
 .tool-item p {
-  color: #4b5563;
+  color: var(--sib-color_content-primary, #1b1b1b);
   font-size: 0.875rem;
 }
 
@@ -142,19 +142,19 @@
 }
 
 .guideline-card h3 {
-  color: #111827;
+  color: var(--sib-color_content-primary, #1b1b1b);
   border-bottom: 1px solid #e5e7eb;
   padding-bottom: 0.5rem;
 }
 
 .guideline-card p {
-  color: #4b5563;
+  color: var(--sib-color_content-primary, #1b1b1b);
   font-size: 0.875rem;
   line-height: 1.625;
 }
 
 .guideline-card ul {
-  color: #6b7280;
+  color: var(--sib-color_content-primary, #1b1b1b);
 }
 
 /* Focus Styles for Accessibility */

@@ -17,7 +17,7 @@ export default function AccessibilityWorkshopDemo() {
       {/* Header Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <nav
-          className="container mx-auto px-4 py-4 flex justify-between items-center"
+          className="container mx-auto px-10 py-4 flex justify-between items-center"
           aria-label="Main Navigation"
         >
           <a className="text-2xl font-bold" href="/">

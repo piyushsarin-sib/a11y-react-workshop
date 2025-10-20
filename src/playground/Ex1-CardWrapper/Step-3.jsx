@@ -1,10 +1,10 @@
-// STEP: 4 - fix focus-visible issues
+// STEP: 3 - add ARIA roles, associations properties
 import React from "react";
 import PropTypes from "prop-types";
 
 export const Card = ({ id, title, description, price, imageSrc }) => {
   const handleAddToCart = () => {
-    alert(`${title} added to cart`);
+    alert("Success");
   };
 
   // IDs for ARIA associations
@@ -15,7 +15,7 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
   return (
     <li className="flex-shrink-0" id={`card-${id}`}>
       <article
-          className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 focus-within:ring-2 focus-within:ring-blue-500 w-[480px] md:w-[600px] lg:w-[620px]"
+        className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 focus-within:ring-2 focus-within:ring-blue-500 w-[480px] md:w-[600px] lg:w-[620px]"
         aria-labelledby={titleId}
         aria-describedby={`${descriptionId} ${priceId}`}
       >
@@ -35,12 +35,11 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
 
         <button
           onClick={handleAddToCart}
-          aria-label={`Add ${title} to cart`}
           className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 text-sm w-full transition-colors rounded"
         >
           Add to Cart
         </button>
-         {/* ❌ ISSUE 5: Motion-reduce preference ignored in transitions */}
+         {/* ❌ ISSUE 4: Motion-reduce preference ignored in transitions */}
       </article>
     </li>
   );
