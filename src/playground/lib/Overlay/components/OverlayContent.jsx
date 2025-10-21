@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PLACEMENTS } from '../constants';
 
-const OverlayContent = ({
-  ref,
+const OverlayContent = React.forwardRef(({
   bodyId,
   className,
   overlayStyles,
@@ -16,7 +15,7 @@ const OverlayContent = ({
   close,
   open,
   toggle,
-}) => {
+}, ref) => {
   // Determine ARIA role based on pattern
   const getRole = () => {
     if (placement === PLACEMENTS.CENTER || backdrop) return 'dialog';
@@ -55,10 +54,11 @@ const OverlayContent = ({
       })}
     </div>
   );
-};
+});
+
+OverlayContent.displayName = 'OverlayContent';
 
 OverlayContent.propTypes = {
-  ref: PropTypes.object,
   bodyId: PropTypes.string,
   className: PropTypes.string,
   overlayStyles: PropTypes.object,

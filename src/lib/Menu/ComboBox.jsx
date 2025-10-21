@@ -3,7 +3,7 @@
 import React from "react";
 import { Overlay } from "@lib/Overlay";
 import ComboBoxList from "./ComboBoxList";
-import MenuTitle from "./MenuTitle";
+import MenuSection from "./MenuSection";
 import MenuOption from "./MenuOption";
 
 /**
@@ -80,7 +80,7 @@ const ComboBox = ({
 };
 
 // Attach child components for compound component pattern
-ComboBox.Title = MenuTitle;
+ComboBox.Section = MenuSection;
 ComboBox.Option = MenuOption;
 ComboBox.List = ComboBoxList; // Export ComboBoxList for standalone usage
 

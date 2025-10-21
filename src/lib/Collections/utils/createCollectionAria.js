@@ -32,6 +32,7 @@ export const createCollectionAria = ({
   busy,
   parentRole,
   pattern,
+  isNested = false,
 } = {}) => {
   // Compute pattern config with all resolved roles
   const patternConfig = pattern ? (COLLECTION_PATTERNS[pattern] || {}) : {};
@@ -46,7 +47,10 @@ export const createCollectionAria = ({
     const props = {};
 
     // Base role - use effective role
-    if (effectiveRole) {
+    // Special case: Nested trees should have role="group"
+    if (isNested && pattern === 'tree') {
+      props.role = 'group';
+    } else if (effectiveRole) {
       props.role = effectiveRole;
     }
 

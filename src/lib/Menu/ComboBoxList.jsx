@@ -1,7 +1,7 @@
 import React from "react";
 import Collection from "@lib/Collections/Collection";
 import { useComboboxState } from "./hooks/useComboboxState";
-import MenuTitle from "./MenuTitle";
+import MenuSection from "./MenuSection";
 import MenuOption from "./MenuOption";
 import { MenuContext } from "./MenuContext";
 import "@lib/css/SelectionExample.css";
@@ -55,7 +55,7 @@ const ComboBoxList = ({
 };
 
 // Attach child components for compound component pattern
-ComboBoxList.Title = MenuTitle;
+ComboBoxList.Section = MenuSection;
 ComboBoxList.Option = MenuOption;
 
 export default ComboBoxList;

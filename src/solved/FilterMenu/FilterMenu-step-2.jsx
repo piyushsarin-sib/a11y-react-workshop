@@ -98,19 +98,21 @@ const MenuWithOverlay = () => {
         selectionMode="multiple"
         ariaLabel="Product filters menu"
       >
-        <Menu.Title>📦 Categories</Menu.Title>
-        {categories.map((category) => (
-          <Menu.Option key={category.id} value={category.id}>
-            {category.name}
-          </Menu.Option>
-        ))}
+        <Menu.Section title="📦 Categories">
+          {categories.map((category) => (
+            <Menu.Option key={category.id} value={category.id}>
+              {category.name}
+            </Menu.Option>
+          ))}
+        </Menu.Section>
 
-        <Menu.Title>💰 Price Ranges</Menu.Title>
-        {priceRanges.map((price) => (
-          <Menu.Option key={price.id} value={price.id}>
-            {price.name}
-          </Menu.Option>
-        ))}
+        <Menu.Section title="💰 Price Ranges">
+          {priceRanges.map((price) => (
+            <Menu.Option key={price.id} value={price.id}>
+              {price.name}
+            </Menu.Option>
+          ))}
+        </Menu.Section>
       </Menu>
 
       <Button

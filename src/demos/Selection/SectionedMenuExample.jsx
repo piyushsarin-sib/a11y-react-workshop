@@ -22,17 +22,19 @@ const SectionedMenuExample = () => {
         onChange={handleChange}
         ariaLabel="File operations with component API"
       >
-        <MenuList.Title>📁 File Operations</MenuList.Title>
-        <MenuList.Option value="new">📄 New File</MenuList.Option>
-        <MenuList.Option value="open">📁 Open File</MenuList.Option>
-        <MenuList.Option value="save">💾 Save</MenuList.Option>
+        <MenuList.Section title="📁 File Operations">
+          <MenuList.Option value="new">📄 New File</MenuList.Option>
+          <MenuList.Option value="open">📁 Open File</MenuList.Option>
+          <MenuList.Option value="save">💾 Save</MenuList.Option>
+        </MenuList.Section>
 
-        <MenuList.Title>📤 Export & Print</MenuList.Title>
-        <MenuList.Option value="export">📤 Export</MenuList.Option>
-        <MenuList.Option value="print">🖨️ Print</MenuList.Option>
-        <MenuList.Option value="pdf" disabled>
-          📋 Export PDF (Pro)
-        </MenuList.Option>
+        <MenuList.Section title="📤 Export & Print">
+          <MenuList.Option value="export">📤 Export</MenuList.Option>
+          <MenuList.Option value="print">🖨️ Print</MenuList.Option>
+          <MenuList.Option value="pdf" disabled>
+            📋 Export PDF (Pro)
+          </MenuList.Option>
+        </MenuList.Section>
       </MenuList>
 
       <div style={{ marginTop: "12px", fontSize: "14px", color: "#666" }}>

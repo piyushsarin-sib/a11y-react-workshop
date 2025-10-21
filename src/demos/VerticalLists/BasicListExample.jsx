@@ -8,10 +8,8 @@ const BasicListExample = () => {
         Collection Builder - Tree Example
       </h2>
 
-      <Collection 
-        as="ul" 
-        itemAs="li" 
-        indentSize={24} 
+      <Collection
+        as="ul"
         className="list-basic-container"
         pattern="tree"
         ariaLabel="Nested tree structure"
@@ -20,7 +18,7 @@ const BasicListExample = () => {
         <Collection.Item>2</Collection.Item>
         <Collection.Item aria-expanded="true">
           3
-          <Collection as="ul" itemAs="li">
+          <Collection as="ul">
             <Collection.Item>3.1</Collection.Item>
             <Collection.Item>3.2</Collection.Item>
             <Collection.Item>3.3</Collection.Item>
@@ -29,15 +27,15 @@ const BasicListExample = () => {
         <Collection.Item>4</Collection.Item>
         <Collection.Item aria-expanded="true">
           5
-          <Collection as="ul" itemAs="li">
+          <Collection as="ul">
             <Collection.Item>5.1</Collection.Item>
             <Collection.Item aria-expanded="true">
               5.2
-              <Collection as="ul" itemAs="li">
+              <Collection as="ul">
                 <Collection.Item>5.2.1</Collection.Item>
                 <Collection.Item aria-expanded="true">
                   5.2.2
-                  <Collection as="ul" itemAs="li">
+                  <Collection as="ul">
                     <Collection.Item>5.2.2.1</Collection.Item>
                     <Collection.Item>5.2.2.2</Collection.Item>
                   </Collection>

@@ -1,6 +1,6 @@
 import Button from "@common/Button";
 import Collection from "@lib/Collections/Collection";
-import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingIndex";
+import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingTabIndex";
 
 const products = [
   {
@@ -69,7 +69,7 @@ const ProductsGrid = () => {
   const gridNav = useRovingIndex({
     items: products,
     orientation: "both",
-    // columnsCount: 2,
+    columnsCount: 2,
     defaultActiveKey: products.length > 0 ? products[0].id : null,
   });
 

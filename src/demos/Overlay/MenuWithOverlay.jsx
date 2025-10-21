@@ -48,14 +48,16 @@ const MenuWithOverlay = () => {
         onChange={handleMenuChange}
         ariaLabel="File operations menu"
       >
-        <Menu.Title>File Operations</Menu.Title>
-        <Menu.Option value="new">📄 New File</Menu.Option>
-        <Menu.Option value="open">📁 Open File</Menu.Option>
-        <Menu.Option value="recent">📋 Recent Files</Menu.Option>
+        <Menu.Section title="File Operations">
+          <Menu.Option value="new">📄 New File</Menu.Option>
+          <Menu.Option value="open">📁 Open File</Menu.Option>
+          <Menu.Option value="recent">📋 Recent Files</Menu.Option>
+        </Menu.Section>
 
-        <Menu.Title>Actions</Menu.Title>
-        <Menu.Option value="save">💾 Save</Menu.Option>
-        <Menu.Option value="export">📤 Export</Menu.Option>
+        <Menu.Section title="Actions">
+          <Menu.Option value="save">💾 Save</Menu.Option>
+          <Menu.Option value="export">📤 Export</Menu.Option>
+        </Menu.Section>
       </Menu>
 
       <Button

@@ -12,60 +12,46 @@ const NestedCollectionWithTitlesExample = () => {
       </p>
 
       <Collection
-        title="Files"
-        ariaLabel="File Explorere with file and edit operations"
+        ariaLabel="File Explorer with file and edit operations"
         pattern="tree"
         as="ul"
-        itemAs="li"
         className="list-unstyled"
       >
-        <Collection title="File Operations" as="ul" itemAs="li" pattern="tree">
+        <Collection.Section title="File Operations">
           <Collection.Item key="new">📄 New File</Collection.Item>
           <Collection.Item key="open">📁 Open File</Collection.Item>
           <Collection.Item key="recent">
             📋 Recent Files
-            <Collection
-              title="Recent Documents"
-              ariaLabel="Recent documents tree"
-              as="ul"
-              itemAs="li"
-              pattern="tree"
-            >
+            <Collection as="ul" ariaLabel="Recent documents">
               <Collection.Item key="doc1">📄 Document1.txt</Collection.Item>
               <Collection.Item key="doc2">📊 Presentation.pptx</Collection.Item>
               <Collection.Item key="doc3">📈 Spreadsheet.xlsx</Collection.Item>
             </Collection>
           </Collection.Item>
           <Collection.Item key="save">💾 Save</Collection.Item>
-        </Collection>
+        </Collection.Section>
 
-        <Collection title="Edit Operations" as="ul" itemAs="li" pattern="tree">
+        <Collection.Section title="Edit Operations">
           <Collection.Item key="undo">↶ Undo</Collection.Item>
           <Collection.Item key="redo">↷ Redo</Collection.Item>
           <Collection.Item key="cut">✂️ Cut</Collection.Item>
           <Collection.Item key="copy">📋 Copy</Collection.Item>
           <Collection.Item key="paste">📄 Paste</Collection.Item>
-        </Collection>
+        </Collection.Section>
 
-        <Collection title="Export Options" as="ul" itemAs="li" pattern="tree">
+        <Collection.Section title="Export Options">
           <Collection.Item key="export-pdf">📄 Export as PDF</Collection.Item>
           <Collection.Item key="export-word">📝 Export as Word</Collection.Item>
           <Collection.Item key="export-more">
             📤 More Export Options
-            <Collection
-              title="Export Formats"
-              ariaLabel="Additional export formats tree"
-              as="ul"
-              itemAs="li"
-              pattern="tree"
-            >
+            <Collection as="ul" ariaLabel="Additional export formats">
               <Collection.Item key="export-html">🌐 HTML</Collection.Item>
               <Collection.Item key="export-markdown">📝 Markdown</Collection.Item>
               <Collection.Item key="export-json">🔗 JSON</Collection.Item>
               <Collection.Item key="export-csv">📊 CSV</Collection.Item>
             </Collection>
           </Collection.Item>
-        </Collection>
+        </Collection.Section>
       </Collection>
     </>
   );
