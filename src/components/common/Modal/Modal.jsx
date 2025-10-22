@@ -69,7 +69,7 @@ const Modal = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby={`modal-title-${title.replace(/\s+/g, '-').toLowerCase()}`}
-        className={`bg-white rounded-lg shadow-xl overflow-auto max-h-[90vh] max-w-[90vw] ${className}`}
+        className={`bg-white rounded-lg shadow-xl overflow-auto max-h-[90vh] ${className}`}
         tabIndex={-1}
       >
         <div className="flex justify-between items-center border-b p-4">

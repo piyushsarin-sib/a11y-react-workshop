@@ -83,7 +83,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
       close={handleClose}
       title={product.name}
       backdrop
-      style={{ width: '100%', maxWidth: '48rem' }}
+      style={{ width: '600px' }}
     >
       <div className="mb-4">
         <p className="mb-4">{product.description}</p>

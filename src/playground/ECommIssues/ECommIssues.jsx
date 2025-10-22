@@ -360,7 +360,7 @@ const CheckoutModal = ({ isOpen, onClose, orderPlaced, onCheckout, isProcessing 
       isOpen={isOpen}
       onClose={onClose}
       title="Checkout"
-      style={{ width: '90%', maxWidth: '600px' }}
+      style={{ width: '800px' }}
     >
       {isProcessing && (
         <div className="text-center py-8">
@@ -473,7 +473,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, cart, openCartM
       isOpen={isOpen}
       onClose={onClose}
       title={product.name}
-      style={{ width: '90%', maxWidth: '500px' }}
+      style={{ width: '90%', maxWidth: '700px' }}
     >
       <div className="mb-4">
         <p className="mb-4">{product.description}</p>
@@ -549,7 +549,7 @@ const CartModal = ({ cart, isOpen, onClose, removeFromCart, updateCartItemQuanti
       isOpen={isOpen}
       onClose={onClose}
       title="Your Cart"
-      style={{ width: '100%', maxWidth: '48rem' }}
+      style={{ width: '90%', maxWidth: '900px' }}
     >
       {cart.length === 0 ? (
         <div className="text-center py-8">

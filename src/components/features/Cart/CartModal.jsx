@@ -31,7 +31,7 @@ const CartModal = () => {
       {...cartModalState}
       title="Your Cart"
       backdrop
-      style={{ width: '90%', maxWidth: '800px', maxHeight: '80vh' }}
+      style={{ width: '600px' }}
     >
       {cart.length === 0 ? (
         <div className="text-center py-8">
