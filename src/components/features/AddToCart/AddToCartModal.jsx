@@ -70,7 +70,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
     } else if (quantity === 0 && !cart.some(item => item.id === product.id)) {
       return 'Select Quantity';
     } else {
-      return 'Update Cart';
+      return quantity > 0 ? 'Update Cart (' + quantity + ')' : 'Update Cart';
     }
   };
 
