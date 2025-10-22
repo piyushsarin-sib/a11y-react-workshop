@@ -21,12 +21,12 @@ const AccessibilityBanner = () => {
           </div>
           
           {/* Title */}
-          <h2 
+          <h1 
             id="accessibility-banner-title" 
             className="text-3xl md:text-4xl font-bold text-white mb-4"
           >
             Building Inclusive Experiences
-          </h2>
+          </h1>
           
           {/* Description */}
           <p className="text-lg md:text-xl text-blue-50 mb-6 max-w-2xl mx-auto">
