@@ -49,7 +49,7 @@ const products = [
     description: "An entry-level hearing aid that is powerful and durable.",
     image: "/behind_the_ear.jpeg",
     alt: "Behind-the-ear digital hearing aid",
-    price: "Rs 8000–25000",
+    price: "Rs 8000",
     category: "hearing",
     priceValue: 8000,
   },

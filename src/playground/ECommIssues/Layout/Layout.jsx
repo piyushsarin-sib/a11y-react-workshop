@@ -50,9 +50,9 @@ const Footer = () => (
     <div className="container mx-auto px-4 py-6">
       <nav aria-label="Footer Navigation">
         <ul className="flex justify-center space-x-6">
-          <li><Link to="/" className="hover:underline">Help</Link></li>
-          <li><Link to="/" className="hover:underline">Contact Us</Link></li>
-          <li><Link to="/" className="hover:underline">Shipping & Returns</Link></li>
+          <li><Link to="/" className="hover:underline">Home</Link></li>
+          <li><Link to="/best-practices" className="hover:underline">Best Practices</Link></li>
+          <li><Link to="/references" className="hover:underline">Reference links</Link></li>
         </ul>
       </nav>
       <p className="text-center mt-4 text-sm">&copy; 2025 Brevo. All rights reserved.</p>

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
 import AddToCartModal from "@components/features/AddToCart";
-import AccessibilityCarousel from "@components/features/AccessibilityCarousel";
+import AccessibilityBanner from "@components/features/AccessibilityBanner";
 import SearchAndFilter from "@components/features/SearchAndFilter";
 import ProductList from "@components/features/ProductList";
 import Panel from "@components/common/Panel";
@@ -63,7 +63,7 @@ const products = [
     description: "An entry-level hearing aid that is powerful and durable.",
     image: "/behind_the_ear.jpeg",
     alt: "Behind-the-ear digital hearing aid",
-    price: "Rs 8000–25000",
+    price: "Rs 8000",
     category: "hearing",
     priceValue: 8000,
   },
@@ -95,7 +95,7 @@ const products = [
       "Footwear designed to protect and comfort sensitive feet, with non-binding, soft soles.",
     image: "/shoes.jpeg",
     alt: "Pair of orthopedic diabetic-friendly shoes",
-    price: "Rs 1000–3000 per pair",
+    price: "Rs 1000",
     category: "mobility",
     priceValue: 1000,
   },
@@ -171,12 +171,8 @@ const ECommerce = () => {
   return (
     <>
       <div className="container mx-auto px-4 py-8">
-        <h1 id="products-heading" className="text-3xl font-bold my-8">
-          Building Accessible Experiences
-        </h1>
-
-        {/* Accessibility Carousel */}
-        <AccessibilityCarousel />
+        {/* Accessibility Banner */}
+        <AccessibilityBanner />
 
         <Panel className="my-6">
           <h2 className="text-2xl font-bold mb-4">Accessible Products</h2>

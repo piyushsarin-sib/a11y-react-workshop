@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import AccessibilityCarousel from '@components/features/AccessibilityCarousel';
+import AccessibilityBanner from '@components/features/AccessibilityBanner';
 import Layout from './Layout';
 import Button from '@common/Button';
 import QuantitySelector from '@common/QuantitySelector';
@@ -53,7 +54,7 @@ const products = [
     description: 'An entry-level hearing aid that is powerful and durable.',
     image: '/behind_the_ear.jpeg',
     alt: 'Behind-the-ear digital hearing aid',
-    price: 'Rs 8000–25000',
+    price: 'Rs 8000',
     category: 'hearing',
     priceValue: 8000,
   },
@@ -83,7 +84,7 @@ const products = [
     description: 'Footwear designed to protect and comfort sensitive feet, with non-binding, soft soles.',
     image: '/shoes.jpeg',
     alt: 'Pair of orthopedic diabetic-friendly shoes',
-    price: 'Rs 1000–3000 per pair',
+    price: 'Rs 1000',
     category: 'mobility',
     priceValue: 1000,
   },
@@ -344,12 +345,13 @@ Modal.propTypes = {
 };
 
 // Custom CheckoutModal component
-const CheckoutModal = ({ isOpen, onClose, cart, orderPlaced, onCheckout, isProcessing }) => {
-  const totalPrice = cart.reduce((sum, item) => {
-    const priceText = typeof item.price === "string" ? item.price.replace(/[^\d.-]/g, "") : item.price;
-    const priceValue = parseFloat(priceText);
-    return sum + priceValue * item.quantity;
-  }, 0);
+const CheckoutModal = ({ isOpen, onClose, orderPlaced, onCheckout, isProcessing }) => {
+  // Automatically trigger checkout when modal opens and order is not placed yet
+  useEffect(() => {
+    if (isOpen && !orderPlaced && !isProcessing) {
+      onCheckout();
+    }
+  }, [isOpen, orderPlaced, isProcessing, onCheckout]);
 
   if (!isOpen) return null;
 
@@ -395,47 +397,6 @@ const CheckoutModal = ({ isOpen, onClose, cart, orderPlaced, onCheckout, isProce
           </div>
         </div>
       )}
-      {!isProcessing && !orderPlaced && (
-        <div>
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
-            <div className="space-y-3">
-              {cart.map((item) => (
-                <div key={item.id} className="flex justify-between items-center py-2 border-b">
-                  <div>
-                    <h4 className="font-medium">{item.name}</h4>
-                    <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
-                  </div>
-                  <span className="font-medium">{item.price}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 pt-4 border-t">
-              <div className="flex justify-between text-lg font-bold">
-                <span>Total:</span>
-                <span>Rs {totalPrice.toFixed(2)}</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="flex justify-end space-x-3">
-            <Button
-              onClick={onClose}
-              variant="secondary"
-              ariaLabel="Cancel checkout"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={onCheckout}
-              variant="primary"
-              ariaLabel="Confirm order"
-            >
-              Confirm Order
-            </Button>
-          </div>
-        </div>
-      )}
     </Modal>
   );
 };
@@ -443,14 +404,13 @@ const CheckoutModal = ({ isOpen, onClose, cart, orderPlaced, onCheckout, isProce
 CheckoutModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  cart: PropTypes.array.isRequired,
   orderPlaced: PropTypes.bool.isRequired,
   onCheckout: PropTypes.func.isRequired,
   isProcessing: PropTypes.bool.isRequired,
 };
 
 // Custom AddToCartModal component
-const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, cart }) => {
+const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, cart, openCartModal }) => {
   const [quantity, setQuantity] = useState(1);
 
   // Set quantity based on cart status when modal opens
@@ -483,6 +443,11 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, ca
   const handleClearCart = () => {
     onClearCart();
     onClose();
+  };
+
+  const handleGoToCart = () => {
+    onClose();
+    openCartModal();
   };
 
   if (!isOpen || !product) {
@@ -571,6 +536,18 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, ca
             {getButtonText()}
           </Button>
         </div>
+
+        {/* Go to Cart Link */}
+        <div className="text-center mt-4 pt-4 border-t">
+          <button
+            onClick={handleGoToCart}
+            tabIndex="-1"
+            className="text-blue-600 hover:text-blue-800 underline text-sm font-medium focus:outline-none rounded-md px-2 py-1"
+            aria-label="Go to cart"
+          >
+            Go to Cart
+          </button>
+        </div>
       </div>
     </Modal>
   );
@@ -588,6 +565,7 @@ AddToCartModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClearCart: PropTypes.func.isRequired,
   cart: PropTypes.array.isRequired,
+  openCartModal: PropTypes.func.isRequired,
 };
 
 // Custom CartModal component
@@ -676,9 +654,13 @@ const CartModal = ({ cart, isOpen, onClose, removeFromCart, updateCartItemQuanti
               >
                 Clear Cart
               </Button>
-              <Button onClick={onCheckout} variant="primary" ariaLabel="Proceed to checkout">
+              <div 
+                onClick={onCheckout} 
+                className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 cursor-pointer"
+                ariaLabel="Proceed to checkout"
+              >
                 Checkout
-              </Button>
+              </div>
             </div>
           </div>
         </>
@@ -788,12 +770,8 @@ const ECommContainer = ({ cartContext }) => {
   return (
     <>
       <main className="container mx-auto px-4" aria-labelledby="products-heading">
-        <h1 id="products-heading" className="text-3xl font-bold my-8">
-          Building Accessible Experiences
-        </h1>
-        
-        {/* Accessibility Carousel */}
-        <AccessibilityCarousel />
+        {/* Accessibility Banner */}
+        <AccessibilityBanner />
         
         <h2 className="text-2xl font-bold mb-4">
           Accessible Products
@@ -857,6 +835,7 @@ const ECommContainer = ({ cartContext }) => {
         isOpen={isAddToCartModalOpen}
         onClearCart={clearCart}
         cart={cart}
+        openCartModal={cartContext?.openCartModal}
       />
       <CartModal
         cart={cart}
@@ -867,7 +846,6 @@ const ECommContainer = ({ cartContext }) => {
         onCheckout={openCheckoutModal}
       />
       <CheckoutModal
-        cart={cart}
         isOpen={isCheckoutModalOpen}
         onClose={closeCheckoutModal}
         orderPlaced={orderPlaced}
