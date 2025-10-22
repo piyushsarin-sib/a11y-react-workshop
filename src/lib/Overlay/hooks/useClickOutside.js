@@ -31,8 +31,15 @@ const useClickOutside = ({
       }
 
       // For backdrop overlays, only close on backdrop click
-      if (hasBackdrop && backdropRef?.current && clickedElement !== backdropRef.current) {
-        return;
+      if (hasBackdrop && backdropRef?.current) {
+        // Check if clicked on backdrop element or its children (if any)
+        const clickedOnBackdrop =
+          clickedElement === backdropRef.current ||
+          backdropRef.current.contains(clickedElement);
+
+        if (!clickedOnBackdrop) {
+          return; // Don't close if not clicking on backdrop
+        }
       }
 
       // Close the overlay

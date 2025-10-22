@@ -119,9 +119,9 @@ accessible-react-workshop/
 │   │   │   ├── HorizontalNavigationExample.jsx
 │   │   │   ├── RovingIndexExample.jsx
 │   │   │   └── VerticalNavigationExample.jsx
-│   │   ├── 📁 Overlay/               # Modal and overlay examples
+│   │   ├── 📁 Overlay/               # Dialog and overlay examples
 │   │   │   ├── MenuWithOverlay.jsx
-│   │   │   ├── ModalExample.jsx
+│   │   │   ├── DialogExample.jsx
 │   │   │   └── SimpleTooltip.jsx
 │   │   ├── 📁 Selection/             # Selection pattern examples
 │   │   │   ├── EmptyMenuExample.jsx

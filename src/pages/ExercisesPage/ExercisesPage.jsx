@@ -34,11 +34,6 @@ export default function ExercisesPage() {
       desc: "Improved Overlay modal usecase with focus trap",
     },
     {
-      to: "/playground/filter-combo",
-      title: "A popup multi-select listbox + active aria descendant ???",
-      desc: "Combobox variant & accessibility considerations.",
-    },
-    {
       to: "/playground/edge-cases",
       title: "Edge Cases Accessibility",
       desc: "Improved handling of edge cases with accessibility in mind",
@@ -51,11 +46,12 @@ export default function ExercisesPage() {
   ];
 
   return (
-    <div className="bg-gray-50 flex flex-col items-center justify-center p-6" style={{ width: "100%", minHeight: "60vh" }}>
+    <div
+      className="bg-gray-50 flex flex-col items-center justify-center p-6"
+      style={{ width: "100%", minHeight: "60vh" }}
+    >
       <header className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900">
-          Hands-On Accessibility Exercises
-        </h1>
+        <h1 className="text-4xl font-bold text-gray-900">Hands-On Accessibility Exercises</h1>
         <p className="text-lg text-gray-700 mt-4 text-center max-w-3xl">
           Practice fixing accessibility issues with these interactive examples
         </p>
@@ -68,9 +64,7 @@ export default function ExercisesPage() {
               className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg hover:border-blue-500 border-2 border-transparent transition-all block w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               aria-label={`${demo.title}: ${demo.desc}`}
             >
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {demo.title}
-              </h2>
+              <h2 className="text-2xl font-semibold text-gray-900">{demo.title}</h2>
               <p className="mt-2 text-gray-700">{demo.desc}</p>
             </Link>
           </li>

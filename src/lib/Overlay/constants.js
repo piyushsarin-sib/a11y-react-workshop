@@ -27,3 +27,14 @@ export const KEYS = {
   ENTER: 'Enter',
   SPACE: ' ',
 };
+
+// ARIA haspopup values (https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup)
+export const ARIA_HASPOPUP = {
+  FALSE: false,
+  TRUE: true,  // same as 'menu'
+  MENU: 'menu',
+  LISTBOX: 'listbox',
+  TREE: 'tree',
+  GRID: 'grid',
+  DIALOG: 'dialog',
+};

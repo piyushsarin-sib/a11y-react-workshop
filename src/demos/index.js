@@ -17,5 +17,5 @@ export { default as RovingIndexExample } from "./KeyboardNavigation/RovingIndexE
 
 // Overlay
 export { default as MenuWithOverlay } from "./Overlay/MenuWithOverlay";
-export { default as ModalExample } from "./Overlay/ModalExample";
-export { default as SimpleTooltip } from "./Overlay/SimpleTooltip";
+export { default as DialogExample } from "./Overlay/DialogExample";
+export { default as PopoverDialogExample } from "./Overlay/PopoverDialogExample";

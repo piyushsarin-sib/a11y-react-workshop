@@ -1,9 +1,10 @@
 import { useId } from "react";
-import useOverlay from "@lib/Overlay/hooks/useOverlay";
+import usePopup from "@lib/Overlay/hooks/usePopup";
+import { ARIA_HASPOPUP } from "@lib/Overlay";
 
 /**
- * Hook for integrating menu with overlay
- * Provides overlay controls (trigger props, open/close/toggle) for menu
+ * Hook for integrating menu with PopupOverlay
+ * Provides popup controls (trigger props, open/close/toggle) for menu
  *
  * @param {Object} options - Configuration options
  * @param {Object} options.overlayConfig - Overlay configuration (placement, offset, etc)
@@ -11,23 +12,27 @@ import useOverlay from "@lib/Overlay/hooks/useOverlay";
  * @param {string} options.className - CSS class for overlay
  * @param {string} options.triggerId - ID for trigger element
  * @param {string} options.overlayId - ID for overlay element
- * @returns {Object} Overlay controls (trigger, body, open, close, toggle, setVisible)
+ * @returns {Object} Popup controls (trigger, body, open, close, toggle, setVisible)
  */
 export const useMenu = ({ overlayConfig, style, className, triggerId, overlayId } = {}) => {
-  // Generate stable IDs for overlay integration
+  // Generate stable IDs for popup integration
   const generatedTriggerId = useId();
   const generatedOverlayId = useId();
 
-  // Always call useOverlay (unconditional hook call)
-  // Use stable generated IDs if not provided
-  const overlayControls = useOverlay({
-    pattern: "menu",
-    ...(overlayConfig || {}),
-    style,
-    className,
+  // Use usePopup for menu (non-modal popup with role="menu")
+  const popupControls = usePopup({
+    role: "menu",
+    hasPopup: ARIA_HASPOPUP.MENU,
     triggerId: triggerId || generatedTriggerId,
     bodyId: overlayId || generatedOverlayId,
   });
 
-  return overlayControls;
+  // Add overlayConfig, style, className, and menu-specific defaults to return value
+  return {
+    ...popupControls,
+    overlayConfig,
+    style,
+    className,
+    trapFocus: false,  // Menus should NOT trap focus - Tab closes menu
+  };
 };

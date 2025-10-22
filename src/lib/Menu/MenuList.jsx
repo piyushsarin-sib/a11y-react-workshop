@@ -10,6 +10,7 @@ import "@lib/css/SelectionExample.css";
  * Use this when you need a menu without popover/overlay behavior
  */
 const MenuList = ({
+  id,
   selectedKeys,
   onChange,
   defaultSelectedKeys = [],
@@ -35,6 +36,7 @@ const MenuList = ({
   return (
     <MenuContext.Provider value={{ menu, close, open, toggle }}>
       <Collection
+        id={id}
         as="ul"
         itemAs="li"
         className={className}

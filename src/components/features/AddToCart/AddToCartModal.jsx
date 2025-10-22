@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { CartContext } from '../../../context/CartContextCore';
-import Modal from '@lib/Modal';
+import { DialogOverlay } from '@lib/Overlay';
 import Button from '@common/Button';
 import QuantitySelector from '@common/QuantitySelector';
 
@@ -78,10 +78,12 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
   const isAddToCartDisabled = quantity === 0 && !cart.some(item => item.id === product.id);
 
   return (
-    <Modal
+    <DialogOverlay
       {...modalState}
       close={handleClose}
       title={product.name}
+      backdrop
+      style={{ width: '100%', maxWidth: '48rem' }}
     >
       <div className="mb-4">
         <p className="mb-4">{product.description}</p>
@@ -132,7 +134,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
           </Button>
         </div>
       </div>
-    </Modal>
+    </DialogOverlay>
   );
 };
 

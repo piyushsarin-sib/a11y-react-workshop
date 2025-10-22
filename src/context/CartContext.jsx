@@ -2,18 +2,15 @@ import React, { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { OrderConfirmationModal } from '../components/features/OrderConfirmation';
 import { CartContext } from './CartContextCore';
-import { useOverlay, PLACEMENTS } from '../lib/Overlay';
+import { useDialog } from '../lib/Overlay';
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [customerInfo, setCustomerInfo] = useState({ name: '', phone: '' });
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
-  const cartModalState = useOverlay({
+  const cartModalState = useDialog({
     bodyId: 'cart-modal',
-    pattern: 'modal',
-    placement: PLACEMENTS.CENTER,
-    style: { width: '90%', maxWidth: '800px', maxHeight: '80vh' },
   });
 
   const addToCart = useCallback((product, quantity) => {
