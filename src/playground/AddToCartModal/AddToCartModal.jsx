@@ -1,6 +1,5 @@
 import React from "react";
-import Modal from "@playground/lib/Modal";
-import { useOverlay, PLACEMENTS } from "@playground/lib/Overlay";
+import { DialogOverlay, useDialog } from "@lib/Overlay";
 import Button from "@common/Button";
 import QuantitySelector from "@common/QuantitySelector";
 
@@ -16,27 +15,16 @@ const product = {
 };
 
 const AddToCartModal = () => {
-  const addToCartModalState = useOverlay({
+  const dialogState = useDialog({
     bodyId: "add-to-cart-modal",
     triggerId: "add-to-cart-button",
-    pattern: "modal",
-    placement: PLACEMENTS.CENTER,
-    style: { width: "100%", maxWidth: "48rem" },
   });
-
-  const openModal = () => {
-    addToCartModalState.open();
-  };
-
-  const closeModal = () => {
-    addToCartModalState.close();
-  };
 
   return (
     <>
       <Button
-        {...addToCartModalState.trigger}
-        onClick={() => openModal()}
+        {...dialogState.trigger}
+        onClick={dialogState.open}
         className="px-3 py-1.5 text-sm"
         style={{ width: "48rem", display: "block", margin: "50px auto" }}
         ariaLabel={`Add ${product.name} to cart`}
@@ -45,7 +33,12 @@ const AddToCartModal = () => {
         Add to Cart
       </Button>
 
-      <Modal {...addToCartModalState} close={closeModal} title={product.name}>
+      <DialogOverlay
+        {...dialogState}
+        title={product.name}
+        backdrop
+        style={{ width: "100%", maxWidth: "48rem" }}
+      >
         <div className="mb-4">
           <p className="mb-4">{product.description}</p>
           <div className="flex items-center justify-between mb-6">
@@ -77,7 +70,7 @@ const AddToCartModal = () => {
             </Button>
           </div>
         </div>
-      </Modal>
+      </DialogOverlay>
     </>
   );
 };

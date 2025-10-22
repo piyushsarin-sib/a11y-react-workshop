@@ -1,12 +1,12 @@
 import React from "react";
-import { Overlay } from "@lib/Overlay";
+import { PopupOverlay, PLACEMENTS } from "@lib/Overlay";
 import MenuList from "./MenuList";
-import MenuTitle from "./MenuTitle";
+import MenuSection from "./MenuSection";
 import MenuOption from "./MenuOption";
 
 /**
- * Menu - Menu with overlay by default
- * Consumers should use useMenu hook to get overlay controls,
+ * Menu - Menu with PopupOverlay by default
+ * Consumers should use useMenu hook to get popup controls,
  * then spread trigger props on their chosen trigger element
  *
  * @example
@@ -27,12 +27,11 @@ import MenuOption from "./MenuOption";
 const Menu = ({
   trigger,
   body,
-  open,
   close,
-  toggle,
-  setVisible,
-  autoFocus = false,
-  closeOnOutsideClick = true,
+  overlayConfig = {},
+  style = {},
+  className = '',
+  trapFocus = true,
   children,
   selectedKeys,
   defaultSelectedKeys,
@@ -41,38 +40,36 @@ const Menu = ({
   ariaLabel,
   ...props
 }) => {
+  const { placement = PLACEMENTS.BOTTOM_START } = overlayConfig;
+
   return (
-    <Overlay
+    <PopupOverlay
       trigger={trigger}
       body={body}
-      open={open}
       close={close}
-      toggle={toggle}
-      setVisible={setVisible}
-      pattern="menu"
-      // eslint-disable-next-line jsx-a11y/no-autofocus
-      autoFocus={autoFocus}
-      closeOnOutsideClick={closeOnOutsideClick}
+      placement={placement}
+      trapFocus={trapFocus}
+      style={style}
+      className={className}
     >
       <MenuList
+        id={body.id}
         selectedKeys={selectedKeys}
         defaultSelectedKeys={defaultSelectedKeys}
         selectionMode={selectionMode}
         onChange={onChange}
         ariaLabel={ariaLabel}
         close={close}
-        open={open}
-        toggle={toggle}
         {...props}
       >
         {children}
       </MenuList>
-    </Overlay>
+    </PopupOverlay>
   );
 };
 
 // Attach child components for compound component pattern
-Menu.Title = MenuTitle;
+Menu.Section = MenuSection;
 Menu.Option = MenuOption;
 Menu.List = MenuList; // Export MenuList for standalone usage
 

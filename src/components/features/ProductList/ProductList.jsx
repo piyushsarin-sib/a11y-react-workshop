@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Button from "@common/Button";
 import Collection from "@lib/Collections/Collection";
-import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingIndex";
+import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingTabIndex";
 
 const ProductList = ({ products, onAddToCart }) => {
   // 2D Grid keyboard navigation for product grid (4 columns on desktop, 2 on mobile)

@@ -10,7 +10,7 @@ import Header from '@components/layout/Header';
 import Footer from '@components/layout/Footer';
 
 
-import { useOverlay, PLACEMENTS } from "@lib/Overlay";
+import { useDialog } from "@lib/Overlay";
 import { CartContext } from "@context/CartContextCore";
 import { CartProvider } from '@context/CartContext.jsx';
 
@@ -107,11 +107,8 @@ const ECommerce = () => {
   const [filters, setFilters] = useState({ categories: [], prices: [] });
   const { addToCart } = useContext(CartContext);
 
-  const addToCartModalState = useOverlay({
+  const addToCartModalState = useDialog({
     bodyId: 'add-to-cart-modal',
-    pattern: 'modal',
-    placement: PLACEMENTS.CENTER,
-    style: { width: '100%', maxWidth: '48rem' },
   });
 
   const handleOpenModal = (product) => {

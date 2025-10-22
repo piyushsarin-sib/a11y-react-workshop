@@ -3,7 +3,7 @@
 import React from "react";
 import { Overlay } from "@playground/lib/Overlay";
 import MenuList from "./MenuList";
-import MenuTitle from "./MenuTitle";
+import MenuSection from "./MenuSection";
 import MenuOption from "./MenuOption";
 
 /**
@@ -91,7 +91,7 @@ const Menu = ({
 };
 
 // Attach child components for compound component pattern
-Menu.Title = MenuTitle;
+Menu.Section = MenuSection;
 Menu.Option = MenuOption;
 Menu.List = MenuList; // Export MenuList for standalone usage
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Collection from "@lib/Collections/Collection";
 import { useExpansion } from "@lib/interactions/expansion/useExpansion";
-import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingIndex";
+import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingTabIndex";
 
 const StaticTreeControlledExample = () => {
   // All expandable folder keys - in a real app, extract from data structure

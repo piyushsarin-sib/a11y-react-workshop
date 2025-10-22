@@ -1,5 +1,5 @@
 import Collection from "@lib/Collections/Collection";
-import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingIndex";
+import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingTabIndex";
 
 const Grid2DNavigationExample = () => {
   // Sample data for 2D grid navigation

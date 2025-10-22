@@ -1,6 +1,6 @@
 import Collection from "@lib/Collections/Collection";
 import { useMenuState } from "./hooks/useMenuState";
-import MenuTitle from "./MenuTitle";
+import MenuSection from "./MenuSection";
 import MenuOption from "./MenuOption";
 import { MenuContext } from "./MenuContext";
 import "@lib/css/SelectionExample.css";
@@ -50,7 +50,7 @@ const MenuList = ({
 };
 
 // Attach child components for compound component pattern
-MenuList.Title = MenuTitle;
+MenuList.Section = MenuSection;
 MenuList.Option = MenuOption;
 
 export default MenuList;

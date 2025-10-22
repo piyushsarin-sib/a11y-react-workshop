@@ -1,6 +1,6 @@
 import React from "react";
 import { CartContext } from "../../../context/CartContextCore.js";
-import Modal from "@lib/Modal";
+import { DialogOverlay } from "@lib/Overlay";
 import Button from "@common/Button";
 import QuantitySelector from "@common/QuantitySelector";
 
@@ -27,10 +27,11 @@ const CartModal = () => {
   };
 
   return (
-    <Modal
+    <DialogOverlay
       {...cartModalState}
       title="Your Cart"
-      style={{ width: '100%', maxWidth: '48rem' }}
+      backdrop
+      style={{ width: '90%', maxWidth: '800px', maxHeight: '80vh' }}
     >
       {cart.length === 0 ? (
         <div className="text-center py-8">
@@ -111,7 +112,7 @@ const CartModal = () => {
           </div>
         </>
       )}
-    </Modal>
+    </DialogOverlay>
   );
 };
 

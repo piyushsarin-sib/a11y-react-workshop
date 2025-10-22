@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useSelection } from "@lib/interactions/selection/useSelection";
-import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingIndex";
+import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingTabIndex";
 
 /**
  * Hook for managing menu state including selection and keyboard navigation
@@ -23,13 +23,15 @@ export const useMenuState = ({
   ariaLabel,
   selectionMode = "single",
 }) => {
-  // Simple function to extract menu options from children
+  // Extract menu options from children (supports nested Menu.Section)
   const createMenuNodes = (children) => {
     const nodes = [];
 
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement(child)) {
-        // Check if it's a Menu.Option by checking displayName or value prop
+    const extractOptions = (children) => {
+      React.Children.forEach(children, (child) => {
+        if (!React.isValidElement(child)) return;
+
+        // Check if it's a Menu.Option
         const isMenuOption =
           child.type?.displayName === "Menu.Option" || child.props.value !== undefined;
 
@@ -43,10 +45,14 @@ export const useMenuState = ({
               disabled: child.props.disabled || false,
             });
           }
+        } else if (child.props?.children) {
+          // Recursively search nested children (e.g., Menu.Section)
+          extractOptions(child.props.children);
         }
-      }
-    });
+      });
+    };
 
+    extractOptions(children);
     return nodes;
   };
 

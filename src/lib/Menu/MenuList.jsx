@@ -1,6 +1,6 @@
 import Collection from '../Collections/Collection';
 import { useMenuState } from './hooks/useMenuState';
-import MenuTitle from './MenuTitle';
+import MenuSection from './MenuSection';
 import MenuOption from './MenuOption';
 import { MenuContext } from './MenuContext';
 import "@lib/css/SelectionExample.css";
@@ -10,6 +10,7 @@ import "@lib/css/SelectionExample.css";
  * Use this when you need a menu without popover/overlay behavior
  */
 const MenuList = ({
+  id,
   selectedKeys,
   onChange,
   defaultSelectedKeys = [],
@@ -35,6 +36,7 @@ const MenuList = ({
   return (
     <MenuContext.Provider value={{ menu, close, open, toggle }}>
       <Collection
+        id={id}
         as="ul"
         itemAs="li"
         className={className}
@@ -50,7 +52,7 @@ const MenuList = ({
 };
 
 // Attach child components for compound component pattern
-MenuList.Title = MenuTitle;
+MenuList.Section = MenuSection;
 MenuList.Option = MenuOption;
 
 export default MenuList;

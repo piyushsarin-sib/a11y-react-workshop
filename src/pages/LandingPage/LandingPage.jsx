@@ -39,11 +39,6 @@ const workshopCards = [
     solved: "/solved/cart-modal",
   },
   {
-    title: "Demo: A popup multi-select listbox + active aria descendant ???",
-    description: "Combobox variant & accessibility considerations.",
-    playground: "/playground/filter-combo",
-  },
-  {
     title: "Ex 4: Edge Cases Accessibility",
     description: "Improved handling of edge cases with accessibility in mind.",
     playground: "/playground/edge-cases",
@@ -125,8 +120,8 @@ export default function LandingPage() {
               <strong className="text-gray-900">
                 Accessibility to make web pages Build for Everyone. Build with Accessibility.
               </strong>{" "}
-              Learn to build inclusive, user-friendly web experiences by applying accessibility
-              best practices directly into your React workflow.
+              Learn to build inclusive, user-friendly web experiences by applying accessibility best
+              practices directly into your React workflow.
             </p>
           </div>
         </div>
@@ -137,26 +132,29 @@ export default function LandingPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
             {workshopCards.map(({ title, description, playground, solved }) => (
-              <article key={title} className="bg-white/40 rounded-lg p-4 shadow flex flex-col gap-4 h-full">
+              <article
+                key={title}
+                className="bg-white/40 rounded-lg p-4 shadow flex flex-col gap-4 h-full"
+              >
                 <h3 className="text-lg font-bold text-gray-900">{title}</h3>
                 <p className="text-base text-gray-700 flex-grow">{description}</p>
                 <div className="flex gap-3 justify-center">
-                  <a 
-                    href={playground} 
+                  <a
+                    href={playground}
                     className={buttonClass}
-                    aria-label={`${solved ? 'Practice' : 'View demo for'} ${title}`}
+                    aria-label={`${solved ? "Practice" : "View demo for"} ${title}`}
                   >
                     {solved ? "Practice" : "Demo"}
                   </a>
-                 {solved && (
-                   <a 
-                     href={solved} 
-                     className={buttonClass}
-                     aria-label={`View solved example for ${title}`}
-                   >
-                     Solved
-                   </a>
-                 )}
+                  {solved && (
+                    <a
+                      href={solved}
+                      className={buttonClass}
+                      aria-label={`View solved example for ${title}`}
+                    >
+                      Solved
+                    </a>
+                  )}
                 </div>
               </article>
             ))}

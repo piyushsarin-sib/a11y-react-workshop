@@ -13,7 +13,7 @@ import { manageFocusableDescendants } from "@lib/Collections/utils/activeDescend
  * - Autocomplete widgets
  * - Any pattern where the trigger needs to maintain focus
  *
- * Note: This hook does NOT set roles or labels - those should come from useCollectionAria
+ * Note: This hook does NOT set roles or labels - those should come from createCollectionAria
  *
  * @param {Object} options - Configuration options
  * @param {Array} options.items - Array of items or keys to navigate through
@@ -256,7 +256,7 @@ export const useActiveDescendant = ({
 
   // Get props for individual items
   // In active descendant pattern, items don't receive focus and don't need tabIndex
-  // Note: role should come from useCollectionAria, not here
+  // Note: role should come from createCollectionAria, not here
   const getItemProps = useCallback(
     (key, options = {}) => {
       if (disabled) return {};
@@ -313,7 +313,7 @@ export const useActiveDescendant = ({
   }, [disabled, activeKey, itemKeys, navigateTo, isEditMode]);
 
   // Collection props getter - for listbox container
-  // Note: role and labels should come from useCollectionAria, not here
+  // Note: role and labels should come from createCollectionAria, not here
   // This provides ID, focus handling, and edit mode support
   const getCollectionProps = useCallback((userProps = {}) => {
     if (disabled) return userProps;

@@ -23,7 +23,6 @@ import {
   GridActiveDescendant,
   FilterMenu as FilterMenuSolved,
   AddToCartModal as AddToCartModalSolved,
-  FilterCombo,
 } from "./solved";
 
 // Demo imports
@@ -36,8 +35,8 @@ import {
   CollapsibleTreeExample,
   RovingIndexExample,
   MenuWithOverlay,
-  ModalExample,
-  SimpleTooltip,
+  DialogExample,
+  PopoverDialogExample,
 } from "./demos";
 
 function App() {
@@ -93,7 +92,6 @@ function App() {
         <Route path="/playground/grid-active-descendant" element={<GridActiveDescendant />} />
         <Route path="/playground/filter-menu" element={<FilterMenu />} />
         <Route path="/playground/cart-modal" element={<AddToCartModal />} />
-        <Route path="/playground/filter-combo" element={<FilterCombo />} />
         <Route path="/playground/edge-cases" element={<EdgeCases />} />
 
         {/* Solved Routes */}
@@ -113,8 +111,8 @@ function App() {
         <Route path="/demos/expansion" element={<CollapsibleTreeExample />} />
         <Route path="/demos/key-nav/roving-index" element={<RovingIndexExample />} />
         <Route path="/demos/overlay/menu" element={<MenuWithOverlay />} />
-        <Route path="/demos/overlay/modal" element={<ModalExample />} />
-        <Route path="/demos/overlay/tooltip" element={<SimpleTooltip />} />
+        <Route path="/demos/overlay/dialog" element={<DialogExample />} />
+        <Route path="/demos/overlay/popover" element={<PopoverDialogExample />} />
       </Routes>
     </Router>
   );

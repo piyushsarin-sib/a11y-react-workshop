@@ -29,11 +29,6 @@ export default function DemoPage() {
       desc: "Accessible uncontrolled menu demo",
     },
     {
-      to: "/demos/expansion",
-      title: "Collapsible Tree Example",
-      desc: "Accessible collapsible tree demo",
-    },
-    {
       to: "/demos/key-nav/roving-index",
       title: "Roving Index Example",
       desc: "Accessible roving tabindex demo",
@@ -44,24 +39,24 @@ export default function DemoPage() {
       desc: "Accessible menu with overlay demo",
     },
     {
-      to: "/demos/overlay/modal",
-      title: "Modal Example",
-      desc: "Accessible modal dialog demo",
+      to: "/demos/overlay/dialog",
+      title: "Dialog Example",
+      desc: "Accessible dialog overlay demo",
     },
     {
-      to: "/demos/overlay/tooltip",
-      title: "Simple Tooltip",
-      desc: "Accessible tooltip component demo",
+      to: "/demos/overlay/popover",
+      title: "Simple Popover",
+      desc: "Accessible popover component demo",
     },
   ];
 
   return (
-    <div className="bg-gray-50 flex flex-col items-center justify-center p-6" style={{ width: "100%", minHeight: "60vh" }}>
+    <div
+      className="bg-gray-50 flex flex-col items-center justify-center p-6"
+      style={{ width: "100%", minHeight: "60vh" }}
+    >
       <header className="mb-8">
-        <h1 
-          className="text-4xl font-bold text-gray-900" 
-          id="page-heading"
-        >
+        <h1 className="text-4xl font-bold text-gray-900" id="page-heading">
           Interactive Accessibility Demos
         </h1>
         <p className="text-lg text-gray-700 mt-4 text-center max-w-3xl">
@@ -78,10 +73,7 @@ export default function DemoPage() {
                 aria-describedby={`desc-${demo.to.replaceAll("/", "-")}`}
               >
                 <h2 className="text-2xl font-semibold text-gray-900">{demo.title}</h2>
-                <p 
-                  className="mt-2 text-gray-700" 
-                  id={`desc-${demo.to.replaceAll("/", "-")}`}
-                >
+                <p className="mt-2 text-gray-700" id={`desc-${demo.to.replaceAll("/", "-")}`}>
                   {demo.desc}
                 </p>
               </Link>
