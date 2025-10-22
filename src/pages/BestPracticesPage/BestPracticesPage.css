@@ -157,11 +157,73 @@
   color: var(--sib-color_content-primary, #1b1b1b);
 }
 
+/* Keyboard Shortcut Styles */
+kbd {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  line-height: 1;
+  color: #1f2937;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+}
+
+.shortcut-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.shortcut-item:last-child {
+  border-bottom: none;
+}
+
+.shortcut-item strong {
+  color: var(--sib-color_content-primary, #1b1b1b);
+  font-weight: 600;
+}
+
+/* Screen Reader Section Styles */
+.screen-reader-section {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  transition: box-shadow 0.3s ease;
+}
+
+.screen-reader-section:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.screen-reader-header {
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.screen-reader-section h4 {
+  color: var(--sib-color_content-primary, #1b1b1b);
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.screen-reader-section ul {
+  color: var(--sib-color_content-primary, #1b1b1b);
+}
+
 /* Focus Styles for Accessibility */
 .best-practice-card:focus-within,
 .testing-method:focus-within,
 .principle-card:focus-within,
-.guideline-card:focus-within {
+.guideline-card:focus-within,
+.screen-reader-section:focus-within {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }

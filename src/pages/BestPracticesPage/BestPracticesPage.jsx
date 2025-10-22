@@ -55,6 +55,428 @@ const BestPracticesPage = () => {
           </div>
         </section>
 
+        {/* Keyboard Shortcuts Section */}
+        <section className="mb-12" aria-labelledby="keyboard-shortcuts">
+          <h2 id="keyboard-shortcuts" className="text-3xl font-bold text-gray-900 mb-6 text-center">Essential Keyboard Shortcuts</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <article className="testing-method">
+              <h3 className="text-xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-2" aria-hidden="true">⌨️</span>
+                {" "}
+                Basic Navigation
+              </h3>
+              <ul className="list-none space-y-3">
+                <li className="shortcut-item">
+                  <kbd>Tab</kbd> - Move focus to next interactive element
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Shift + Tab</kbd> - Move focus to previous interactive element
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Enter</kbd> - Activate button or link
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Space</kbd> - Activate button, checkbox, or scroll page
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Arrow Keys</kbd> - Navigate within widgets (radio groups, menus, tabs)
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Esc</kbd> - Close modal or dismiss overlay
+                </li>
+              </ul>
+            </article>
+
+            <article className="testing-method">
+              <h3 className="text-xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-2" aria-hidden="true">🌐</span>
+                {" "}
+                Browser Shortcuts
+              </h3>
+              <ul className="list-none space-y-3">
+                <li className="shortcut-item">
+                  <kbd>Ctrl/Cmd + F</kbd> - Find on page
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Ctrl/Cmd + L</kbd> - Focus address bar
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Ctrl/Cmd + +/-</kbd> - Zoom in/out
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Ctrl/Cmd + 0</kbd> - Reset zoom
+                </li>
+                <li className="shortcut-item">
+                  <kbd>Home</kbd> - Scroll to top of page
+                </li>
+                <li className="shortcut-item">
+                  <kbd>End</kbd> - Scroll to bottom of page
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        {/* Screen Reader Shortcuts Section */}
+        <section className="mb-12" aria-labelledby="screen-reader-shortcuts">
+          <h2 id="screen-reader-shortcuts" className="text-3xl font-bold text-gray-900 mb-6 text-center">Screen Reader Shortcuts</h2>
+          
+          {/* NVDA */}
+          <article className="screen-reader-section mb-8">
+            <div className="screen-reader-header">
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-3" aria-hidden="true">🔊</span>
+                NVDA (Windows - Free)
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Basic Commands</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>Ctrl + Alt + N</kbd> - Start NVDA
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Q</kbd> - Quit NVDA
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + S</kbd> - Toggle speech mode
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Down</kbd> - Read current line
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Up</kbd> - Read from top
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Ctrl</kbd> - Stop reading
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Navigation</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>H</kbd> - Next heading
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Shift + H</kbd> - Previous heading
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>K</kbd> - Next link
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>B</kbd> - Next button
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>F</kbd> - Next form field
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>T</kbd> - Next table
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>L</kbd> - Next list
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>G</kbd> - Next graphic
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          {/* JAWS */}
+          <article className="screen-reader-section mb-8">
+            <div className="screen-reader-header">
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-3" aria-hidden="true">🔊</span>
+                JAWS (Windows - Commercial)
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Basic Commands</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>Insert + J</kbd> - JAWS window
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + F4</kbd> - Exit JAWS
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Down</kbd> - Say all (read from cursor)
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Up</kbd> - Read current line
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Space + S</kbd> - JAWS settings
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Ctrl</kbd> - Stop reading
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Navigation</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>H / Shift + H</kbd> - Next/Previous heading
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>1-6</kbd> - Jump to heading level 1-6
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + F6</kbd> - List headings
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + F7</kbd> - List links
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>F</kbd> - Next form field
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>B</kbd> - Next button
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>T</kbd> - Next table
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>R</kbd> - Next region/landmark
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          {/* VoiceOver */}
+          <article className="screen-reader-section mb-8">
+            <div className="screen-reader-header">
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-3" aria-hidden="true">🍎</span>
+                VoiceOver (macOS/iOS - Built-in)
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Basic Commands (VO = Ctrl + Option)</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>Cmd + F5</kbd> - Toggle VoiceOver on/off
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + A</kbd> - Read from current position
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + Left/Right</kbd> - Move to previous/next item
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + Space</kbd> - Activate item
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + H</kbd> - Open VoiceOver Help
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Ctrl</kbd> - Stop reading
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Web Navigation</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>VO + Cmd + H</kbd> - Next heading
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + Cmd + L</kbd> - Next link
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + Cmd + J</kbd> - Next form control
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + Cmd + T</kbd> - Next table
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + Cmd + G</kbd> - Next graphic
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + U</kbd> - Open rotor (navigation menu)
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>VO + Shift + Down</kbd> - Enter web area
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <h4 className="text-lg font-semibold mb-2">iOS VoiceOver Gestures</h4>
+              <ul className="list-none space-y-2">
+                <li className="shortcut-item">
+                  <strong>Swipe Right/Left</strong> - Next/Previous item
+                </li>
+                <li className="shortcut-item">
+                  <strong>Double Tap</strong> - Activate item
+                </li>
+                <li className="shortcut-item">
+                  <strong>Two-finger Swipe Down</strong> - Read all
+                </li>
+                <li className="shortcut-item">
+                  <strong>Rotor Gesture</strong> - Rotate two fingers to change navigation mode
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          {/* ORCA */}
+          <article className="screen-reader-section mb-8">
+            <div className="screen-reader-header">
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-3" aria-hidden="true">🐧</span>
+                Orca (Linux - Free)
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Basic Commands</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>Super + Alt + S</kbd> - Toggle Orca
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Space</kbd> - Orca preferences
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Q</kbd> - Quit Orca
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + Semicolon</kbd> - Read from cursor
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Ctrl</kbd> - Stop reading
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Navigation</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>H</kbd> - Next heading
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>L</kbd> - Next link
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>B</kbd> - Next button
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>E</kbd> - Next entry/form field
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>T</kbd> - Next table
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Insert + F7</kbd> - List links
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          {/* TalkBack */}
+          <article className="screen-reader-section mb-8">
+            <div className="screen-reader-header">
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-3" aria-hidden="true">🤖</span>
+                TalkBack (Android - Built-in)
+              </h3>
+            </div>
+            <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+              <h4 className="text-lg font-semibold mb-3">Essential Gestures</h4>
+              <ul className="list-none space-y-2">
+                <li className="shortcut-item">
+                  <strong>Swipe Right/Left</strong> - Move to next/previous item
+                </li>
+                <li className="shortcut-item">
+                  <strong>Double Tap</strong> - Activate item
+                </li>
+                <li className="shortcut-item">
+                  <strong>Swipe Down then Right</strong> - Continue reading
+                </li>
+                <li className="shortcut-item">
+                  <strong>Swipe Up then Down</strong> - Go to first item on screen
+                </li>
+                <li className="shortcut-item">
+                  <strong>Swipe Down then Up</strong> - Go to last item on screen
+                </li>
+                <li className="shortcut-item">
+                  <strong>Swipe Right then Left</strong> - Back
+                </li>
+                <li className="shortcut-item">
+                  <strong>Swipe Up then Right</strong> - Open TalkBack menu
+                </li>
+                <li className="shortcut-item">
+                  <strong>Swipe Down then Left</strong> - Home button
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          {/* ChromeVox */}
+          <article className="screen-reader-section">
+            <div className="screen-reader-header">
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-2xl mr-3" aria-hidden="true">🌐</span>
+                ChromeVox (Chrome Extension - Free)
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Basic Commands (CV = Ctrl + Alt or Search)</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>Ctrl + Alt + Z</kbd> - Toggle ChromeVox
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + O, O</kbd> - ChromeVox Options
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + A, A</kbd> - Read from here
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + Right/Left</kbd> - Next/Previous item
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>Ctrl</kbd> - Stop reading
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Navigation</h4>
+                <ul className="list-none space-y-2">
+                  <li className="shortcut-item">
+                    <kbd>CV + H</kbd> - Next heading
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + L</kbd> - Next link
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + F</kbd> - Next form field
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + B</kbd> - Next button
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + T</kbd> - Next table
+                  </li>
+                  <li className="shortcut-item">
+                    <kbd>CV + Ctrl + H</kbd> - List headings
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </section>
+
         {/* Testing Methods */}
         <section className="mb-12" aria-labelledby="testing-methods">
           <h2 id="testing-methods" className="text-3xl font-bold text-gray-900 mb-6 text-center">Manual Testing Methods</h2>
@@ -81,7 +503,10 @@ const BestPracticesPage = () => {
               </h3>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>NVDA</strong> - Free screen reader for Windows</li>
+                <li><strong>JAWS</strong> - Commercial screen reader for Windows</li>
                 <li><strong>VoiceOver</strong> - Built-in macOS/iOS screen reader</li>
+                <li><strong>TalkBack</strong> - Built-in Android screen reader</li>
+                <li><strong>Orca</strong> - Free screen reader for Linux</li>
                 <li><strong>ChromeVox</strong> - Chrome extension for testing</li>
                 <li>Test content structure and navigation</li>
               </ul>
