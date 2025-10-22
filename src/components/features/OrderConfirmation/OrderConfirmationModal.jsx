@@ -26,22 +26,12 @@ const OrderConfirmationModal = ({ onClose, isOpen = true }) => {
     if (showAnimation) {
       return (
         <div className="flex flex-col items-center justify-center py-8" aria-live="polite">
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            Processing Your Order
-          </h2>
-          
-          {/* Shipping animation */}
-          <div className="relative w-full h-32 mb-6">
-            <div className="absolute left-0 animate-moveRight">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-              </svg>
-            </div>
-          </div>
-          
-          <p className="text-lg text-center text-gray-700 animate-pulse">
-            Preparing your items...
-          </p>
+          <div 
+        className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4" 
+        aria-hidden="true"
+          ></div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">Processing Your Order...</h2>
+          <p className="text-gray-600">Please wait while we process your order.</p>
         </div>
       );
     } else {

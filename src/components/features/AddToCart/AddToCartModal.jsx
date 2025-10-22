@@ -68,7 +68,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
     if (quantity === 0 && cart.some(item => item.id === product.id)) {
       return 'Remove from Cart';
     } else if (quantity === 0 && !cart.some(item => item.id === product.id)) {
-      return 'No items to add';
+      return 'Select Quantity';
     } else {
       return 'Update Cart';
     }
@@ -106,11 +106,6 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
           {quantity === 0 && cart.some(item => item.id === product.id) && `${product.name} will be removed from cart`}
         </div>
         
-        <div className="flex justify-between items-center mb-4">
-          {quantity === 0 && (
-            <p className="text-red-600 text-sm">Setting quantity to 0 will remove the item from cart</p>
-          )}
-        </div>
         <div className="flex justify-end mb-4">
           <Button
             onClick={handleAddToCart}

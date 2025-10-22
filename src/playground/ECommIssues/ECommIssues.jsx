@@ -410,14 +410,14 @@ CheckoutModal.propTypes = {
 };
 
 // Custom AddToCartModal component
-const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, cart, openCartModal }) => {
+const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, cart, openCartModal }) => {
   const [quantity, setQuantity] = useState(1);
 
   // Set quantity based on cart status when modal opens
   useEffect(() => {
     if (isOpen && product) {
       const existingItem = cart.find(item => item.id === product.id);
-      if (existingItem) {
+      if (existingItem && existingItem.quantity > 0) {
         setQuantity(existingItem.quantity);
       } else {
         setQuantity(0); // Start with zero for new items
@@ -440,11 +440,6 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, ca
     onClose(); // Close modal after adding to cart
   };
 
-  const handleClearCart = () => {
-    onClearCart();
-    onClose();
-  };
-
   const handleGoToCart = () => {
     onClose();
     openCartModal();
@@ -454,19 +449,20 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, ca
     return null;
   }
 
-  // Check if item is already in cart
+  // Check if item is already in cart with quantity > 0
   const existingItem = cart.find(item => item.id === product.id);
-  const isInCart = !!existingItem;
-  const currentCartQuantity = existingItem ? existingItem.quantity : 0;
+  const isInCart = !!existingItem && existingItem.quantity > 0;
   
   // Button text and aria label logic
   const getButtonText = () => {
+    if (quantity === 0 && isInCart) return "Remove from Cart";
     if (quantity === 0) return "Select Quantity";
-    if (isInCart) return `Update Cart (${currentCartQuantity} in cart)`;
+    if (isInCart) return `Update Cart`;
     return "Add to Cart";
   };
   
   const getAriaLabel = () => {
+    if (quantity === 0 && isInCart) return "Remove from cart";
     if (quantity === 0) return "Select quantity to add to cart";
     if (isInCart) return "Update cart quantity";
     return "Add to Cart";
@@ -493,45 +489,14 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, onClearCart, ca
           />
         </div>
         
-        {/* Cart Status */}
-        {isInCart && (
-          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
-            <p className="text-sm text-blue-800">
-              <strong>Current in cart:</strong> {currentCartQuantity} {currentCartQuantity === 1 ? 'item' : 'items'}
-            </p>
-            <p className="text-xs text-blue-600 mt-1">
-              {quantity === 0 ? "Set quantity to 0 to remove from cart" : "Adjust quantity above to update your cart"}
-            </p>
-          </div>
-        )}
         
-        {/* Zero Quantity Warning */}
-        {quantity === 0 && !isInCart && (
-          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
-            <p className="text-sm text-yellow-800">
-              <strong>No quantity selected</strong>
-            </p>
-            <p className="text-xs text-yellow-600 mt-1">
-              Use the quantity selector above to add items to your cart
-            </p>
-          </div>
-        )}
-        
-        <div className="flex justify-between mb-4">
-          <Button
-            onClick={handleClearCart}
-            variant="secondary"
-            ariaLabel="Remove all items from cart"
-            className="bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700"
-          >
-            Remove from Cart
-          </Button>
+        <div className="flex justify-end mb-4">
           <Button
             onClick={handleAddToCart}
-            variant="primary"
-            disabled={quantity === 0}
+            variant={quantity === 0 && isInCart ? "secondary" : "primary"}
+            disabled={quantity === 0 && !isInCart}
             ariaLabel={getAriaLabel()}
-            className={quantity === 0 ? "opacity-50 cursor-not-allowed" : ""}
+            className={`${quantity === 0 && !isInCart ? "opacity-50 cursor-not-allowed" : ""} ${quantity === 0 && isInCart ? "bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700" : ""}`}
           >
             {getButtonText()}
           </Button>
@@ -563,7 +528,6 @@ AddToCartModal.propTypes = {
   onAddToCart: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  onClearCart: PropTypes.func.isRequired,
   cart: PropTypes.array.isRequired,
   openCartModal: PropTypes.func.isRequired,
 };
@@ -702,8 +666,7 @@ const ECommContainer = ({ cartContext }) => {
     closeCheckoutModal,
     handleCheckout,
     orderPlaced = false,
-    isProcessing = false,
-    clearCart
+    isProcessing = false
   } = cartContext || {};
 
   // Debug logging
@@ -833,7 +796,6 @@ const ECommContainer = ({ cartContext }) => {
           onAddToCart={handleAddToCart}
           onClose={handleCloseModal}
         isOpen={isAddToCartModalOpen}
-        onClearCart={clearCart}
         cart={cart}
         openCartModal={cartContext?.openCartModal}
       />
