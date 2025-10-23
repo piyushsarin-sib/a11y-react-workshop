@@ -1,44 +1,49 @@
-import { useState, useCallback } from "react";
-import { createCollectionAria } from "@lib/Collections/utils/createCollectionAria";
+import { useState, useCallback, useMemo } from "react";
+import { COLLECTION_PATTERNS } from "@lib/Collections/constants/aria-config";
 
 /**
  * Hook for managing collection item selection
+ * Accepts and returns arrays, but uses Set internally for performance
+ *
  * @param {Object} options - Configuration options
  * @param {string} options.selectionMode - 'none', 'single', or 'multiple'
- * @param {Set} options.selectedKeys - Controlled selected keys (controlled mode)
- * @param {Function} options.onChange - Selection change handler (called on both controlled and uncontrolled modes)
- * @param {Set} options.defaultSelectedKeys - Default selected items (uncontrolled mode)
+ * @param {Array} options.selectedKeys - Controlled selected keys as array (controlled mode)
+ * @param {Function} options.onChange - Selection change handler: (event, { selectedKeys: Array }) => void
+ * @param {Array} options.defaultSelectedKeys - Default selected items as array (uncontrolled mode)
  * @param {string} options.role - Collection role for proper ARIA attributes
  * @param {string} options.pattern - Pre-configured pattern ('listbox', 'menu', 'tabs', 'tree', 'radiogroup', 'checkboxgroup')
  * @param {string} options.label - Accessible label for the collection
- * @returns {Object} Selection state and handlers
+ * @returns {Object} Selection state and handlers (selectedKeys returned as Set for ARIA compatibility)
  */
 export const useSelection = ({
   selectionMode = "none",
   selectedKeys: controlledSelectedKeys,
   onChange,
-  defaultSelectedKeys = new Set(),
-  role,
+  defaultSelectedKeys = [],
   pattern,
-  label,
 } = {}) => {
+  // Convert array inputs to Sets internally
+  const controlledSelectedKeysSet = controlledSelectedKeys !== undefined
+    ? new Set(controlledSelectedKeys)
+    : undefined;
+
   // Determine if we're in controlled or uncontrolled mode
   const isControlled = controlledSelectedKeys !== undefined;
 
-  // Internal state for uncontrolled mode
-  const [internalSelectedKeys, setInternalSelectedKeys] = useState(defaultSelectedKeys);
+  // Internal state for uncontrolled mode (stored as Set)
+  const [internalSelectedKeys, setInternalSelectedKeys] = useState(
+    () => new Set(defaultSelectedKeys)
+  );
 
-  // Use controlled or uncontrolled state
-  const selectedKeys = isControlled ? controlledSelectedKeys : internalSelectedKeys;
+  // Use controlled or uncontrolled state (always a Set)
+  const selectedKeys = isControlled ? controlledSelectedKeysSet : internalSelectedKeys;
 
-  // Initialize ARIA factory function for proper selection attributes (pattern is handled internally)
-  const aria = createCollectionAria({
-    role,
-    pattern,
-    selectionMode: selectionMode !== "none" ? selectionMode : undefined,
-    selectedKeys,
-    label,
-  });
+  // Get pattern config for selection attributes
+  const patternConfig = useMemo(() => {
+    return pattern ? COLLECTION_PATTERNS[pattern] : {};
+  }, [pattern]);
+
+  const selectionAttribute = patternConfig.selectionAttribute;
 
   const handleSelection = useCallback(
     (event, { key, item }) => {
@@ -59,13 +64,16 @@ export const useSelection = ({
       }
 
       // Update state for both controlled and uncontrolled modes
+      // Convert Set to Array for onChange callback
+      const selectedKeysArray = Array.from(newSelection);
+
       if (isControlled) {
         // In controlled mode, call onChange to notify parent with item data
-        onChange?.(event, { selectedKeys: newSelection, selectedItem: item, key });
+        onChange?.(event, { selectedKeys: selectedKeysArray, selectedItem: item, key });
       } else {
         // In uncontrolled mode, update internal state and call onChange if provided
         setInternalSelectedKeys(newSelection);
-        onChange?.(event, { selectedKeys: newSelection, selectedItem: item, key });
+        onChange?.(event, { selectedKeys: selectedKeysArray, selectedItem: item, key });
       }
     },
     // setSelectedKeys is intentionally omitted - it's either onChange (controlled) or setState (uncontrolled)
@@ -82,15 +90,16 @@ export const useSelection = ({
       return {
         onClick: (e) => {
           e.preventDefault();
+          e.stopPropagation(); // Prevent event bubbling to parent items
           handleSelection(e, { key, item });
         },
         onKeyDown: (e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
+            e.stopPropagation(); // Prevent event bubbling to parent items
             handleSelection(e, { key, item });
           }
         },
-        tabIndex: 0,
       };
     },
     [selectionMode, handleSelection],
@@ -98,17 +107,18 @@ export const useSelection = ({
 
   const getItemAriaProps = useCallback(
     (key, options = {}) => {
-      if (selectionMode === "none") return {};
+      if (selectionMode === "none" || !selectionAttribute) return {};
 
       const isSelected = selectedKeys.has(key);
+      const ariaProps = {};
 
-      // Get ARIA props from the aria hook
-      return aria.getItemAriaProps(key, {
-        ...options,
-        selected: isSelected,
-      });
+      // Add selection attribute (aria-selected or aria-checked)
+      ariaProps[selectionAttribute] = isSelected;
+
+      // Merge with any additional options
+      return { ...ariaProps, ...options };
     },
-    [selectedKeys, selectionMode, aria],
+    [selectedKeys, selectionMode, selectionAttribute],
   );
 
   // Combined props (backward compatibility)
@@ -125,11 +135,13 @@ export const useSelection = ({
 
   const clearSelection = useCallback(() => {
     const newSelection = new Set();
+    const selectedKeysArray = [];
+
     if (isControlled) {
-      onChange?.(null, { selectedKeys: newSelection });
+      onChange?.(null, { selectedKeys: selectedKeysArray });
     } else {
       setInternalSelectedKeys(newSelection);
-      onChange?.(null, { selectedKeys: newSelection });
+      onChange?.(null, { selectedKeys: selectedKeysArray });
     }
   }, [isControlled, onChange]);
 
@@ -138,11 +150,13 @@ export const useSelection = ({
       if (selectionMode !== "multiple") return;
 
       const newSelection = new Set(allKeys);
+      const selectedKeysArray = Array.from(newSelection);
+
       if (isControlled) {
-        onChange?.(null, { selectedKeys: newSelection });
+        onChange?.(null, { selectedKeys: selectedKeysArray });
       } else {
         setInternalSelectedKeys(newSelection);
-        onChange?.(null, { selectedKeys: newSelection });
+        onChange?.(null, { selectedKeys: selectedKeysArray });
       }
     },
     [selectionMode, isControlled, onChange],
@@ -161,11 +175,13 @@ export const useSelection = ({
   const replaceSelection = useCallback(
     (key) => {
       const newSelection = new Set([key]);
+      const selectedKeysArray = Array.from(newSelection);
+
       if (isControlled) {
-        onChange?.(null, { selectedKeys: newSelection });
+        onChange?.(null, { selectedKeys: selectedKeysArray });
       } else {
         setInternalSelectedKeys(newSelection);
-        onChange?.(null, { selectedKeys: newSelection });
+        onChange?.(null, { selectedKeys: selectedKeysArray });
       }
     },
     [isControlled, onChange],
@@ -188,7 +204,5 @@ export const useSelection = ({
     // Selection state
     hasSelection: selectedKeys.size > 0,
     selectionCount: selectedKeys.size,
-    // Collection ARIA props from createCollectionAria
-    getCollectionAriaProps: aria.getCollectionAriaProps,
   };
 };

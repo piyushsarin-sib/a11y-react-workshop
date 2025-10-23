@@ -1,0 +1,25 @@
+/* TreeExample - Custom styling examples */
+
+.highlighted-section {
+  background-color: #f0f8ff;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.important-file {
+  background-color: #fff3cd;
+  font-weight: bold;
+}
+
+.level2-item {
+  background-color: #e8f5e9;
+  padding: 4px 8px;
+  border-left: 3px solid #4caf50;
+}
+
+.level3-item {
+  background-color: #fff3e0;
+  padding: 4px 8px;
+  border-left: 3px solid #ff9800;
+  font-style: italic;
+}

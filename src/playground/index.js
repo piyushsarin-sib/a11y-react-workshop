@@ -6,3 +6,4 @@ export { default as EdgeCases } from "./Ex4-EdgeCases";
 export { solved as EdgeCasesSolved } from "./Ex4-EdgeCases";
 export { default as ECommIssues } from "./ECommIssues";
 export { default as AddToCartModal } from "./AddToCartModal";
+export { default as TreeList } from "./TreeList/TreeList";

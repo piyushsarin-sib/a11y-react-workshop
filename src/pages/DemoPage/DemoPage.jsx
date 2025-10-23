@@ -4,41 +4,6 @@ import { Link } from "react-router-dom";
 export default function DemoPage() {
   const demoLinks = [
     {
-      to: "/demos/vertical-lists",
-      title: "Vertical List Example",
-      desc: "Accessible vertical list component demo",
-    },
-    {
-      to: "/demos/horizontal-lists",
-      title: "Horizontal List Example",
-      desc: "Accessible horizontal list component demo",
-    },
-    {
-      to: "/demos/single-select",
-      title: "Single Selection Example",
-      desc: "Accessible single selection list demo",
-    },
-    {
-      to: "/demos/multi-select",
-      title: "Multi Selection Example",
-      desc: "Accessible multi selection list demo",
-    },
-    {
-      to: "/demos/menu-skeleton",
-      title: "Uncontrolled Menu Example",
-      desc: "Accessible uncontrolled menu demo",
-    },
-    {
-      to: "/demos/key-nav/roving-index",
-      title: "Roving Index Example",
-      desc: "Accessible roving tabindex demo",
-    },
-    {
-      to: "/demos/overlay/menu",
-      title: "Menu With Overlay",
-      desc: "Accessible menu with overlay demo",
-    },
-    {
       to: "/demos/overlay/dialog",
       title: "Dialog Example",
       desc: "Accessible dialog overlay demo",

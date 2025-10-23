@@ -1,50 +1,42 @@
+/**
+ * Tree Component
+ *
+ * Similar to React Aria's TreeView - processes JSX children internally
+ * and applies keyboard navigation, roles, and aria-level automatically.
+ *
+ * Usage:
+ * import Tree, { Item, Section } from '@lib/Tree';
+ *
+ * <Tree>
+ *   <Section title="Files">
+ *     <Item>Document.txt</Item>
+ *   </Section>
+ * </Tree>
+ */
 import React from "react";
 import { useCollectionState } from "@lib/Collections/hooks/useCollectionState";
 import { useKeyboardNavigation } from "@lib/interactions/keyboard/hooks/useKeyboardNavigation";
 import { useSelection } from "@lib/interactions/selection/useSelection";
 import { ItemRenderer } from "@lib/Collections/components/ItemRenderer";
 import { mergeProps } from "@lib/utils";
-import MenuSection from "./MenuSection";
-import MenuOption from "./MenuOption";
-import "./MenuList.css";
+import "./Tree.css";
 
-/**
- * MenuList - Standalone menu component
- * Similar to Tree but for menu pattern (no nesting, no aria-level, no aria-expanded)
- *
- * Usage:
- * import MenuList, { MenuOption, MenuSection } from '@lib/Menu';
- *
- * <MenuList selectionMode="single">
- *   <MenuSection title="Categories">
- *     <MenuOption>Item 1</MenuOption>
- *   </MenuSection>
- * </MenuList>
- */
-const MenuList = React.forwardRef(
+const Tree = React.forwardRef(
   (
     {
       children,
-      pattern = "menu",
+      pattern = "tree",
       orientation = "vertical",
       ariaLabel,
       ariaLabelledBy,
       ariaDescribedBy,
       // eslint-disable-next-line no-unused-vars
       as: WrapperElement = "ul",
+      indentSize = 24,
       // Selection props
-      selectionMode = "single",
+      selectionMode = "none",
       selectedKeys,
-      // eslint-disable-next-line no-unused-vars
-      defaultSelectedKeys,
       onChange,
-      // Non-DOM props (filter out to prevent passing to DOM)
-      // eslint-disable-next-line no-unused-vars
-      close,
-      // eslint-disable-next-line no-unused-vars
-      open,
-      // eslint-disable-next-line no-unused-vars
-      toggle,
       ...props
     },
     ref,
@@ -52,7 +44,7 @@ const MenuList = React.forwardRef(
     // Process JSX children to extract collection state with metadata
     const state = useCollectionState({
       children,
-      indentSize: 0, // No indentation for menu
+      indentSize,
       pattern,
       ariaLabel,
       ariaLabelledBy,
@@ -62,13 +54,10 @@ const MenuList = React.forwardRef(
     });
 
     // Set up keyboard navigation using collection's navigation methods
-    // For menus, set first item as default active (WAI-ARIA menu pattern)
-    const firstKey = state.getFirstKey?.();
     const nav = useKeyboardNavigation({
       collection: state,
       orientation,
       loop: true,
-      defaultActiveKey: firstKey,
     });
 
     // Set up selection (always call hook, but selectionMode controls behavior)
@@ -76,20 +65,19 @@ const MenuList = React.forwardRef(
       selectionMode,
       selectedKeys,
       onChange,
-      pattern: "menu",
+      pattern: "tree",
       label: ariaLabel,
     });
 
     // Merge all props using mergeProps utility
     const wrapperProps = mergeProps(
-      { className: "menu-list" },
+      { className: "tree" },
       state.getCollectionProps(),
       nav.getCollectionProps(),
       { ref, ...props }
     );
 
-    // Render menu from hierarchical collection using ItemRenderer component
-
+    // Render tree from hierarchical collection using ItemRenderer component
     return (
       <WrapperElement {...wrapperProps}>
         {state.collection.map(node => (
@@ -108,10 +96,6 @@ const MenuList = React.forwardRef(
   },
 );
 
-MenuList.displayName = "MenuList";
+Tree.displayName = "Tree";
 
-// Attach child components for compound component pattern
-MenuList.Section = MenuSection;
-MenuList.Option = MenuOption;
-
-export default MenuList;
+export default Tree;

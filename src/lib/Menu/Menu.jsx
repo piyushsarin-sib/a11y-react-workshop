@@ -31,7 +31,7 @@ const Menu = ({
   overlayConfig = {},
   style = {},
   className = '',
-  trapFocus = true,
+  trapFocus = false,  // Menus should NOT trap focus - Tab closes menu
   children,
   selectedKeys,
   defaultSelectedKeys,

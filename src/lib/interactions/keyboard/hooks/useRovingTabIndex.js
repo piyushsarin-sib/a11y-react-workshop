@@ -32,6 +32,10 @@ import { useGridLayout } from "./useGridLayout.js";
  * @returns {number} return.activeIndex - Currently active item index (0-based)
  * @returns {Function} return.isActive - Check if key is active: (key) => boolean
  * @returns {Function} return.getCurrentPosition - Get position info: (key?) => {index, row, col}
+ * @returns {Function} return.getNextKey - Get next key: (fromKey?) => key|null
+ * @returns {Function} return.getPrevKey - Get previous key: (fromKey?) => key|null
+ * @returns {Function} return.getFirstKey - Get first key: () => key|null
+ * @returns {Function} return.getLastKey - Get last key: () => key|null
  * @returns {Function} return.getCollectionProps - Props for collection container
  * @returns {Function} return.getItemProps - Props for individual items: (key, options?) => object
  */
@@ -157,7 +161,8 @@ export const useRovingIndex = ({
       ref: createRefCallback(key, itemRefs.current, options.ref),
       onFocus: (event) => {
         // Update active key when item receives focus (for keyboard navigation)
-        if (isActive !== true) {
+        // Only handle if this element is the actual target (not a bubbled event from children)
+        if (isActive !== true && event.target === event.currentTarget) {
           navigateTo(key);
         }
         options.onFocus?.(event);
@@ -174,6 +179,25 @@ export const useRovingIndex = ({
     [getCurrentPosition, activeKey]
   );
 
+  // Navigation methods (React Aria style)
+  const getNextKey = useCallback((fromKey = activeKey) => {
+    const delegate = keyboardDelegate();
+    return delegate.getNextKey('down', fromKey);
+  }, [keyboardDelegate, activeKey]);
+
+  const getPrevKey = useCallback((fromKey = activeKey) => {
+    const delegate = keyboardDelegate();
+    return delegate.getNextKey('up', fromKey);
+  }, [keyboardDelegate, activeKey]);
+
+  const getFirstKey = useCallback(() => {
+    return itemKeys[0] ?? null;
+  }, [itemKeys]);
+
+  const getLastKey = useCallback(() => {
+    return itemKeys.at(-1) ?? null;
+  }, [itemKeys]);
+
   return {
     // State
     activeKey,
@@ -182,6 +206,12 @@ export const useRovingIndex = ({
     // Utilities
     isActive,
     getCurrentPosition,
+
+    // Navigation methods (similar to React Aria)
+    getNextKey,
+    getPrevKey,
+    getFirstKey,
+    getLastKey,
 
     // Props getters
     getCollectionProps,

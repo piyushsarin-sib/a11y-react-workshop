@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Button from "@common/Button";
 import Collection from "@lib/Collections/Collection";
+import { Item as LegacyItem } from "@lib/Collections/components/legacy";
 import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingTabIndex";
 
 const ProductList = ({ products, onAddToCart }) => {
@@ -37,7 +38,7 @@ const ProductList = ({ products, onAddToCart }) => {
         {...gridNav.getCollectionProps()}
       >
         {products.map((product) => (
-          <Collection.Item
+          <LegacyItem
             key={product.id}
             className="border rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow focus-within:ring-2 focus-within:ring-blue-500"
             {...gridNav.getItemProps(product.id)}
@@ -58,7 +59,7 @@ const ProductList = ({ products, onAddToCart }) => {
             >
               Add to Cart
             </Button>
-          </Collection.Item>
+          </LegacyItem>
         ))}
       </Collection>
       {/* COLLECTIONS END */}

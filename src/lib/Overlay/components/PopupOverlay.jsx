@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BaseOverlay from './BaseOverlay';
 import useFocusTrap from '../hooks/useFocusTrap';
+import useAutoFocus from '../hooks/useFocusManagement/useAutoFocus';
 import usePosition from '../hooks/usePosition';
 import { PLACEMENTS } from '../constants';
 import '../Overlay.css';
@@ -12,9 +13,9 @@ import '../Overlay.css';
  * Responsibilities:
  * - Dynamic positioning relative to trigger
  * - Conditional focus trap (ONLY for keyboard users)
+ * - Auto-focus first interactive element when popup opens
  * - NO inert background (user can interact with page)
  * - NO scroll lock (user can scroll)
- * - NO auto-focus (focus stays on trigger unless explicitly moved)
  * - Semantic container with role from usePopup (menu, listbox, etc.)
  *
  * @example
@@ -67,6 +68,12 @@ const PopupOverlay = ({
     containerRef: body.ref,
     onTabOut: !trapFocus ? close : undefined,  // Close menu when Tab moves focus outside
     isVisible: body.visible,
+  });
+
+  // ✅ Auto-focus first interactive element when popup opens
+  useAutoFocus({
+    enabled: body.visible,
+    containerRef: body.ref,
   });
 
   // ✅ Dynamic positioning relative to trigger

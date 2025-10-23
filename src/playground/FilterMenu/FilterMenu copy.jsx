@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { PopupOverlay, PLACEMENTS, ARIA_HASPOPUP, usePopup } from "@lib/Overlay";
+import { PopupOverlay, PLACEMENTS } from "@lib/Overlay";
 import Button from "@common/Button";
-import { MenuList } from "@lib/Menu";
+import { MenuList, useMenu } from "@lib/Menu";
 import FilterTrigger from "./FilterTrigger";
 
 const categories = [
@@ -21,28 +21,17 @@ const priceRanges = [
 const MenuWithOverlay = () => {
   const [selectedKeys, setSelectedKeys] = useState([]);
 
-  // const menuState = useMenu({
-  //   overlayConfig: { placement: PLACEMENTS.BOTTOM_START },
-  //   style: { width: "200px" },
-  //   overlayId: "menu-overlay",
-  //   triggerId: "menu-overlay-trigger",
-  // });
-
-  // const generatedTriggerId = useId();
-  // const generatedOverlayId = useId();
-
-  // Use usePopup for menu (non-modal popup with role="menu")
-  const popupControls = usePopup({
-    // overlayConfig: { placement: PLACEMENTS.BOTTOM_START },
-    bodyId: "menu-overlay",
+  const menuState = useMenu({
+    overlayConfig: { placement: PLACEMENTS.BOTTOM_START },
+    style: { width: "200px" },
+    overlayId: "menu-overlay",
     triggerId: "menu-overlay-trigger",
-    hasPopup: ARIA_HASPOPUP.MENU,
   });
 
   const handleMenuChange = (event, { selectedKeys: newSelectedKeys }) => {
     console.log("Menu selection changed:", newSelectedKeys);
     setSelectedKeys(Array.from(newSelectedKeys));
-    // popupControls.close();
+    // menuState.close();
   };
 
   return (
@@ -60,35 +49,36 @@ const MenuWithOverlay = () => {
         Previous Button
       </Button>
 
-      <FilterTrigger trigger={popupControls.trigger} onClick={popupControls.toggle} />
+      <FilterTrigger trigger={menuState.trigger} onClick={menuState.toggle} />
 
       <PopupOverlay
-        trigger={popupControls.trigger}
-        body={popupControls.body}
-        close={popupControls.close}
+        trigger={menuState.trigger}
+        body={menuState.body}
+        close={menuState.close}
         placement={PLACEMENTS.BOTTOM_START}
         trapFocus={false}
-        style={{ width: "200px" }}
+        style={menuState.style}
+        className={menuState.className}
       >
         <MenuList
-          id={popupControls.body.id}
+          id={menuState.body.id}
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           onChange={handleMenuChange}
           ariaLabel="Product filters menu"
-          close={popupControls.close}
+          close={menuState.close}
         >
-          <MenuList.Section key="categories" title="📦 Categories">
+          <MenuList.Section title="📦 Categories">
             {categories.map((category) => (
-              <MenuList.Option key={category.id}>
+              <MenuList.Option key={category.id} value={category.id}>
                 {category.name}
               </MenuList.Option>
             ))}
           </MenuList.Section>
 
-          <MenuList.Section key="prices" title="💰 Price Ranges">
+          <MenuList.Section title="💰 Price Ranges">
             {priceRanges.map((price) => (
-              <MenuList.Option key={price.id}>
+              <MenuList.Option key={price.id} value={price.id}>
                 {price.name}
               </MenuList.Option>
             ))}

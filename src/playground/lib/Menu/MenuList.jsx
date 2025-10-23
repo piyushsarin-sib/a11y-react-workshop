@@ -1,53 +1,114 @@
-import Collection from "@lib/Collections/Collection";
-import { useMenuState } from "./hooks/useMenuState";
+import React from "react";
+import { useCollectionState } from "@lib/Collections/hooks/useCollectionState";
+import { useKeyboardNavigation } from "@lib/interactions/keyboard/hooks/useKeyboardNavigation";
+import { useSelection } from "@lib/interactions/selection/useSelection";
+import { ItemRenderer } from "@lib/Collections/components/ItemRenderer";
+import { mergeProps } from "@lib/utils";
 import MenuSection from "./MenuSection";
 import MenuOption from "./MenuOption";
-import { MenuContext } from "./MenuContext";
-import "@lib/css/SelectionExample.css";
+import "./MenuList.css";
 
 /**
- * MenuList - Standalone menu component without overlay
- * Use this when you need a menu without popover/overlay behavior
+ * MenuList - Standalone menu component
+ * Similar to Tree but for menu pattern (no nesting, no aria-level, no aria-expanded)
+ *
+ * Usage:
+ * import MenuList, { MenuOption, MenuSection } from '@lib/Menu';
+ *
+ * <MenuList selectionMode="single">
+ *   <MenuSection title="Categories">
+ *     <MenuOption>Item 1</MenuOption>
+ *   </MenuSection>
+ * </MenuList>
  */
-const MenuList = ({
-  selectedKeys,
-  onChange,
-  defaultSelectedKeys = [],
-  selectionMode = "single",
-  className = "selection-menu",
-  ariaLabel,
-  children,
-  close,
-  open,
-  toggle,
-  ...props
-}) => {
-  // Use useMenuState hook for menu logic (children processing, keyboard nav)
-  const menu = useMenuState({
-    children,
-    selectedKeys,
-    defaultSelectedKeys,
-    onChange,
-    ariaLabel,
-    selectionMode,
-  });
+const MenuList = React.forwardRef(
+  (
+    {
+      children,
+      pattern = "menu",
+      orientation = "vertical",
+      ariaLabel,
+      ariaLabelledBy,
+      ariaDescribedBy,
+      // eslint-disable-next-line no-unused-vars
+      as: WrapperElement = "ul",
+      // Selection props
+      selectionMode = "single",
+      selectedKeys,
+      // eslint-disable-next-line no-unused-vars
+      defaultSelectedKeys,
+      onChange,
+      // Non-DOM props (filter out to prevent passing to DOM)
+      // eslint-disable-next-line no-unused-vars
+      close,
+      // eslint-disable-next-line no-unused-vars
+      open,
+      // eslint-disable-next-line no-unused-vars
+      toggle,
+      ...props
+    },
+    ref,
+  ) => {
+    // Process JSX children to extract collection state with metadata
+    const state = useCollectionState({
+      children,
+      indentSize: 0, // No indentation for menu
+      pattern,
+      ariaLabel,
+      ariaLabelledBy,
+      ariaDescribedBy,
+      orientation,
+      selectionMode,
+    });
 
-  return (
-    <MenuContext.Provider value={{ menu, close, open, toggle }}>
-      <Collection
-        as="ul"
-        itemAs="li"
-        className={className}
-        autoIndent={true}
-        indentSize={24}
-        {...menu.getCollectionProps()}
-        {...props}
-      >
-        {children}
-      </Collection>
-    </MenuContext.Provider>
-  );
-};
+    // Set up keyboard navigation using collection's navigation methods
+    // For menus, set first item as default active (WAI-ARIA menu pattern)
+    const firstKey = state.getFirstKey?.();
+    const nav = useKeyboardNavigation({
+      collection: state,
+      orientation,
+      loop: true,
+      defaultActiveKey: firstKey,
+    });
+
+    // Set up selection (always call hook, but selectionMode controls behavior)
+    const selection = useSelection({
+      selectionMode,
+      selectedKeys,
+      onChange,
+      pattern: "menu",
+      label: ariaLabel,
+    });
+
+    // Merge all props using mergeProps utility
+    const wrapperProps = mergeProps(
+      { className: "menu-list" },
+      state.getCollectionProps(),
+      nav.getCollectionProps(),
+      { ref, ...props }
+    );
+
+    // Render menu from hierarchical collection using ItemRenderer component
+
+    return (
+      <WrapperElement {...wrapperProps}>
+        {state.collection.map(node => (
+          <ItemRenderer
+            key={node.key}
+            node={node}
+            nav={nav}
+            selection={selection}
+            itemAs="li"
+            sectionWrapperAs="li"
+            sectionGroupAs="ul"
+          />
+        ))}
+      </WrapperElement>
+    );
+  },
+);
+
+MenuList.displayName = "MenuList";
 
 // Attach child components for compound component pattern
 MenuList.Section = MenuSection;

@@ -8,13 +8,13 @@
  * @see Collection.examples.jsx - Complete code examples
  */
 import React from "react";
-import "./Collection.css";
-import { createCollectionAria } from "./utils/createCollectionAria";
+import "./CollectionLegacy.css";
+import { createCollectionAria } from "./components/legacy/createCollectionAria";
 import CollectionContext, { useCollectionContext } from "./CollectionContext.js";
-import Item from "./components/Item.jsx";
-import Title from "./components/Title.jsx";
-import NestedCollection from "./components/Nested.jsx";
-import Section from "./components/Section.jsx";
+import Item from "./components/legacy/Item.jsx";
+import Title from "./components/legacy/Title.jsx";
+import NestedCollection from "./components/legacy/Nested.jsx";
+import Section from "./components/legacy/Section.jsx";
 
 /**
  * Simplified Collection component
