@@ -2,20 +2,9 @@ import { useId } from "react";
 import PropTypes from "prop-types";
 import Button from "@common/Button";
 import Collection from "@lib/Collections/Collection";
-import { useRovingIndex } from "@lib/interactions/keyboard/hooks/useRovingTabIndex";
 
 const ProductList = ({ products, onAddToCart }) => {
   const baseId = useId();
-  
-  // 2D Grid keyboard navigation for product grid
-  const gridNav = useRovingIndex({
-    items: products,
-    orientation: "both",
-    columnsCount: 2,
-    defaultActiveKey: products.length > 0 ? products[0].id : null,
-  });
-
-  const focusedItemId = gridNav.activeKey;
 
   if (products.length === 0) {
     return (
@@ -33,33 +22,28 @@ const ProductList = ({ products, onAddToCart }) => {
         {products.length} {products.length === 1 ? "product" : "products"} found
       </div>
       
-      {/* Grid using enhanced Collection component */}
+      {/* Grid using enhanced Collection component with dual navigation */}
       <Collection
         as="div"
+        items={products}
+        itemAs="article"
         className="grid grid-cols-2 gap-4"
         pattern="grid"
         ariaLabel="Product cards"
-        colCount={1}
+        colCount={2}
         getTitleId={(key) => `${baseId}-title-${key}`}
         getDescriptionId={(key) => `${baseId}-desc-${key}`}
-        {...gridNav.getCollectionProps()}
+        enableArrowNavigation={true}
+        getItemProps={() => ({
+          className: "border rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow focus-within:ring-2 focus-within:ring-blue-500"
+        })}
       >
-        {products.map((product, index) => {
-          const isFocused = focusedItemId === product.id;
+        {(product) => {
           const titleId = `${baseId}-title-${product.id}`;
           const descId = `${baseId}-desc-${product.id}`;
 
           return (
-            <Collection.Item
-              key={product.id}
-              as="article"
-              rowIndex={index + 1}
-              titleId={titleId}
-              descriptionId={descId}
-              tabIndex={isFocused ? 0 : -1}
-              className="border rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
-              {...gridNav.getItemProps(product.id)}
-            >
+            <>
               <img
                 src={product.image}
                 alt={product.alt}
@@ -80,13 +64,12 @@ const ProductList = ({ products, onAddToCart }) => {
                 className="w-full px-3 py-1.5 text-sm"
                 aria-label={`Add ${product.name} to cart`}
                 variant="primary"
-                tabIndex={isFocused ? undefined : -1}
               >
                 Add to Cart
               </Button>
-            </Collection.Item>
+            </>
           );
-        })}
+        }}
       </Collection>
     </>
   );

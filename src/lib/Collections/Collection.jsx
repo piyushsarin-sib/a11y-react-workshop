@@ -45,6 +45,7 @@ const Collection = React.forwardRef(({
   gridItemRole = "rowheader",
   getTitleId,
   getDescriptionId,
+  enableArrowNavigation = false, // Enable arrow key navigation with natural tab order
   // Tree-specific props
   indentSize = 24,
   autoIndent = true,
@@ -89,6 +90,58 @@ const Collection = React.forwardRef(({
     ? { paddingLeft: `${indentSize}px` }
     : {};
 
+  // Refs for arrow key navigation
+  const itemRefs = React.useRef({});
+
+  // Arrow key navigation handler
+  const createArrowKeyHandler = React.useCallback((key, index) => {
+    if (!enableArrowNavigation || !isGridPattern) return undefined;
+
+    return (e) => {
+      let targetIndex = index;
+
+      switch (e.key) {
+        case 'ArrowRight':
+          e.preventDefault();
+          targetIndex = index + 1;
+          if (targetIndex >= items.length) targetIndex = index;
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          targetIndex = index - 1;
+          if (targetIndex < 0) targetIndex = 0;
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          targetIndex = index + colCount;
+          if (targetIndex >= items.length) targetIndex = index;
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          targetIndex = index - colCount;
+          if (targetIndex < 0) targetIndex = index;
+          break;
+        default:
+          return;
+      }
+
+      // Focus the target item
+      const targetItem = items[targetIndex];
+      const targetKey = targetItem?.key || targetItem?.id || targetIndex;
+      const targetElement = itemRefs.current[targetKey];
+      
+      if (targetElement) {
+        // Focus the interactive element (button/link) or the element itself
+        const focusableChild = targetElement.querySelector('button, a, [tabindex="0"]');
+        if (focusableChild) {
+          focusableChild.focus();
+        } else {
+          targetElement.focus();
+        }
+      }
+    };
+  }, [enableArrowNavigation, isGridPattern, items, colCount]);
+
   // Provide context to children
   const contextValue = React.useMemo(() => ({
     level: currentLevel,
@@ -130,11 +183,19 @@ const Collection = React.forwardRef(({
                   ...(descId && { 'aria-describedby': descId }),
                 };
 
+                // Add ref for arrow navigation
+                const itemRef = (el) => {
+                  if (el) itemRefs.current[key] = el;
+                };
+
+                // Add arrow key handler if enabled
+                const arrowKeyHandler = createArrowKeyHandler(key, index);
+
                 // Render with nested structure if ItemInnerElement specified
                 if (ItemInnerElement) {
                   return (
                     <div key={key} role="row" aria-rowindex={rowIndex}>
-                      <ItemElement {...itemAriaProps}>
+                      <ItemElement ref={itemRef} {...itemAriaProps} onKeyDown={arrowKeyHandler}>
                         <ItemInnerElement {...behaviorProps} {...itemInnerProps}>
                           {content}
                         </ItemInnerElement>
@@ -146,7 +207,13 @@ const Collection = React.forwardRef(({
                 // Simple structure
                 return (
                   <div key={key} role="row" aria-rowindex={rowIndex}>
-                    <ItemElement {...behaviorProps} {...itemAriaProps}>
+                    <ItemElement 
+                      ref={itemRef} 
+                      {...itemAriaProps}
+                      {...behaviorProps}
+                      onKeyDown={arrowKeyHandler}
+                      className={behaviorProps.className}
+                    >
                       {content}
                     </ItemElement>
                   </div>
