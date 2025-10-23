@@ -22,14 +22,53 @@ const Item = React.forwardRef(({
   innerProps = {},
   role: explicitRole,
   "aria-level": explicitAriaLevel,
+  // Grid-specific props
+  rowIndex,
+  gridItemRole = "rowheader",
+  titleId,
+  descriptionId,
   ...props
 }, ref) => {
   // Read context for automatic nesting support
   const context = useCollectionContext();
+  const isGrid = context?.pattern === 'grid';
+
+  // Grid pattern: wrap in row with rowheader
+  if (isGrid && rowIndex) {
+    const itemAriaProps = {
+      role: gridItemRole,
+      'aria-colindex': 1,
+      ...(titleId && { 'aria-labelledby': titleId }),
+      ...(descriptionId && { 'aria-describedby': descriptionId }),
+    };
+
+    // Support nested structure (e.g., article > button)
+    if (InnerElement) {
+      return (
+        <div role="row" aria-rowindex={rowIndex}>
+          <ElementType ref={ref} {...itemAriaProps}>
+            <InnerElement {...props} {...innerProps}>
+              {children}
+            </InnerElement>
+          </ElementType>
+        </div>
+      );
+    }
+
+    // Simple structure
+    return (
+      <div role="row" aria-rowindex={rowIndex}>
+        <ElementType ref={ref} {...itemAriaProps} {...props}>
+          {children}
+        </ElementType>
+      </div>
+    );
+  }
 
   // Auto-apply aria-level and role for tree items (only if not explicitly set)
   const ariaLevel = explicitAriaLevel ?? (context?.pattern === 'tree' ? context.level : undefined);
   const itemRole = explicitRole ?? (context?.pattern === 'tree' ? 'treeitem' : undefined);
+  
   // Support nested structure (e.g., li > button)
   // Outer element is structural, inner element is interactive
   if (InnerElement) {
