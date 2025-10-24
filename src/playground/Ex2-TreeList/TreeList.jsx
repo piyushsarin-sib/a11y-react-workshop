@@ -36,8 +36,8 @@ const TreeList = () => {
           borderRadius: "4px",
         }}
       >
-        <div style={{ fontSize: "12px", color: "#666", marginBottom: "8px" }}>
-          📁 <strong>File:</strong> src/playground/Ex2-TreeList/TreeList.jsx
+        <div style={{ fontSize: "14px", marginBottom: "10px" }}>
+          📁 <strong style={{ fontWeight: "700", fontSize: "15px" }}>src/playground/Ex2-TreeList/TreeList.jsx</strong>
         </div>
         <strong>Checkpoints:</strong>
         <ul style={{ fontSize: "14px", margin: "8px 0" }}>
