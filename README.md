@@ -14,6 +14,9 @@ This workshop is designed to teach developers how to build truly accessible web 
 - **Modern Tooling**: Built with React 19, Vite, and Tailwind CSS
 - **Strict Linting**: Zero-tolerance accessibility linting with jsx-a11y
 - **Production Ready**: Error boundaries, performance optimization, and SEO
+- **Advanced Focus Management**: Improved focus traps with dynamic element detection
+- **Accessible Grid Patterns**: Adobe spec-compliant card grids with dual navigation (Tab + Arrow keys)
+- **Enhanced Modal UX**: Streamlined checkout and cart interactions
 
 ## 🚀 Quick Start
 
@@ -77,9 +80,11 @@ accessible-react-workshop/
 │   │   │   ├── 📁 AccessibilityCarousel/ # Accessibility info carousel
 │   │   │   ├── 📁 AddToCart/         # Add to cart functionality
 │   │   │   ├── 📁 Cart/              # Shopping cart components
+│   │   │   ├── 📁 Checkout/          # Checkout flow components
+│   │   │   ├── 📁 AccessibilityBanner/ # Accessibility info banner
 │   │   │   ├── 📁 OrderConfirmation/ # Order confirmation flow
 │   │   │   ├── 📁 Product/           # Product display components
-│   │   │   ├── 📁 ProductList/       # Product listing components
+│   │   │   ├── 📁 ProductList/       # Product listing with accessible grid
 │   │   │   └── 📁 SearchAndFilter/   # Search and filtering
 │   │   ├── 📁 layout/                # Layout components
 │   │   │   ├── 📁 Footer/            # Site footer
@@ -138,7 +143,11 @@ accessible-react-workshop/
 │   │   │   └── index.js
 │   │   ├── 📁 Collections/           # Collection management utilities
 │   │   │   ├── Collection.css
-│   │   │   ├── Collection.jsx
+│   │   │   ├── Collection.jsx        # Enhanced collection component with grid support
+│   │   │   ├── 📁 components/        # Collection sub-components
+│   │   │   │   └── Item.jsx          # Collection item wrapper
+│   │   │   ├── 📁 constants/         # ARIA configuration constants
+│   │   │   │   └── aria-config.js    # Grid and list ARIA patterns
 │   │   │   ├── 📁 hooks/
 │   │   │   │   └── useCollectionAria.js
 │   │   │   └── index.js
@@ -151,7 +160,8 @@ accessible-react-workshop/
 │   │   │   │   │   ├── index.js
 │   │   │   │   │   └── linear1DDelegate.js
 │   │   │   │   ├── 📁 hooks/
-│   │   │   │   │   └── useRovingIndex.js
+│   │   │   │   │   ├── useRovingIndex.js    # Roving tabindex pattern
+│   │   │   │   │   └── useArrowNavigation.js # Arrow key navigation
 │   │   │   │   └── 📁 utils/
 │   │   │   │       └── keyboardPrimitives.js
 │   │   │   └── 📁 selection/         # Selection patterns
@@ -192,9 +202,15 @@ accessible-react-workshop/
 │   │   ├── 📁 ExercisesPage/         # Exercise instructions page
 │   │   └── 📁 LandingPage/           # Home page
 │   ├── 📁 playground/                # Interactive playground components
-│   │   ├── 📁 CardWrapper/           # Card wrapper examples
+│   │   ├── 📁 Ex1-CardWrapper/       # Exercise 1: Card wrapper examples
 │   │   ├── 📁 ECommIssues/           # E-commerce accessibility issues
-│   │   ├── 📁 EdgeCases/             # Edge case examples
+│   │   ├── 📁 Ex4-EdgeCases/         # Exercise 4: Edge case examples
+│   │   │   ├── EdgeCases.jsx         # Issues demonstration
+│   │   │   ├── Step-0.jsx            # Starting point with issues
+│   │   │   ├── Step-1.jsx            # Fix heading hierarchy
+│   │   │   ├── Step-2.jsx            # Add skip links (if exists)
+│   │   │   ├── Step-3.jsx            # Add live regions
+│   │   │   └── solved.jsx            # Complete solution
 │   │   ├── 📁 FilterMenu/            # Filter menu examples
 │   │   ├── 📁 NestedCollectionWithTitles/
 │   │   ├── 📁 Overlay/               # Overlay examples
@@ -237,12 +253,15 @@ accessible-react-workshop/
 
 ### **Phase 2: Progressive Fixes**
 1. **Skip Links** - Quick navigation to main content
-2. **Button Semantics** - Proper interactive element markup
-3. **Form Labels** - Clear input descriptions
-4. **Keyboard Navigation** - Full keyboard support
-5. **ARIA Live Regions** - Dynamic content announcements
-6. **Focus Management** - Proper focus trapping and restoration
-7. **Modal Accessibility** - Screen reader and keyboard support
+2. **Heading Hierarchy** - Proper h1 → h2 → h3 structure
+3. **Button Semantics** - Proper interactive element markup
+4. **Form Labels** - Clear input descriptions
+5. **Keyboard Navigation** - Full keyboard support with Tab and Arrow keys
+6. **ARIA Live Regions** - Dynamic content announcements for cart updates
+7. **Focus Management** - Advanced focus trapping with disabled element handling
+8. **Focus Restoration** - Automatic return to previously focused element
+9. **Modal Accessibility** - Screen reader support with proper ARIA attributes
+10. **Grid Patterns** - Adobe spec-compliant card grids with row/rowheader pattern
 
 ### **Phase 3: Testing & Validation**
 - **Keyboard testing** - Tab navigation, Enter/Space activation
@@ -277,35 +296,44 @@ Reusable UI components with built-in accessibility features:
 
 - **Button** - Accessible button with loading states and variants
 - **Input** - Form input with proper labeling and error handling
-- **Modal** - Accessible modal with focus management
+- **Modal** - Accessible modal with advanced focus management and restoration
+- **DialogOverlay** - Dialog with backdrop click handling and Escape key support
 - **FormGroup** - Form wrapper with accessibility enhancements
 - **Carousel** - Accessible image/content carousel
-- **Checkbox/Radio** - Accessible form controls
+- **Checkbox/Radio** - Accessible form controls with proper ARIA
+- **QuantitySelector** - Increment/decrement controls with keyboard support
 
 ### **Feature Components** (`src/components/features/`)
 Business logic components for the e-commerce workshop:
 
 - **Product** - Product display and interaction
-- **Cart** - Shopping cart functionality
+- **ProductList** - Accessible product grid with Adobe card spec (role="grid", row/rowheader pattern)
+- **Cart** - Shopping cart with live region announcements
+- **AddToCart** - Modal with dynamic button states and keyboard-inaccessible "Go to Cart" link
+- **Checkout** - Streamlined checkout with immediate order placement
+- **AccessibilityBanner** - Informational banner about accessibility features
 - **SearchAndFilter** - Product search and filtering
 - **OrderConfirmation** - Checkout completion flow
 
 ### **Demo Components** (`src/demos/`)
 Interactive examples demonstrating accessibility patterns:
 
-- **Keyboard Navigation** - Roving tabindex, arrow key navigation
+- **Keyboard Navigation** - Roving tabindex, arrow key navigation, dual navigation (Tab + Arrows)
 - **Selection Patterns** - Single/multi-select with proper ARIA
-- **Overlay Components** - Modals, tooltips, dropdowns
-- **List Components** - Accessible lists and grids
+- **Overlay Components** - Modals, tooltips, dropdowns with focus traps
+- **List Components** - Accessible lists and grids with proper ARIA attributes
+- **Grid Navigation** - 2D grid navigation with aria-rowindex and aria-colindex
 
 ## 🔧 Development Guidelines
 
 ### **Accessibility Standards**
 - **WCAG 2.1 AA** compliance
 - **ARIA 1.1** implementation
-- **Keyboard navigation** support
-- **Screen reader** compatibility
-- **Color contrast** requirements
+- **Adobe Accessibility Specifications** for card grids
+- **Keyboard navigation** support (Tab, Arrow keys, Enter, Space, Escape)
+- **Screen reader** compatibility (NVDA, JAWS, VoiceOver)
+- **Color contrast** requirements (4.5:1 for normal text)
+- **Focus indicators** visible on all interactive elements
 
 ### **Code Quality**
 - **ESLint** with jsx-a11y plugin
@@ -315,19 +343,23 @@ Interactive examples demonstrating accessibility patterns:
 - **Error boundaries** for resilience
 
 ### **Testing Approach**
-- **Keyboard-only** navigation testing
-- **Screen reader** testing (NVDA, VoiceOver)
-- **Color contrast** validation
-- **Focus management** verification
-- **ARIA implementation** testing
+- **Keyboard-only** navigation testing (Tab, Shift+Tab, Arrow keys, Enter, Space, Escape)
+- **Screen reader** testing (NVDA, VoiceOver, JAWS)
+- **Color contrast** validation (WebAIM Contrast Checker)
+- **Focus management** verification (focus traps, restoration, visible indicators)
+- **ARIA implementation** testing (role, aria-label, aria-labelledby, aria-describedby)
+- **Disabled state** handling (excluding disabled elements from focus traps)
+- **Grid patterns** validation (aria-rowcount, aria-colcount, aria-rowindex, aria-colindex)
 
 ## 📚 Learning Resources
 
 ### **Accessibility Guidelines**
 - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 - [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
+- [Adobe Accessibility Specifications](https://opensource.adobe.com/spectrum-web-components/components/)
 - [WebAIM Keyboard Accessibility](https://webaim.org/techniques/keyboard/)
 - [Focus Management Best Practices](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+- [Grid Pattern ARIA Specification](https://www.w3.org/WAI/ARIA/apg/patterns/grid/)
 
 ### **React Accessibility**
 - [React Accessibility Documentation](https://reactjs.org/docs/accessibility.html)
@@ -366,6 +398,33 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🌐 Live Demo
 
 Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](https://accessible-react-workshop-99af.vercel.app)
+
+## 🌟 Recent Enhancements
+
+### **Focus Management Improvements**
+- ✅ Enhanced focus trap with dynamic disabled element detection
+- ✅ Automatic focus restoration to previously focused element
+- ✅ `getFocusableElements()` function that queries fresh on Tab key press
+- ✅ Proper handling of Escape key with `preventDefault()`
+- ✅ Timeout-based focus to ensure DOM readiness
+
+### **Product Grid Accessibility**
+- ✅ Adobe spec-compliant card grid pattern
+- ✅ `role="grid"` with `role="row"` and `role="rowheader"` structure
+- ✅ Proper ARIA attributes: `aria-rowindex`, `aria-colindex`, `aria-labelledby`, `aria-describedby`
+- ✅ Dual navigation support: Tab for sequential navigation, Arrow keys for 2D navigation
+- ✅ Collection component handles both navigation patterns automatically
+
+### **E-Commerce UX Improvements**
+- ✅ Streamlined checkout modal (immediate order placement)
+- ✅ Enhanced AddToCart modal with "Go to Cart" link (keyboard-inaccessible by design)
+- ✅ Dynamic button states based on quantity and cart status
+- ✅ Larger, consistent modal sizes across playground and solved pages
+- ✅ Updated footer links: Home, Best Practices, Reference links
+
+### **Accessibility Banner**
+- ✅ Non-button styling for disability type tags (Motor, Visual, Hearing, Cognitive)
+- ✅ Pill-shaped badges with subtle borders instead of clickable-looking boxes
 
 ---
 
