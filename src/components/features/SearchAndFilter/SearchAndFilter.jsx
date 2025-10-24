@@ -2,8 +2,7 @@ import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 
 import FilterMenu from "./FilterMenu";
-import { useMenu } from "@lib/Menu";
-import { PLACEMENTS } from "@lib/Overlay";
+import { usePopup, ARIA_HASPOPUP } from "@lib/Overlay";
 
 // Categories derived from the product list for filtering
 const categories = [
@@ -26,9 +25,10 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
   const [selectedPrices, setSelectedPrices] = useState([]);
   const searchInputRef = useRef(null);
 
-  const menuState = useMenu({
-    overlayConfig: { placement: PLACEMENTS.BOTTOM_START },
-    style: { width: "250px" },
+  const popupControls = usePopup({
+    bodyId: "filter-menu-overlay",
+    triggerId: "filter-menu-trigger",
+    hasPopup: ARIA_HASPOPUP.MENU,
   });
 
   // Price range IDs for checking
@@ -150,8 +150,8 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
         {/* Filter dropdown button */}
         <button
           type="button"
-          {...menuState.trigger}
-          onClick={menuState.toggle}
+          {...popupControls.trigger}
+          onClick={popupControls.toggle}
           className="w-full md:w-auto px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 accessible-focus"
         >
           <span className="flex items-center">
@@ -188,7 +188,7 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
         </button>
 
         <FilterMenu
-          menuState={menuState}
+          popupControls={popupControls}
           onChange={handleMenuChange}
           categories={categories}
           priceRanges={priceRanges}

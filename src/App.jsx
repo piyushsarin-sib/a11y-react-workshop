@@ -17,11 +17,10 @@ import {
   EdgeCasesSolved,
   ECommIssues,
   AddToCartModal,
+  AddToCartModalSolved,
   TreeList,
   TreeListSolved,
 } from "./playground";
-
-import { AddToCartModal as AddToCartModalSolved } from "./solved";
 
 // Demo imports
 import { DialogExample, PopoverDialogExample } from "./demos";

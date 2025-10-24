@@ -1,30 +1,39 @@
-import Menu from "@lib/Menu";
+import { PopupOverlay, PLACEMENTS } from "@lib/Overlay";
+import { MenuList } from "@lib/Menu";
 
-const FilterMenu = ({ menuState, onChange, categories, priceRanges, selectedKeys }) => {
+const FilterMenu = ({ popupControls, onChange, categories, priceRanges, selectedKeys }) => {
   return (
-    <Menu
-      {...menuState}
-      onChange={onChange}
-      selectedKeys={selectedKeys}
-      selectionMode="multiple"
-      ariaLabel="Product filters menu"
+    <PopupOverlay
+      trigger={popupControls.trigger}
+      body={popupControls.body}
+      close={popupControls.close}
+      placement={PLACEMENTS.BOTTOM_START}
+      trapFocus={false}
+      style={{ width: "250px" }}
     >
-      <Menu.Section title="📦 Categories">
-        {categories.map((category) => (
-          <Menu.Option key={category.id} value={category.id}>
-            {category.name}
-          </Menu.Option>
-        ))}
-      </Menu.Section>
+      <MenuList
+        selectedKeys={selectedKeys}
+        selectionMode="multiple"
+        onChange={onChange}
+        ariaLabel="Product filters menu"
+      >
+        <MenuList.Section key="categories" title="📦 Categories">
+          {categories.map((category) => (
+            <MenuList.Option key={category.id}>
+              {category.name}
+            </MenuList.Option>
+          ))}
+        </MenuList.Section>
 
-      <Menu.Section title="💰 Price Ranges">
-        {priceRanges.map((price) => (
-          <Menu.Option key={price.id} value={price.id}>
-            {price.name}
-          </Menu.Option>
-        ))}
-      </Menu.Section>
-    </Menu>
+        <MenuList.Section key="prices" title="💰 Price Ranges">
+          {priceRanges.map((price) => (
+            <MenuList.Option key={price.id}>
+              {price.name}
+            </MenuList.Option>
+          ))}
+        </MenuList.Section>
+      </MenuList>
+    </PopupOverlay>
   );
 };
 

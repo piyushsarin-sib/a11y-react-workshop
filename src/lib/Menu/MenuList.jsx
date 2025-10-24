@@ -34,6 +34,7 @@ const MenuList = React.forwardRef(
       // Selection props
       selectionMode = "single",
       selectedKeys,
+      defaultSelectedKeys, // eslint-disable-line no-unused-vars
       onChange,
       ...props
     },

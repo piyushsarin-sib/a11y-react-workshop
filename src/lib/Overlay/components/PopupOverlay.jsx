@@ -113,6 +113,7 @@ const PopupOverlay = ({
       portalTarget={portalTarget}
       className="popup-overlay"
       zIndex={1000}
+      style={style}
     >
       {content}
     </BaseOverlay>

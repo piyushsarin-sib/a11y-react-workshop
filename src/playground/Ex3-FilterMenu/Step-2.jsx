@@ -4,6 +4,7 @@ import { PopupOverlay, PLACEMENTS, ARIA_HASPOPUP, usePopup } from "@lib/Overlay"
 import Button from "@common/Button";
 import { MenuList } from "@lib/Menu";
 import FilterTrigger from "./FilterTrigger";
+import Checkpoints from "./Checkpoints";
 
 const categories = [
   { id: "hearing", name: "Hearing Assistance" },
@@ -41,6 +42,7 @@ const MenuWithOverlay = () => {
 
   return (
     <div style={{ padding: "50px" }}>
+      <Checkpoints />
       <h3 style={{ marginBottom: "20px" }}>Menu with Overlay (Default)</h3>
       <p style={{ marginBottom: "20px", color: "#666" }}>
         Click the button to open a menu. Use ESC to close, or click outside.

@@ -24,11 +24,10 @@ fi
 typeset -A base_files
 base_files=(
   ex1 "CardWrapper"
-  ex2 "ProductsGrid"
-  ex3a "Menu"
-  ex3b "FilterMenu"
-  ex3c "useKeyboardHandlers"
-  ex4 "EdgeCases"
+  ex2 "TreeList"
+  ex3 "FilterMenu"
+  ex4 "AddToCartModal"
+  ex5 "EdgeCases"
   # Add more exercises here
 )
 

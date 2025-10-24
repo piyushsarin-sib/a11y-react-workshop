@@ -36,6 +36,9 @@ const TreeList = () => {
           borderRadius: "4px",
         }}
       >
+        <div style={{ fontSize: "12px", color: "#666", marginBottom: "8px" }}>
+          📁 <strong>File:</strong> src/playground/Ex2-TreeList/TreeList.jsx
+        </div>
         <strong>Checkpoints:</strong>
         <ul style={{ fontSize: "14px", margin: "8px 0" }}>
           <li>✅ No manual prop spreading - Tree handles everything</li>

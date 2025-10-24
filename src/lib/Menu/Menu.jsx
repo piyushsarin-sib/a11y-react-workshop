@@ -38,7 +38,6 @@ const Menu = ({
   selectionMode = "single",
   onChange,
   ariaLabel,
-  ...props
 }) => {
   const { placement = PLACEMENTS.BOTTOM_START } = overlayConfig;
 
@@ -53,14 +52,12 @@ const Menu = ({
       className={className}
     >
       <MenuList
-        id={body.id}
+        id={body?.id}
         selectedKeys={selectedKeys}
         defaultSelectedKeys={defaultSelectedKeys}
         selectionMode={selectionMode}
         onChange={onChange}
         ariaLabel={ariaLabel}
-        close={close}
-        {...props}
       >
         {children}
       </MenuList>

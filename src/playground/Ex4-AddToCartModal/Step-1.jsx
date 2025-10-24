@@ -2,6 +2,7 @@ import React from "react";
 import { DialogOverlay, useDialog } from "@lib/Overlay";
 import Button from "@common/Button";
 import QuantitySelector from "@common/QuantitySelector";
+import Checkpoints from "./Checkpoints";
 
 const product = {
   id: 2,
@@ -15,6 +16,7 @@ const product = {
 };
 
 const AddToCartModal = () => {
+  // ✅ COMPLETED: Configure useDialog hook for a Dialog overlay for modal
   const dialogState = useDialog({
     bodyId: "add-to-cart-modal",
     triggerId: "add-to-cart-button",
@@ -22,6 +24,8 @@ const AddToCartModal = () => {
 
   return (
     <>
+      <Checkpoints />
+      {/* ✅ COMPLETED: Connect trigger button to dialog controls by spreading trigger props and onClick handler */}
       <Button
         {...dialogState.trigger}
         onClick={dialogState.open}
@@ -32,12 +36,15 @@ const AddToCartModal = () => {
         Add to Cart
       </Button>
 
+      {/* ✅ STEP 1: Configure DialogOverlay component with dialog state props */}
+
       <DialogOverlay
         {...dialogState}
         title={product.name}
         backdrop
         style={{ width: "100%", maxWidth: "48rem" }}
       >
+        {/* ✅ COMPLETED: Connect modal content to dialog body with aria-describedby by setting div id */}
         <div id={dialogState.body["aria-describedby"]} className="mb-4">
           <p className="mb-4">{product.description}</p>
           <div className="flex items-center justify-between mb-6">

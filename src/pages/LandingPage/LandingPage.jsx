@@ -21,20 +21,20 @@ const workshopCards = [
     solved: "/solved/tree-list",
   },
   {
-    title: "Ex 3a, 3b, 3c: Filter Menu Accessibility",
+    title: "Ex 3: Filter Menu Accessibility",
     description:
       "Filter Menu Accessibility (popup/overlay + trigger connectivity with accessibility)",
     playground: "/playground/filter-menu",
     solved: "/solved/filter-menu",
   },
   {
-    title: "Ex 3c: Cart Modal Accessibility",
+    title: "Ex 4: Cart Modal Accessibility",
     description: "Improved Overlay modal usecase with focus trap and better accessibility.",
     playground: "/playground/cart-modal",
     solved: "/solved/cart-modal",
   },
   {
-    title: "Ex 4: Edge Cases Accessibility",
+    title: "Ex 5: Edge Cases Accessibility",
     description: "Improved handling of edge cases with accessibility in mind.",
     playground: "/playground/edge-cases",
     solved: "/solved/edge-cases",
