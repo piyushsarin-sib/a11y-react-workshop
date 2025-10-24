@@ -1,0 +1,134 @@
+.accordion {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.accordion-header:hover {
+  background: #e9ecef;
+}
+
+.accordion-header:focus {
+  outline: 2px solid #007bff;
+  outline-offset: -2px;
+}
+
+.accordion-header:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: #f8f9fa;
+}
+
+.accordion-title {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.accordion-icon {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+  color: #6c757d;
+}
+
+.accordion-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.accordion-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.accordion-content {
+  overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+.accordion-body {
+  padding: 16px;
+  background: #ffffff;
+}
+
+.accordion-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.accordion-toggle:hover {
+  background: #e9ecef;
+}
+
+.accordion-toggle:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 1px;
+}
+
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .accordion {
+    border-color: #444;
+  }
+
+  .accordion-item {
+    border-color: #444;
+  }
+
+  .accordion-header {
+    background: #2d2d2d;
+    color: #ffffff;
+  }
+
+  .accordion-header:hover {
+    background: #404040;
+  }
+
+  .accordion-body {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .accordion-toggle:hover {
+    background: #404040;
+  }
+}
