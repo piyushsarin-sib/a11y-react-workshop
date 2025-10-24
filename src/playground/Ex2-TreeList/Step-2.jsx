@@ -1,11 +1,7 @@
+/* eslint-disable */
 /**
  * Tree Component
- *
- * Similar to React Aria's TreeView - processes JSX children internally
- * and applies keyboard navigation, roles, and aria-level automatically.
- *
  * Usage:
- * import Tree, { Item, Section } from '@lib/Tree';
  *
  * <Tree>
  *   <Section title="Files">
@@ -19,7 +15,7 @@ import { useKeyboardNavigation } from "@lib/interactions/keyboard/hooks/useKeybo
 import { useSelection } from "@lib/interactions/selection/useSelection";
 import { ItemRenderer } from "@lib/Collections/components/ItemRenderer";
 import { mergeProps } from "@lib/utils";
-import "./Tree.css";
+import "@lib/Tree/Tree.css";
 
 const Tree = React.forwardRef(
   (
@@ -41,7 +37,11 @@ const Tree = React.forwardRef(
     },
     ref,
   ) => {
-    // Process JSX children to extract collection state with metadata
+    /**
+     * ✅ STEP 1: Uncomment the call to useCollectionState hook with relevant config.
+     * This processes JSX children to extract collection state with metadata
+     */
+
     const state = useCollectionState({
       children,
       indentSize,
@@ -53,23 +53,31 @@ const Tree = React.forwardRef(
       selectionMode,
     });
 
-    // Set up keyboard navigation using collection's navigation methods
+    /**
+     * ✅ STEP 2: Uncomment the call to useKeyboardNavigation hook.
+     * This sets up keyboard navigation using collection's navigation methods
+     */
+
     const nav = useKeyboardNavigation({
       collection: state,
       orientation,
       loop: true,
     });
 
-    // Set up selection (always call hook, but selectionMode controls behavior)
-    const selection = useSelection({
-      selectionMode,
-      selectedKeys,
-      onChange,
-      pattern: "tree",
-      label: ariaLabel,
-    });
+    /**
+     * ✏️ TODO STEP 3: Uncomment the call to useSelection hook.
+     * This sets up selection (always call hook, but selectionMode controls behavior)
+     */
 
-    // Merge all props using mergeProps utility
+    // const selection = useSelection({
+    //   selectionMode,
+    //   selectedKeys,
+    //   onChange,
+    //   pattern: "tree",
+    //   label: ariaLabel,
+    // });
+
+    // ✅ STEP 4: Merge all props using mergeProps utility
     const wrapperProps = mergeProps(
       { className: "tree" },
       state.getCollectionProps(),

@@ -1,5 +1,5 @@
-import { getFocusableElements } from "./focusUtils";
-import { isEscapeKey, isTabKey } from "./keyUtils";
+import { getFocusableElements } from './focusUtils';
+import { isEscapeKey, isTabKey } from './keyUtils';
 
 /**
  * Pure helper - Checks if escape key should trigger close
@@ -21,7 +21,7 @@ export const shouldCloseOnEscape = (event) => {
  * @returns {boolean} Whether focus trap should be applied
  */
 export const shouldApplyFocusTrap = (backdrop, placement) => {
-  return backdrop || placement === "center";
+  return backdrop || placement === 'center';
 };
 
 // Track if we've warned about missing focusable elements (per container)
@@ -45,12 +45,12 @@ export const applyFocusTrap = (event, container) => {
 
     // Warn once per container in development
     // eslint-disable-next-line no-undef
-    if (process.env.NODE_ENV !== "production" && !warnedContainers.has(container)) {
+    if (process.env.NODE_ENV !== 'production' && !warnedContainers.has(container)) {
       warnedContainers.add(container);
       console.warn(
-        "[Overlay] Focus trap active but no focusable elements found. " +
-          "Consider adding at least one interactive element (button, link, etc.) " +
-          "or set backdrop={false} for non-modal overlays.",
+        '[Overlay] Focus trap active but no focusable elements found. ' +
+        'Consider adding at least one interactive element (button, link, etc.) ' +
+        'or set backdrop={false} for non-modal overlays.'
       );
     }
 
@@ -64,13 +64,15 @@ export const applyFocusTrap = (event, container) => {
   // Shift+Tab on first element - wrap to last
   if (event.shiftKey && activeElement === firstElement) {
     event.preventDefault();
-    // TODO: call focus on lastElement
+    lastElement.focus();
+    return true;
   }
 
   // Tab on last element - wrap to first
   if (!event.shiftKey && activeElement === lastElement) {
     event.preventDefault();
-    // TODO: call focus on firstElement
+    firstElement.focus();
+    return true;
   }
 
   // Let browser handle normal Tab navigation

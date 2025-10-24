@@ -17,20 +17,13 @@ import {
   ECommIssues,
   AddToCartModal,
   TreeList,
+  TreeListSolved,
 } from "./playground";
 
-import {
-  // ProductsGrid as ProductsGridSolved, // Commented out - has incorrect Collection import
-  // GridActiveDescendant, // Commented out - has incorrect Collection import
-  FilterMenu as FilterMenuSolved,
-  AddToCartModal as AddToCartModalSolved,
-} from "./solved";
+import { FilterMenu as FilterMenuSolved, AddToCartModal as AddToCartModalSolved } from "./solved";
 
 // Demo imports
-import {
-  DialogExample,
-  PopoverDialogExample,
-} from "./demos";
+import { DialogExample, PopoverDialogExample } from "./demos";
 
 function App() {
   return (
@@ -94,6 +87,7 @@ function App() {
         <Route path="/solved/filter-menu" element={<FilterMenuSolved />} />
         <Route path="/solved/cart-modal" element={<AddToCartModalSolved />} />
         <Route path="/solved/edge-cases" element={<EdgeCasesSolved />} />
+        <Route path="/solved/tree-list" element={<TreeListSolved />} />
         <Route path="/solved/e-commerce" element={<ECommercePage />} />
 
         {/* Demo Routes */}

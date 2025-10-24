@@ -1,9 +1,9 @@
 export { default as CardWrapper } from "./Ex1-CardWrapper";
 export { solved as CardWrapperSolved } from "./Ex1-CardWrapper";
 export { default as FilterMenu } from "./FilterMenu";
-export { default as ProductsGrid } from "./ProductGrid";
+export { default as TreeList } from "./Ex2-TreeList";
+export { solved as TreeListSolved } from "./Ex2-TreeList";
 export { default as EdgeCases } from "./Ex4-EdgeCases";
 export { solved as EdgeCasesSolved } from "./Ex4-EdgeCases";
 export { default as ECommIssues } from "./ECommIssues";
 export { default as AddToCartModal } from "./AddToCartModal";
-export { default as TreeList } from "./TreeList/TreeList";

@@ -1,5 +1,5 @@
-import React from 'react';
-import { mergeProps } from '@lib/utils';
+import React from "react";
+import { mergeProps } from "@lib/utils";
 
 /**
  * ItemRenderer - React component for rendering collection items and sections
@@ -20,95 +20,91 @@ export function ItemRenderer({
   node,
   nav,
   selection,
-  itemAs: ItemElement = 'li',
-  sectionWrapperAs: SectionWrapper = 'li',
-  sectionGroupAs: SectionGroup = 'ul',
+  itemAs: ItemElement = "li",
+  sectionWrapperAs: SectionWrapper = "li",
+  sectionGroupAs: SectionGroup = "ul",
 }) {
+  // Helper to render nested children recursively
+  const renderChildren = (childNodes) => {
+    return childNodes.map((childNode) => (
+      <ItemRenderer
+        key={childNode.key}
+        node={childNode}
+        nav={nav}
+        selection={selection}
+        itemAs={ItemElement}
+        sectionWrapperAs={SectionWrapper}
+        sectionGroupAs={SectionGroup}
+      />
+    ));
+  };
+
   // Render section with nested group
-  if (node.type === 'section') {
+  if (node.type === "section") {
     const headingId = `section-${node.key}`;
+    const hasChildren = node.childNodes?.length > 0;
 
-    // Extract custom props from node (excluding component-specific props)
-    const { children: _children, title: _title, as: _as, innerAs: _innerAs, innerProps: _innerProps, ...customProps } = node.props || {};
-
-    // Merge section wrapper props
-    const sectionProps = mergeProps(
-      { role: "presentation" },
-      customProps
-    );
+    // Extract custom props (excluding component-specific props)
+    const {
+      children: _children,
+      title: _title,
+      as: _as,
+      innerAs: _innerAs,
+      innerProps: _innerProps,
+      ...customProps
+    } = node.props || {};
 
     return (
-      <SectionWrapper {...sectionProps}>
-        <div id={headingId}>
-          {node.rendered}
-        </div>
-        {node.childNodes && node.childNodes.length > 0 && (
+      <SectionWrapper {...mergeProps({ role: "presentation" }, customProps)}>
+        <div id={headingId}>{node.rendered}</div>
+        {hasChildren && (
           <SectionGroup role="group" aria-labelledby={headingId}>
-            {node.childNodes.map(childNode => (
-              <ItemRenderer
-                key={childNode.key}
-                node={childNode}
-                nav={nav}
-                selection={selection}
-                itemAs={ItemElement}
-                sectionWrapperAs={SectionWrapper}
-                sectionGroupAs={SectionGroup}
-              />
-            ))}
+            {renderChildren(node.childNodes)}
           </SectionGroup>
         )}
       </SectionWrapper>
     );
   }
 
-  // Render item - extract custom props, excluding component-specific ones
-  const { children: _children, as: _as, innerAs: _innerAs, innerProps: _innerProps, role: _role, 'aria-level': _ariaLevel, ...customPropsFromNode } = node.props || {};
+  // Render item - extract custom props (excluding component-specific props)
+  const {
+    children: _children,
+    as: _as,
+    innerAs: _innerAs,
+    innerProps: _innerProps,
+    role: _role,
+    "aria-level": _ariaLevel,
+    ...customPropsFromNode
+  } = node.props || {};
 
   // Merge all item props using mergeProps utility
-  // Order: base style < custom props < ARIA props (from node) < navigation props < selection props (if provided)
+  // Order: base style < custom props < ARIA props < navigation props < selection props
   const itemProps = mergeProps(
     { style: node.indentStyle },
     customPropsFromNode,
-    node.ariaProps,  // Pre-computed ARIA attributes from useCollectionState
+    node.ariaProps, // Pre-computed ARIA attributes from useCollectionState
     nav.getItemProps(node.key),
-    selection ? selection.getItemSelectionProps(node.key, node) : {}
+    selection ? selection.getItemSelectionProps(node.key, node) : {},
   );
 
-  // If item has nested children, render them in a group
-  if (node.childNodes && node.childNodes.length > 0) {
-    // Filter out collection components (Item/Section) from rendered content
-    // Keep regular elements (divs, spans) and text content
-    const contentOnly = React.Children.toArray(node.rendered).filter(
-      child => !React.isValidElement(child) || !child.type?.getCollectionNode
-    );
+  const hasChildren = node.childNodes?.length > 0;
 
+  // Item with nested children
+  if (hasChildren) {
     return (
       <ItemElement {...itemProps}>
-        {contentOnly}
+        {node.rendered}
         <SectionGroup role="group">
-          {node.childNodes.map(childNode => (
-            <ItemRenderer
-              key={childNode.key}
-              node={childNode}
-              nav={nav}
-              selection={selection}
-              itemAs={ItemElement}
-              sectionWrapperAs={SectionWrapper}
-              sectionGroupAs={SectionGroup}
-            />
-          ))}
+          {renderChildren(node.childNodes)}
         </SectionGroup>
       </ItemElement>
     );
   }
 
-  return (
-    <ItemElement {...itemProps}>
-      {node.rendered}
-    </ItemElement>
-  );
+  // Leaf item
+  return <ItemElement {...itemProps}>{node.rendered}</ItemElement>;
 }
 
-ItemRenderer.displayName = 'ItemRenderer';
+ItemRenderer.displayName = "ItemRenderer";
 
 export default ItemRenderer;

@@ -15,9 +15,10 @@ const workshopCards = [
     solved: "/solved/card-wrapper",
   },
   {
-    title: "Demo: Tree List with Keyboard Navigation",
+    title: "Ex 2: Tree List with Keyboard Navigation",
     description: "Tree List with ARIA attributes, keyboard navigation, and selection",
     playground: "/playground/tree-list",
+    solved: "/solved/tree-list",
   },
   {
     title: "Ex 3a, 3b, 3c: Filter Menu Accessibility",

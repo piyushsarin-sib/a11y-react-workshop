@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import Tree, { Item, Section } from "@lib/Tree";
-import "./TreeList.css";
+import Tree from "./Tree";
+import { Item, Section } from "@lib/Collections";
 
-/**
- * Example showing React Aria-style Tree component
- * - No manual prop spreading needed
- * - Automatic keyboard navigation
- * - Automatic aria-level computation
- * - Controlled selection with onChange
- */
 const TreeList = () => {
   const [selectedKeys, setSelectedKeys] = useState([]);
 
@@ -20,9 +13,18 @@ const TreeList = () => {
   return (
     <div style={{ padding: "20px" }}>
       <h3>Tree Component Example with Selection</h3>
-      <p>React Aria-style Tree with keyboard navigation, ARIA attributes, and controlled selection</p>
+      <p>
+        React Aria-style Tree with keyboard navigation, ARIA attributes, and controlled selection
+      </p>
 
-      <div style={{ marginBottom: "16px", padding: "12px", backgroundColor: "#e8f4f8", borderRadius: "4px" }}>
+      <div
+        style={{
+          marginBottom: "16px",
+          padding: "12px",
+          backgroundColor: "#e8f4f8",
+          borderRadius: "4px",
+        }}
+      >
         <strong>Selected:</strong> {selectedKeys.length > 0 ? selectedKeys.join(", ") : "None"}
       </div>
 
