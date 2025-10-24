@@ -1,4 +1,2 @@
-import OrderConfirmationModal from './OrderConfirmationModal';
-
-export { OrderConfirmationModal };
-export default OrderConfirmationModal;
+export { default as OrderConfirmationDialogModal } from './OrderConfirmationDialogModal';
+export { default } from './OrderConfirmationDialogModal';

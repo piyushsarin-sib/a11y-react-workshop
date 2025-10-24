@@ -1,16 +1,19 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { OrderConfirmationModal } from '../components/features/OrderConfirmation';
+import { OrderConfirmationDialogModal } from '../components/features/OrderConfirmation';
 import { CartContext } from './CartContextCore';
 import { useDialog } from '../lib/Overlay';
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [customerInfo, setCustomerInfo] = useState({ name: '', phone: '' });
-  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   const cartModalState = useDialog({
     bodyId: 'cart-modal',
+  });
+
+  const confirmationModalState = useDialog({
+    bodyId: 'order-confirmation-modal',
   });
 
   const addToCart = useCallback((product, quantity) => {
@@ -61,11 +64,11 @@ export const CartProvider = ({ children }) => {
   }, [cartModalState]);
   
   const closeConfirmationModal = useCallback(() => {
-    setIsConfirmationOpen(false);
+    confirmationModalState.close();
     // Clear cart and customer info after confirmation modal is closed
     setCart([]);
     setCustomerInfo({ name: '', phone: '' });
-  }, []);
+  }, [confirmationModalState]);
 
   const updateCustomerInfo = useCallback((info) => {
     setCustomerInfo(prevInfo => ({ ...prevInfo, ...info }));
@@ -77,9 +80,9 @@ export const CartProvider = ({ children }) => {
     // Close the cart modal
     closeCartModal();
     // Show the confirmation modal
-    setIsConfirmationOpen(true);
+    confirmationModalState.open();
     // Don't clear the cart yet - we'll do that when the confirmation modal is closed
-  }, [cart, customerInfo, closeCartModal]);
+  }, [cart, customerInfo, closeCartModal, confirmationModalState]);
 
   const totalItems = useMemo(() => {
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -112,7 +115,7 @@ export const CartProvider = ({ children }) => {
       customerInfo,
       updateCustomerInfo,
       placeOrder,
-      isConfirmationOpen,
+      confirmationModalState,
       closeConfirmationModal
     }),
     [
@@ -128,7 +131,7 @@ export const CartProvider = ({ children }) => {
       customerInfo,
       updateCustomerInfo,
       placeOrder,
-      isConfirmationOpen,
+      confirmationModalState,
       closeConfirmationModal
     ]
   );
@@ -136,7 +139,10 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider value={value}>
       {children}
-      {isConfirmationOpen && <OrderConfirmationModal onClose={closeConfirmationModal} />}
+      <OrderConfirmationDialogModal
+        dialogState={confirmationModalState}
+        onClose={closeConfirmationModal}
+      />
     </CartContext.Provider>
   );
 };
