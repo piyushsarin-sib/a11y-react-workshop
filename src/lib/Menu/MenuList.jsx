@@ -30,25 +30,17 @@ const MenuList = React.forwardRef(
       ariaLabel,
       ariaLabelledBy,
       ariaDescribedBy,
-      // eslint-disable-next-line no-unused-vars
-      as: WrapperElement = "ul",
+      as = "ul",
       // Selection props
       selectionMode = "single",
       selectedKeys,
-      // eslint-disable-next-line no-unused-vars
-      defaultSelectedKeys,
       onChange,
-      // Non-DOM props (filter out to prevent passing to DOM)
-      // eslint-disable-next-line no-unused-vars
-      close,
-      // eslint-disable-next-line no-unused-vars
-      open,
-      // eslint-disable-next-line no-unused-vars
-      toggle,
       ...props
     },
     ref,
   ) => {
+    const WrapperElement = as;
+
     // Process JSX children to extract collection state with metadata
     const state = useCollectionState({
       children,

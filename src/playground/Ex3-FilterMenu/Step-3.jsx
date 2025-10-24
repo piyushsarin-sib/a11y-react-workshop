@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { PopupOverlay, PLACEMENTS } from "@lib/Overlay";
+import { PopupOverlay, PLACEMENTS, ARIA_HASPOPUP, usePopup } from "@lib/Overlay";
 import Button from "@common/Button";
-import { MenuList, useMenu } from "@lib/Menu";
+import { MenuList } from "@lib/Menu";
 import FilterTrigger from "./FilterTrigger";
 
 const categories = [
@@ -21,17 +21,21 @@ const priceRanges = [
 const MenuWithOverlay = () => {
   const [selectedKeys, setSelectedKeys] = useState([]);
 
-  const menuState = useMenu({
-    overlayConfig: { placement: PLACEMENTS.BOTTOM_START },
-    style: { width: "200px" },
-    overlayId: "menu-overlay",
+  /**
+   * ✅ STEP 1: Uncomment the call to usePopup hook to configure a popup overlay.
+   * for menu (non-modal popup with hasPopup: ARIA_HASPOPUP.MENU)
+   */
+
+  const popupControls = usePopup({
+    bodyId: "menu-overlay",
     triggerId: "menu-overlay-trigger",
+    hasPopup: ARIA_HASPOPUP.MENU,
   });
 
   const handleMenuChange = (event, { selectedKeys: newSelectedKeys }) => {
     console.log("Menu selection changed:", newSelectedKeys);
     setSelectedKeys(Array.from(newSelectedKeys));
-    // menuState.close();
+    // popupControls.close();
   };
 
   return (
@@ -49,38 +53,43 @@ const MenuWithOverlay = () => {
         Previous Button
       </Button>
 
-      <FilterTrigger trigger={menuState.trigger} onClick={menuState.toggle} />
+      {/**
+       * ✅ STEP 2: Connect the FilterTrigger button to the popup controls.
+       * Pass trigger props and toggle handler to FilterTrigger component.
+       */}
+
+      <FilterTrigger trigger={popupControls.trigger} onClick={popupControls.toggle} />
+
+      {/**
+       * ✅ STEP 3: Wrap MenuList with PopupOverlay component.
+       * Pass trigger, body, close props and configure placement, trapFocus, and style.
+       */}
 
       <PopupOverlay
-        trigger={menuState.trigger}
-        body={menuState.body}
-        close={menuState.close}
+        trigger={popupControls.trigger}
+        body={popupControls.body}
+        close={popupControls.close}
         placement={PLACEMENTS.BOTTOM_START}
         trapFocus={false}
-        style={menuState.style}
-        className={menuState.className}
+        style={{ width: "200px" }}
       >
+        {/* ✏️ TODO STEP 4: Pass body id from popupControls to MenuList for aria controls */}
         <MenuList
-          id={menuState.body.id}
+          // id={popupControls.body.id}
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           onChange={handleMenuChange}
           ariaLabel="Product filters menu"
-          close={menuState.close}
         >
-          <MenuList.Section title="📦 Categories">
+          <MenuList.Section key="categories" title="📦 Categories">
             {categories.map((category) => (
-              <MenuList.Option key={category.id} value={category.id}>
-                {category.name}
-              </MenuList.Option>
+              <MenuList.Option key={category.id}>{category.name}</MenuList.Option>
             ))}
           </MenuList.Section>
 
-          <MenuList.Section title="💰 Price Ranges">
+          <MenuList.Section key="prices" title="💰 Price Ranges">
             {priceRanges.map((price) => (
-              <MenuList.Option key={price.id} value={price.id}>
-                {price.name}
-              </MenuList.Option>
+              <MenuList.Option key={price.id}>{price.name}</MenuList.Option>
             ))}
           </MenuList.Section>
         </MenuList>

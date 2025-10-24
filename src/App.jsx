@@ -12,6 +12,7 @@ import {
   CardWrapperSolved,
   // ProductsGrid, // Commented out - has incorrect Collection import
   FilterMenu,
+  FilterMenuSolved,
   EdgeCases,
   EdgeCasesSolved,
   ECommIssues,
@@ -20,7 +21,7 @@ import {
   TreeListSolved,
 } from "./playground";
 
-import { FilterMenu as FilterMenuSolved, AddToCartModal as AddToCartModalSolved } from "./solved";
+import { AddToCartModal as AddToCartModalSolved } from "./solved";
 
 // Demo imports
 import { DialogExample, PopoverDialogExample } from "./demos";
