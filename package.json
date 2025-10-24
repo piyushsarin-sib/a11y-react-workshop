@@ -1,0 +1,56 @@
+{
+  "name": "a11y-react-workshop",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "author": "Piyush Sarin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piyushsarin/a11y-react-workshop.git"
+  },
+  "homepage": "https://accessible-react-workshop-99af.vercel.app",
+  "description": "React India 2025 workshop on accessibility",
+  "scripts": {
+    "start": "vite --port 3009",
+    "prebuild": "eslint . --max-warnings=0",
+    "build": "vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:a11y": "eslint . --config eslint.config.js --ext .js,.jsx --rule \"jsx-a11y/*: error\" --max-warnings=0",
+    "preview": "vite preview",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.540.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@axe-core/react": "^4.10.2",
+    "@eslint/js": "^8.57.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.57.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "husky": "^9.0.11",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.15",
+    "vite": "^5.4.10"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --max-warnings=0"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}
