@@ -33,15 +33,6 @@ const Header = () => {
             </li>
             <li>
               <a
-                href="/exercises"
-                className="transition-colors duration-300 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
-                aria-label="View examples and exercises"
-              >
-                Examples
-              </a>
-            </li>
-            <li>
-              <a
                 href="/best-practices"
                 className="transition-colors duration-300 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
                 aria-label="Learn accessibility best practices"

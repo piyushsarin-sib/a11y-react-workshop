@@ -73,12 +73,6 @@ accessible-react-workshop/
 │   │   │   ├── 📁 Rating/            # Star rating component
 │   │   │   ├── 📁 Select/            # Dropdown select component
 │   │   │   └── 📁 Toast/             # Notification toast component
-│   │   ├── 📁 examples/              # Accessibility examples
-│   │   │   └── 📁 InputAccessibilityPage/
-│   │   │       ├── InputAccessibilityPage.jsx
-│   │   │       └── 📁 InputComponent/
-│   │   │           ├── BeforeInput.jsx    # ❌ Bad example
-│   │   │           └── AfterInput.jsx     # ✅ Good example
 │   │   ├── 📁 features/              # Feature-specific components
 │   │   │   ├── 📁 AccessibilityCarousel/ # Accessibility info carousel
 │   │   │   ├── 📁 AddToCart/         # Add to cart functionality
