@@ -273,10 +273,12 @@ accessible-react-workshop/
 │   │   │   ├── solved.jsx            # Complete solution
 │   │   │   └── index.js              # Export
 │   │   └── index.js                  # Playground exports
-│   ├── 📁 solved/                    # Solved examples
-│   │   ├── 📁 Card/                  # Solved card component
-│   │   ├── 📁 EdgeCases/             # Solved edge cases
-│   │   └── index.js                  # Solved exports
+│   ├── 📁 refernces/                 # Reference implementations
+│   │   ├── FocusTrapFixed.jsx        # Focus trap examples
+│   │   ├── FocusTrapFixed0.jsx
+│   │   ├── FocusTrapFixed1.jsx
+│   │   ├── FocusTrapFixed2.jsx
+│   │   └── FocusTrapFixed3.jsx
 │   ├── 📁 styles/                    # Global styles and CSS
 │   │   ├── accessibility.css         # Accessibility-specific styles
 │   │   ├── index.css                 # Main stylesheet
