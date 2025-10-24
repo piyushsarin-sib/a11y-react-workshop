@@ -77,7 +77,7 @@ const MenuWithOverlay = () => {
       >
         {/* ✅ STEP 4: Pass body id from popupControls to MenuList for aria controls */}
         <MenuList
-          // id={popupControls.body.id}
+          id={popupControls.body.id}
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           onChange={handleMenuChange}
