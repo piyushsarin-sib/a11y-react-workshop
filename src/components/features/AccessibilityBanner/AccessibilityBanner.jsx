@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const AccessibilityBanner = () => {
   return (
@@ -11,13 +10,11 @@ const AccessibilityBanner = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Icon */}
           <div className="flex justify-center mb-4">
-            <span 
-              className="text-6xl md:text-7xl" 
-              role="img" 
-              aria-label="Accessibility symbol"
-            >
-              ♿
-            </span>
+            <img
+              src="https://img.icons8.com/ios-filled/100/ffffff/wheelchair.png"
+              alt="Accessibility symbol"
+              className="text-6xl md:text-7xl w-16 h-16 md:w-20 md:h-20"
+            />
           </div>
           
           {/* Title */}
@@ -25,7 +22,7 @@ const AccessibilityBanner = () => {
             id="accessibility-banner-title" 
             className="text-3xl md:text-4xl font-bold text-white mb-4"
           >
-            Building Inclusive Experiences
+             Accessible Shopping for Everyone
           </h1>
           
           {/* Description */}
@@ -36,26 +33,22 @@ const AccessibilityBanner = () => {
           </p>
           
           {/* Key Points */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
-              <div className="text-3xl mb-2" role="img" aria-label="Wheelchair">🦽</div>
-              <h3 className="text-white font-semibold text-sm md:text-base">Motor</h3>
-            </div>
+          <div className="flex flex-wrap justify-center gap-3 mt-8">
+            <span className="text-white font-medium text-sm md:text-base px-3 py-1 border border-white border-opacity-40 rounded-full">
+              Motor
+            </span>
             
-            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
-              <div className="text-3xl mb-2" role="img" aria-label="Eye">👁️</div>
-              <h3 className="text-white font-semibold text-sm md:text-base">Visual</h3>
-            </div>
+            <span className="text-white font-medium text-sm md:text-base px-3 py-1 border border-white border-opacity-40 rounded-full">
+              Visual
+            </span>
             
-            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
-              <div className="text-3xl mb-2" role="img" aria-label="Ear">👂</div>
-              <h3 className="text-white font-semibold text-sm md:text-base">Hearing</h3>
-            </div>
+            <span className="text-white font-medium text-sm md:text-base px-3 py-1 border border-white border-opacity-40 rounded-full">
+              Hearing
+            </span>
             
-            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
-              <div className="text-3xl mb-2" role="img" aria-label="Brain">🧠</div>
-              <h3 className="text-white font-semibold text-sm md:text-base">Cognitive</h3>
-            </div>
+            <span className="text-white font-medium text-sm md:text-base px-3 py-1 border border-white border-opacity-40 rounded-full">
+              Cognitive
+            </span>
           </div>
         </div>
       </div>

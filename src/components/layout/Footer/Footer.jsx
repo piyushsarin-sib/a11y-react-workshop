@@ -17,7 +17,7 @@ const Footer = () => (
             <Link 
               to="/" 
               className="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
-              aria-label="Go to homepage"
+              aria-label="Home, Link Go to homepage"
             >
               Home
             </Link>

@@ -14,7 +14,7 @@ const Header = () => {
           <Link
             to="/"
             className="text-2xl font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Go to homepage"
+            aria-label="Accessible eCommerce, Link Go to homepage"
           >
             Accessible eCommerce
           </Link>
