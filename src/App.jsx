@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import LandingPage from "./pages/LandingPage";
 import ECommercePage from "./pages/ECommercePage";
-import ExercisesPage from "./pages/ExercisesPage";
 import DemoPage from "./pages/DemoPage";
 import BestPracticesPage from "./pages/BestPracticesPage";
 import ReferencesPage from "./pages/ReferencesPage";
@@ -35,14 +34,6 @@ function App() {
           element={
             <Layout showHeader showFooter withLayout>
               <LandingPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/exercises"
-          element={
-            <Layout showHeader showFooter withLayout>
-              <ExercisesPage />
             </Layout>
           }
         />
