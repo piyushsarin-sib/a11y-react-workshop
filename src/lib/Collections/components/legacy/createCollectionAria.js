@@ -33,6 +33,8 @@ export const createCollectionAria = ({
   parentRole,
   pattern,
   isNested = false,
+  rowCount,
+  colCount,
 } = {}) => {
   // Compute pattern config with all resolved roles
   const patternConfig = pattern ? (COLLECTION_PATTERNS[pattern] || {}) : {};
@@ -86,6 +88,16 @@ export const createCollectionAria = ({
     // Busy state - for loading collections
     if (busy !== undefined) {
       props["aria-busy"] = busy;
+    }
+
+    // Grid-specific attributes
+    if (pattern === 'grid') {
+      if (rowCount !== undefined) {
+        props["aria-rowcount"] = rowCount;
+      }
+      if (colCount !== undefined) {
+        props["aria-colcount"] = colCount;
+      }
     }
 
     return props;

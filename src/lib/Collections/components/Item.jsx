@@ -23,16 +23,16 @@ Item.displayName = "Item";
  */
 Item.getCollectionNode = function* (props) {
   // Extract text value for navigation
-  let textValue = '';
-  if (typeof props.children === 'string') {
+  let textValue = "";
+  if (typeof props.children === "string") {
     textValue = props.children;
-  } else if (props['aria-label']) {
-    textValue = props['aria-label'];
+  } else if (props["aria-label"]) {
+    textValue = props["aria-label"];
   }
 
   // Yield the node metadata
   yield {
-    type: 'item',
+    type: "item",
     rendered: props.children,
     textValue: textValue,
     props: props,
