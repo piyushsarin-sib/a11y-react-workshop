@@ -18,39 +18,72 @@ export default function AccessibilityWorkshopDemo() {
     if (!cartOpen || !cartRef.current) return;
 
     const modalNode = cartRef.current;
-    const focusableEls = modalNode.querySelectorAll(
-      "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
-    );
-    const firstEl = focusableEls[0];
-    const lastEl = focusableEls[focusableEls.length - 1];
+    
+    // Save the previously focused element to restore focus later
+    const previouslyFocused = document.activeElement;
+
+    const getFocusableElements = () => {
+      return modalNode.querySelectorAll(
+        'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])'
+      );
+    };
 
     const handleKeyDown = (e) => {
-      if (e.key === "Tab") {
-        if (e.shiftKey && document.activeElement === firstEl) {
-          e.preventDefault();
-          lastEl.focus();
-        } else if (!e.shiftKey && document.activeElement === lastEl) {
-          e.preventDefault();
-          firstEl.focus();
-        }
-      }
+      // Handle Escape key
       if (e.key === "Escape") {
+        e.preventDefault();
         setCartOpen(false);
-        cartButtonRef.current?.focus();
+        return;
+      }
+
+      // Handle Tab key for focus trap
+      if (e.key === "Tab") {
+        const focusableEls = getFocusableElements();
+        const firstEl = focusableEls[0];
+        const lastEl = focusableEls[focusableEls.length - 1];
+
+        if (!firstEl) return; // No focusable elements
+
+        if (e.shiftKey) {
+          // Shift+Tab: going backwards
+          if (document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          // Tab: going forwards
+          if (document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
       }
     };
 
+    // Add event listener
     modalNode.addEventListener("keydown", handleKeyDown);
-    firstEl?.focus();
+    
+    // Focus first focusable element after a small delay to ensure rendering
+    setTimeout(() => {
+      const focusableEls = getFocusableElements();
+      if (focusableEls.length > 0) {
+        focusableEls[0].focus();
+      }
+    }, 0);
 
-    return () => modalNode.removeEventListener("keydown", handleKeyDown);
+    // Cleanup: restore focus to previously focused element
+    return () => {
+      modalNode.removeEventListener("keydown", handleKeyDown);
+      // Restore focus to the element that was focused before opening modal
+      previouslyFocused?.focus?.();
+    };
   }, [cartOpen]);
 
   return (
     <div>
       {/* Header Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-       <nav
+        <nav
           className="container mx-auto px-10 py-4 flex justify-between items-center"
           aria-label="Main Navigation"
         >
@@ -129,10 +162,7 @@ export default function AccessibilityWorkshopDemo() {
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
           aria-hidden="true"
-          onClick={() => {
-            setCartOpen(false);
-            cartButtonRef.current?.focus();
-          }}
+          onClick={() => setCartOpen(false)}
         />
       )}
 
@@ -157,7 +187,7 @@ export default function AccessibilityWorkshopDemo() {
           }}
         >
           <div className="flex flex-col gap-4">
-            <h2>Cart</h2>
+            <h2 className="text-xl font-semibold">Cart</h2>
             <p>Items in your cart: {cartCount}</p>
             <div className="flex justify-between">
               <Button
@@ -166,7 +196,6 @@ export default function AccessibilityWorkshopDemo() {
                   alert("Proceed to checkout");
                   setCartCount(0);
                   setCartOpen(false);
-                  cartButtonRef.current?.focus();
                 }}
               >
                 Checkout
@@ -174,10 +203,7 @@ export default function AccessibilityWorkshopDemo() {
 
               <Button
                 variant="secondary"
-                onClick={() => {
-                  setCartOpen(false);
-                  cartButtonRef.current?.focus();
-                }}
+                onClick={() => setCartOpen(false)}
               >
                 Close Cart
               </Button>
