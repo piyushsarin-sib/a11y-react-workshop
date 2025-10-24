@@ -150,9 +150,17 @@ accessible-react-workshop/
 │   │   │   │   └── aria-config.js    # Grid and list ARIA patterns
 │   │   │   ├── 📁 hooks/
 │   │   │   │   └── useCollectionAria.js
+│   │   │   ├── 📁 utils/             # Collection utility functions
+│   │   │   │   ├── createCollectionAria.js
+│   │   │   │   ├── createItemAria.js
+│   │   │   │   ├── expandableItemUtils.js
+│   │   │   │   ├── getItemKey.js
+│   │   │   │   └── primitives.js
+│   │   │   ├── CollectionContext.js  # Collection context
 │   │   │   └── index.js
 │   │   ├── 📁 interactions/          # Interaction pattern libraries
 │   │   │   ├── 📁 expansion/         # Expansion patterns
+│   │   │   │   └── useExpandable.js  # Expandable item hook
 │   │   │   ├── 📁 keyboard/          # Keyboard navigation patterns
 │   │   │   │   ├── 📁 delegates/     # Navigation delegates
 │   │   │   │   │   ├── grid2DDelegate.js
@@ -165,6 +173,7 @@ accessible-react-workshop/
 │   │   │   │   └── 📁 utils/
 │   │   │   │       └── keyboardPrimitives.js
 │   │   │   └── 📁 selection/         # Selection patterns
+│   │   │       └── useSelectionManager.js
 │   │   ├── 📁 Menu/                  # Menu component library
 │   │   │   ├── 📁 hooks/
 │   │   │   │   └── useMenu.js
@@ -173,14 +182,26 @@ accessible-react-workshop/
 │   │   │   ├── MenuContext.js
 │   │   │   ├── MenuList.jsx
 │   │   │   ├── MenuOption.jsx
+│   │   │   ├── MenuSection.jsx
 │   │   │   └── MenuTitle.jsx
-│   │   ├── 📁 Modal/                 # Modal component library
+│   │   ├── 📁 Tree/                  # Tree component library
 │   │   │   ├── index.js
-│   │   │   └── Modal.jsx
+│   │   │   ├── Tree.css
+│   │   │   └── Tree.jsx
 │   │   └── 📁 Overlay/               # Overlay management system
 │   │       ├── 📁 components/        # Overlay components
+│   │       │   ├── DialogOverlay.jsx
+│   │       │   ├── Popover.jsx
+│   │       │   ├── PopoverBackdrop.jsx
+│   │       │   ├── PopoverContent.jsx
+│   │       │   └── Tooltip.jsx
 │   │       ├── constants.js          # Overlay constants
 │   │       ├── 📁 helpers/           # Overlay helper functions
+│   │       │   ├── createFocusTrap.js
+│   │       │   ├── getFocusableElements.js
+│   │       │   ├── getScrollbarWidth.js
+│   │       │   ├── inertOthers.js
+│   │       │   └── platform.js
 │   │       ├── 📁 hooks/             # Overlay hooks
 │   │       │   ├── useClickOutside.js
 │   │       │   ├── 📁 useFocusManagement/
@@ -194,27 +215,63 @@ accessible-react-workshop/
 │   │       │   ├── usePosition.js
 │   │       │   └── useScrollLock.js
 │   │       ├── index.js
-│   │       ├── Overlay.css
-│   │       └── Overlay.jsx
+│   │       └── Overlay.css
 │   ├── 📁 pages/                     # Main application pages
 │   │   ├── 📁 DemoPage/              # Demo showcase page
 │   │   ├── 📁 ECommercePage/         # E-commerce workshop page
 │   │   ├── 📁 ExercisesPage/         # Exercise instructions page
 │   │   └── 📁 LandingPage/           # Home page
 │   ├── 📁 playground/                # Interactive playground components
-│   │   ├── 📁 Ex1-CardWrapper/       # Exercise 1: Card wrapper examples
 │   │   ├── 📁 ECommIssues/           # E-commerce accessibility issues
-│   │   ├── 📁 Ex4-EdgeCases/         # Exercise 4: Edge case examples
+│   │   │   ├── ECommIssues.jsx       # Main issues demonstration
+│   │   │   ├── index.js              # Export
+│   │   │   └── 📁 Layout/            # E-commerce layout
+│   │   ├── 📁 Ex1-CardWrapper/       # Exercise 1: Card wrapper accessibility
+│   │   │   ├── CardWrapper.jsx       # Issues demonstration
+│   │   │   ├── Step-0.jsx            # Starting point with issues
+│   │   │   ├── Step-1.jsx            # Fix semantic HTML
+│   │   │   ├── Step-2.jsx            # Add proper ARIA
+│   │   │   ├── Step-3.jsx            # Implement keyboard navigation
+│   │   │   ├── Step-4.jsx            # Complete solution
+│   │   │   ├── solved.jsx            # Final solved version
+│   │   │   └── index.js              # Export
+│   │   ├── 📁 Ex2-TreeList/          # Exercise 2: Tree navigation
+│   │   │   ├── TreeList.jsx          # Issues demonstration
+│   │   │   ├── Tree.jsx              # Tree component
+│   │   │   ├── Step-0.jsx            # Starting point
+│   │   │   ├── Step-1.jsx            # Fix ARIA roles
+│   │   │   ├── Step-2.jsx            # Add keyboard navigation
+│   │   │   ├── Step-3.jsx            # Implement expansion/collapse
+│   │   │   ├── 📁 solved/            # Solved components
+│   │   │   ├── Checkpoints.jsx       # Progress checkpoints
+│   │   │   ├── withErrorBoundary.jsx # Error boundary HOC
+│   │   │   └── index.js              # Export
+│   │   ├── 📁 Ex3-FilterMenu/        # Exercise 3: Filter menu accessibility
+│   │   │   ├── FilterMenu.jsx        # Issues demonstration
+│   │   │   ├── FilterTrigger.jsx     # Menu trigger component
+│   │   │   ├── Step-0.jsx            # Starting point
+│   │   │   ├── Step-1.jsx            # Fix menu semantics
+│   │   │   ├── Step-2.jsx            # Add keyboard navigation
+│   │   │   ├── Step-3.jsx            # Implement focus management
+│   │   │   ├── Step-4.jsx            # Complete solution
+│   │   │   ├── solved.jsx            # Final solved version
+│   │   │   ├── Checkpoints.jsx       # Progress checkpoints
+│   │   │   └── index.js              # Export
+│   │   ├── 📁 Ex4-AddToCartModal/    # Exercise 4: Modal accessibility
+│   │   │   ├── AddToCartModal.jsx    # Issues demonstration
+│   │   │   ├── Step-0.jsx            # Starting point
+│   │   │   ├── Step-1.jsx            # Fix focus trap
+│   │   │   ├── solved.jsx            # Final solved version
+│   │   │   ├── Checkpoints.jsx       # Progress checkpoints
+│   │   │   └── index.js              # Export
+│   │   ├── 📁 Ex5-EdgeCases/         # Exercise 5: Edge cases & advanced patterns
 │   │   │   ├── EdgeCases.jsx         # Issues demonstration
 │   │   │   ├── Step-0.jsx            # Starting point with issues
 │   │   │   ├── Step-1.jsx            # Fix heading hierarchy
-│   │   │   ├── Step-2.jsx            # Add skip links (if exists)
+│   │   │   ├── Step-2.jsx            # Add skip links
 │   │   │   ├── Step-3.jsx            # Add live regions
-│   │   │   └── solved.jsx            # Complete solution
-│   │   ├── 📁 FilterMenu/            # Filter menu examples
-│   │   ├── 📁 NestedCollectionWithTitles/
-│   │   ├── 📁 Overlay/               # Overlay examples
-│   │   ├── 📁 ProductGrid/           # Product grid examples
+│   │   │   ├── solved.jsx            # Complete solution
+│   │   │   └── index.js              # Export
 │   │   └── index.js                  # Playground exports
 │   ├── 📁 solved/                    # Solved examples
 │   │   ├── 📁 Card/                  # Solved card component
