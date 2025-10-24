@@ -10,7 +10,9 @@ const Checkpoints = () => {
         borderRadius: "4px",
       }}
     >
-      <div style={{ fontSize: "14px", marginBottom: "10px" }}>
+      <div style={{ fontSize: "14px", marginBottom: "10px", lineHeight: "1.6" }}>
+        📁 <strong style={{ fontWeight: "700", fontSize: "15px" }}>src/playground/Ex2-TreeList/TreeList.jsx</strong>
+        <br />
         📁 <strong style={{ fontWeight: "700", fontSize: "15px" }}>src/playground/Ex2-TreeList/Tree.jsx</strong>
       </div>
       <strong>Checkpoints:</strong>
