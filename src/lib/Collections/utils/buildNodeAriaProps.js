@@ -13,19 +13,26 @@
  * @param {boolean} options.isFirstFocusable - Whether this is the first focusable item
  * @returns {Object} ARIA attributes for the node (role, aria-level, aria-expanded, tabIndex)
  */
-export function buildNodeAriaProps({ pattern, itemRole, level, isSection, hasChildren, isFirstFocusable }) {
+export function buildNodeAriaProps({
+  pattern,
+  itemRole,
+  level,
+  isSection,
+  hasChildren,
+  isFirstFocusable,
+}) {
   const ariaProps = {};
 
   if (!isSection && itemRole) {
     ariaProps.role = itemRole;
 
     // Tree-specific attributes
-    if (pattern === 'tree') {
-      ariaProps['aria-level'] = level;
+    if (pattern === "tree") {
+      ariaProps["aria-level"] = level;
 
       // Add aria-expanded for items with children (always true since they're visible)
       if (hasChildren) {
-        ariaProps['aria-expanded'] = true;
+        ariaProps["aria-expanded"] = true;
       }
 
       // First focusable item gets tabIndex 0 (for roving tabindex pattern)

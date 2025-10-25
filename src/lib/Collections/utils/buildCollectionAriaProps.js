@@ -8,12 +8,7 @@
  * @param {string} options.ariaDescribedBy - ID of describing element
  * @returns {Object} ARIA attributes for collection container
  */
-export function buildCollectionAriaProps({
-  role,
-  ariaLabel,
-  ariaLabelledBy,
-  ariaDescribedBy,
-}) {
+export function buildCollectionAriaProps({ role, ariaLabel, ariaLabelledBy, ariaDescribedBy }) {
   const props = {};
 
   // Add role from pattern
@@ -23,13 +18,13 @@ export function buildCollectionAriaProps({
 
   // Add labels
   if (ariaLabel) {
-    props['aria-label'] = ariaLabel;
+    props["aria-label"] = ariaLabel;
   }
   if (ariaLabelledBy) {
-    props['aria-labelledby'] = ariaLabelledBy;
+    props["aria-labelledby"] = ariaLabelledBy;
   }
   if (ariaDescribedBy) {
-    props['aria-describedby'] = ariaDescribedBy;
+    props["aria-describedby"] = ariaDescribedBy;
   }
 
   return props;

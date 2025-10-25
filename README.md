@@ -270,12 +270,14 @@ accessible-react-workshop/
 ## 🎓 Workshop Structure
 
 ### **Phase 1: Identify Issues**
+
 - Navigate the e-commerce page with mouse (seems fine)
 - Try keyboard-only navigation (exposes problems)
 - Use screen reader to understand the experience
 - Document accessibility barriers
 
 ### **Phase 2: Progressive Fixes**
+
 1. **Skip Links** - Quick navigation to main content
 2. **Heading Hierarchy** - Proper h1 → h2 → h3 structure
 3. **Button Semantics** - Proper interactive element markup
@@ -288,6 +290,7 @@ accessible-react-workshop/
 10. **Grid Patterns** - Adobe spec-compliant card grids with row/rowheader pattern
 
 ### **Phase 3: Testing & Validation**
+
 - **Keyboard testing** - Tab navigation, Enter/Space activation
 - **Screen reader testing** - NVDA, VoiceOver, JAWS
 - **Focus testing** - Visible indicators and logical order
@@ -316,6 +319,7 @@ npm run prepare    # Setup Husky git hooks
 ## 🎨 Key Components
 
 ### **Common Components** (`src/components/common/`)
+
 Reusable UI components with built-in accessibility features:
 
 - **Button** - Accessible button with loading states and variants
@@ -328,6 +332,7 @@ Reusable UI components with built-in accessibility features:
 - **QuantitySelector** - Increment/decrement controls with keyboard support
 
 ### **Feature Components** (`src/components/features/`)
+
 Business logic components for the e-commerce workshop:
 
 - **Product** - Product display and interaction
@@ -340,6 +345,7 @@ Business logic components for the e-commerce workshop:
 - **OrderConfirmation** - Checkout completion flow
 
 ### **Demo Components** (`src/demos/`)
+
 Interactive examples demonstrating accessibility patterns:
 
 - **Keyboard Navigation** - Roving tabindex, arrow key navigation, dual navigation (Tab + Arrows)
@@ -351,6 +357,7 @@ Interactive examples demonstrating accessibility patterns:
 ## 🔧 Development Guidelines
 
 ### **Accessibility Standards**
+
 - **WCAG 2.1 AA** compliance
 - **ARIA 1.1** implementation
 - **Adobe Accessibility Specifications** for card grids
@@ -360,6 +367,7 @@ Interactive examples demonstrating accessibility patterns:
 - **Focus indicators** visible on all interactive elements
 
 ### **Code Quality**
+
 - **ESLint** with jsx-a11y plugin
 - **PropTypes** for type checking
 - **Consistent naming** conventions
@@ -367,6 +375,7 @@ Interactive examples demonstrating accessibility patterns:
 - **Error boundaries** for resilience
 
 ### **Testing Approach**
+
 - **Keyboard-only** navigation testing (Tab, Shift+Tab, Arrow keys, Enter, Space, Escape)
 - **Screen reader** testing (NVDA, VoiceOver, JAWS)
 - **Color contrast** validation (WebAIM Contrast Checker)
@@ -378,6 +387,7 @@ Interactive examples demonstrating accessibility patterns:
 ## 📚 Learning Resources
 
 ### **Accessibility Guidelines**
+
 - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 - [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
 - [Adobe Accessibility Specifications](https://opensource.adobe.com/spectrum-web-components/components/)
@@ -386,6 +396,7 @@ Interactive examples demonstrating accessibility patterns:
 - [Grid Pattern ARIA Specification](https://www.w3.org/WAI/ARIA/apg/patterns/grid/)
 
 ### **React Accessibility**
+
 - [React Accessibility Documentation](https://reactjs.org/docs/accessibility.html)
 - [Inclusive Components](https://inclusive-components.design/)
 - [A11y Project](https://www.a11yproject.com/)
@@ -401,6 +412,7 @@ We welcome contributions! Please see our contributing guidelines:
 5. **Submit** a pull request
 
 ### **Development Setup**
+
 ```bash
 # Install dependencies
 npm install
@@ -426,6 +438,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 ## 🌟 Recent Enhancements
 
 ### **Focus Management Improvements**
+
 - ✅ Enhanced focus trap with dynamic disabled element detection
 - ✅ Automatic focus restoration to previously focused element
 - ✅ `getFocusableElements()` function that queries fresh on Tab key press
@@ -433,6 +446,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 - ✅ Timeout-based focus to ensure DOM readiness
 
 ### **Product Grid Accessibility**
+
 - ✅ Adobe spec-compliant card grid pattern
 - ✅ `role="grid"` with `role="row"` and `role="rowheader"` structure
 - ✅ Proper ARIA attributes: `aria-rowindex`, `aria-colindex`, `aria-labelledby`, `aria-describedby`
@@ -440,6 +454,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 - ✅ Collection component handles both navigation patterns automatically
 
 ### **E-Commerce UX Improvements**
+
 - ✅ Streamlined checkout modal (immediate order placement)
 - ✅ Enhanced AddToCart modal with "Go to Cart" link (keyboard-inaccessible by design)
 - ✅ Dynamic button states based on quantity and cart status
@@ -447,6 +462,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 - ✅ Updated footer links: Home, Best Practices, Reference links
 
 ### **Accessibility Banner**
+
 - ✅ Non-button styling for disability type tags (Motor, Visual, Hearing, Cognitive)
 - ✅ Pill-shaped badges with subtle borders instead of clickable-looking boxes
 
@@ -454,4 +470,4 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 
 **Happy accessibility learning! 🎯♿**
 
-*Remember: Accessibility isn't just about compliance - it's about creating inclusive experiences for all users.*
+_Remember: Accessibility isn't just about compliance - it's about creating inclusive experiences for all users._

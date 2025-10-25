@@ -74,11 +74,10 @@ const MenuList = React.forwardRef(
     });
 
     // Merge all props using mergeProps utility
-    const wrapperProps = mergeProps(
-      state.getCollectionProps(),
-      nav.getCollectionProps(),
-      { ref, ...props },
-    );
+    const wrapperProps = mergeProps(state.getCollectionProps(), nav.getCollectionProps(), {
+      ref,
+      ...props,
+    });
 
     // Render menu from hierarchical collection using ItemRenderer component
 

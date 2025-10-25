@@ -1,8 +1,8 @@
-import { useMemo, useCallback } from 'react';
-import { COLLECTION_PATTERNS } from '../constants/aria-config.js';
-import { buildCollection } from '../utils/buildCollection.js';
-import { buildCollectionAriaProps } from '../utils/buildCollectionAriaProps.js';
-import * as navigationHelpers from '../utils/collectionNavigation.js';
+import { useMemo, useCallback } from "react";
+import { COLLECTION_PATTERNS } from "../constants/aria-config.js";
+import { buildCollection } from "../utils/buildCollection.js";
+import { buildCollectionAriaProps } from "../utils/buildCollectionAriaProps.js";
+import * as navigationHelpers from "../utils/collectionNavigation.js";
 
 /**
  * Hook to build collection state from JSX children or data structures
@@ -75,8 +75,8 @@ export const useCollectionState = ({
   }, [patternConfig.role, ariaLabel, ariaLabelledBy, ariaDescribedBy]);
 
   return {
-    collection,        // Hierarchical nodes (sections with childNodes)
-    items: focusableItems,  // Flat array of focusable items only (for keyboard nav)
+    collection, // Hierarchical nodes (sections with childNodes)
+    items: focusableItems, // Flat array of focusable items only (for keyboard nav)
 
     // Navigation methods (similar to React Aria)
     getFirstKey,

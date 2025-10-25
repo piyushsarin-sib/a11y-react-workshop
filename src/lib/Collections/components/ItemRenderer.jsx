@@ -56,9 +56,15 @@ export function ItemRenderer({
 
     return (
       <SectionWrapper {...mergeProps({ role: node.sectionWrapperRole }, customProps)}>
-        <div id={headingId} role={node.sectionTitleRole} className="menu-section-title">{node.rendered}</div>
+        <div id={headingId} role={node.sectionTitleRole} className="menu-section-title">
+          {node.rendered}
+        </div>
         {hasChildren && (
-          <SectionGroup role={node.sectionGroupRole} aria-labelledby={headingId} tabIndex={undefined}>
+          <SectionGroup
+            role={node.sectionGroupRole}
+            aria-labelledby={headingId}
+            tabIndex={undefined}
+          >
             {renderChildren(node.childNodes)}
           </SectionGroup>
         )}

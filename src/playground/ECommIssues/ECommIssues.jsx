@@ -1,114 +1,116 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import AccessibilityBanner from '@components/features/AccessibilityBanner';
-import Layout from './Layout';
-import Button from '@common/Button';
-import QuantitySelector from '@common/QuantitySelector';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import AccessibilityBanner from "@components/features/AccessibilityBanner";
+import Layout from "./Layout";
+import Button from "@common/Button";
+import QuantitySelector from "@common/QuantitySelector";
 
 // Add category property to each product
 const products = [
   {
     id: 1,
-    name: 'Wireless Headphones',
-    description: 'Comfortable over-ear headphones with noise cancellation.',
-    image: '/headphone.jpeg',
-    alt: 'Black wireless over-ear headphones',
-    price: 'Rs 500',
-    category: 'hearing',
+    name: "Wireless Headphones",
+    description: "Comfortable over-ear headphones with noise cancellation.",
+    image: "/headphone.jpeg",
+    alt: "Black wireless over-ear headphones",
+    price: "Rs 500",
+    category: "hearing",
     priceValue: 500,
   },
   {
     id: 2,
-    name: 'Braille Keyboard',
-    description: 'Keyboard with Braille for visually impaired users.',
-    image: '/brailkeyboard.jpeg',
-    alt: 'Braille keyboard with raised dots on keys',
-    price: 'Rs 45000',
-    category: 'vision',
+    name: "Braille Keyboard",
+    description: "Keyboard with Braille for visually impaired users.",
+    image: "/brailkeyboard.jpeg",
+    alt: "Braille keyboard with raised dots on keys",
+    price: "Rs 45000",
+    category: "vision",
     priceValue: 45000,
   },
   {
     id: 3,
-    name: 'Wheelchair',
-    description: 'Lightweight, foldable wheelchair for easy mobility.',
-    image: '/wheelchair.jpeg',
-    alt: 'Lightweight foldable wheelchair',
-    price: 'Rs 2500',
-    category: 'mobility',
+    name: "Wheelchair",
+    description: "Lightweight, foldable wheelchair for easy mobility.",
+    image: "/wheelchair.jpeg",
+    alt: "Lightweight foldable wheelchair",
+    price: "Rs 2500",
+    category: "mobility",
     priceValue: 2500,
   },
   {
     id: 4,
-    name: 'Smart Cane (Obstacle Detector)',
-    description: 'Uses sensors to detect obstacles and provides alerts via vibrations.',
-    image: '/ObstacleDetector.jpeg',
-    alt: 'Smart cane with obstacle detection sensors',
-    price: 'Rs 3000',
-    category: 'vision',
+    name: "Smart Cane (Obstacle Detector)",
+    description: "Uses sensors to detect obstacles and provides alerts via vibrations.",
+    image: "/ObstacleDetector.jpeg",
+    alt: "Smart cane with obstacle detection sensors",
+    price: "Rs 3000",
+    category: "vision",
     priceValue: 3000,
   },
   {
     id: 5,
-    name: 'Behind-The-Ear (BTE) Digital Hearing Aid',
-    description: 'An entry-level hearing aid that is powerful and durable.',
-    image: '/behind_the_ear.jpeg',
-    alt: 'Behind-the-ear digital hearing aid',
-    price: 'Rs 8000',
-    category: 'hearing',
+    name: "Behind-The-Ear (BTE) Digital Hearing Aid",
+    description: "An entry-level hearing aid that is powerful and durable.",
+    image: "/behind_the_ear.jpeg",
+    alt: "Behind-the-ear digital hearing aid",
+    price: "Rs 8000",
+    category: "hearing",
     priceValue: 8000,
   },
   {
     id: 6,
-    name: 'Sensory Toy Kit for Autism/ADHD',
-    description: 'A kit of sensory toys designed for children with Autism or ADHD.',
-    image: '/SensoryToyKitforAutism.jpeg',
-    alt: 'Sensory toy kit for Autism and ADHD',
-    price: 'Rs 1500',
-    category: 'sensory',
+    name: "Sensory Toy Kit for Autism/ADHD",
+    description: "A kit of sensory toys designed for children with Autism or ADHD.",
+    image: "/SensoryToyKitforAutism.jpeg",
+    alt: "Sensory toy kit for Autism and ADHD",
+    price: "Rs 1500",
+    category: "sensory",
     priceValue: 1500,
   },
   {
     id: 7,
-    name: 'Vibrating Alarm Clock',
-    description: 'An alarm clock designed for deaf or hard-of-hearing individuals that uses vibrations to wake them up.',
-    image: '/alarmClock.jpeg',
-    alt: 'Vibrating alarm clock for deaf or hard-of-hearing',
-    price: 'Rs 2000',
-    category: 'hearing',
+    name: "Vibrating Alarm Clock",
+    description:
+      "An alarm clock designed for deaf or hard-of-hearing individuals that uses vibrations to wake them up.",
+    image: "/alarmClock.jpeg",
+    alt: "Vibrating alarm clock for deaf or hard-of-hearing",
+    price: "Rs 2000",
+    category: "hearing",
     priceValue: 2000,
   },
   {
     id: 8,
-    name: 'Orthopedic Shoes (Diabetic-friendly)',
-    description: 'Footwear designed to protect and comfort sensitive feet, with non-binding, soft soles.',
-    image: '/shoes.jpeg',
-    alt: 'Pair of orthopedic diabetic-friendly shoes',
-    price: 'Rs 1000',
-    category: 'mobility',
+    name: "Orthopedic Shoes (Diabetic-friendly)",
+    description:
+      "Footwear designed to protect and comfort sensitive feet, with non-binding, soft soles.",
+    image: "/shoes.jpeg",
+    alt: "Pair of orthopedic diabetic-friendly shoes",
+    price: "Rs 1000",
+    category: "mobility",
     priceValue: 1000,
   },
 ];
 
 // Custom SearchAndFilter component
 const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedPrice, setSelectedPrice] = useState('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedPrice, setSelectedPrice] = useState("all");
 
   const categories = [
-    { id: 'all', name: 'All Categories' },
-    { id: 'hearing', name: 'Hearing Assistance' },
-    { id: 'vision', name: 'Visual Assistance' },
-    { id: 'mobility', name: 'Mobility Aids' },
-    { id: 'sensory', name: 'Sensory Tools' },
+    { id: "all", name: "All Categories" },
+    { id: "hearing", name: "Hearing Assistance" },
+    { id: "vision", name: "Visual Assistance" },
+    { id: "mobility", name: "Mobility Aids" },
+    { id: "sensory", name: "Sensory Tools" },
   ];
 
   const priceRanges = [
-    { id: 'all', name: 'All Prices' },
-    { id: 'under1000', name: 'Under ₹1,000' },
-    { id: '1000-5000', name: '₹1,000 - ₹5,000' },
-    { id: 'above5000', name: 'Above ₹5,000' },
+    { id: "all", name: "All Prices" },
+    { id: "under1000", name: "Under ₹1,000" },
+    { id: "1000-5000", name: "₹1,000 - ₹5,000" },
+    { id: "above5000", name: "Above ₹5,000" },
   ];
 
   const handleSearchChange = (e) => {
@@ -130,11 +132,11 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
   };
 
   const clearFilters = () => {
-    setSearchQuery('');
-    setSelectedCategory('all');
-    setSelectedPrice('all');
-    onSearchChange('');
-    onFilterChange({ category: 'all', price: 'all' });
+    setSearchQuery("");
+    setSelectedCategory("all");
+    setSelectedPrice("all");
+    onSearchChange("");
+    onFilterChange({ category: "all", price: "all" });
   };
 
   return (
@@ -224,7 +226,7 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
         </div>
 
         {/* Clear Filters Button */}
-        {(searchQuery || selectedCategory !== 'all' || selectedPrice !== 'all') && (
+        {(searchQuery || selectedCategory !== "all" || selectedPrice !== "all") && (
           <button
             type="button"
             onClick={clearFilters}
@@ -237,7 +239,7 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
       </div>
 
       {/* Active filters display */}
-      {(selectedCategory !== 'all' || selectedPrice !== 'all' || searchQuery) && (
+      {(selectedCategory !== "all" || selectedPrice !== "all" || searchQuery) && (
         <div className="mt-4 flex flex-wrap items-center gap-2" aria-live="polite">
           <span className="text-sm text-gray-500">Active filters:</span>
 
@@ -247,13 +249,13 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
             </span>
           )}
 
-          {selectedCategory !== 'all' && (
+          {selectedCategory !== "all" && (
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
               Category: {categories.find((c) => c.id === selectedCategory)?.name}
             </span>
           )}
 
-          {selectedPrice !== 'all' && (
+          {selectedPrice !== "all" && (
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
               Price: {priceRanges.find((p) => p.id === selectedPrice)?.name}
             </span>
@@ -273,19 +275,19 @@ SearchAndFilter.propTypes = {
 const Modal = ({ isOpen, onClose, title, children, style = {} }) => {
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
@@ -295,14 +297,14 @@ const Modal = ({ isOpen, onClose, title, children, style = {} }) => {
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-screen items-center justify-center p-4">
         {/* Backdrop */}
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
           onClick={onClose}
           aria-hidden="true"
         />
-        
+
         {/* Modal */}
-        <dialog 
+        <dialog
           className="relative bg-white rounded-lg shadow-xl max-w-lg w-full mx-auto border-0"
           style={style}
           aria-labelledby={title ? "modal-title" : undefined}
@@ -320,16 +322,19 @@ const Modal = ({ isOpen, onClose, title, children, style = {} }) => {
                 aria-label="Close modal"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
           )}
-          
+
           {/* Content */}
-          <div className="p-6">
-            {children}
-          </div>
+          <div className="p-6">{children}</div>
         </dialog>
       </div>
     </div>
@@ -356,12 +361,7 @@ const CheckoutModal = ({ isOpen, onClose, orderPlaced, onCheckout, isProcessing 
   if (!isOpen) return null;
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Checkout"
-      style={{ width: '800px' }}
-    >
+    <Modal isOpen={isOpen} onClose={onClose} title="Checkout" style={{ width: "800px" }}>
       {isProcessing && (
         <div className="text-center py-8">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
@@ -373,8 +373,10 @@ const CheckoutModal = ({ isOpen, onClose, orderPlaced, onCheckout, isProcessing 
         <div className="text-center py-8">
           <div className="text-green-500 text-6xl mb-4">✓</div>
           <h3 className="text-2xl font-bold text-gray-900 mb-2">Order Confirmed!</h3>
-          <p className="text-gray-600 mb-4">Thank you for your purchase. Your order has been processed.</p>
-          
+          <p className="text-gray-600 mb-4">
+            Thank you for your purchase. Your order has been processed.
+          </p>
+
           {/* Dummy Order Banner */}
           <div className="mb-6 p-4 bg-gradient-to-r from-orange-100 to-red-100 border-2 border-orange-300 rounded-lg shadow-md">
             <div className="flex items-center justify-center mb-2">
@@ -382,16 +384,13 @@ const CheckoutModal = ({ isOpen, onClose, orderPlaced, onCheckout, isProcessing 
               <h4 className="text-lg font-bold text-orange-800">Workshop Demo Notice</h4>
             </div>
             <p className="text-orange-700 font-medium">
-              Just kidding! This is a dummy order. Your items won't actually be shipped because this is just a workshop demo.
+              Just kidding! This is a dummy order. Your items won't actually be shipped because this
+              is just a workshop demo.
             </p>
           </div>
-          
+
           <div className="mt-6">
-            <Button
-              onClick={onClose}
-              variant="primary"
-              ariaLabel="Close order confirmation"
-            >
+            <Button onClick={onClose} variant="primary" ariaLabel="Close order confirmation">
               Close Modal
             </Button>
           </div>
@@ -416,7 +415,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, cart, openCartM
   // Set quantity based on cart status when modal opens
   useEffect(() => {
     if (isOpen && product) {
-      const existingItem = cart.find(item => item.id === product.id);
+      const existingItem = cart.find((item) => item.id === product.id);
       if (existingItem && existingItem.quantity > 0) {
         setQuantity(existingItem.quantity);
       } else {
@@ -450,9 +449,9 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, cart, openCartM
   }
 
   // Check if item is already in cart with quantity > 0
-  const existingItem = cart.find(item => item.id === product.id);
+  const existingItem = cart.find((item) => item.id === product.id);
   const isInCart = !!existingItem && existingItem.quantity > 0;
-  
+
   // Button text and aria label logic
   const getButtonText = () => {
     if (quantity === 0 && isInCart) return "Remove from Cart";
@@ -460,7 +459,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, cart, openCartM
     if (isInCart) return `Update Cart`;
     return "Add to Cart";
   };
-  
+
   const getAriaLabel = () => {
     if (quantity === 0 && isInCart) return "Remove from cart";
     if (quantity === 0) return "Select quantity to add to cart";
@@ -473,13 +472,13 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, cart, openCartM
       isOpen={isOpen}
       onClose={onClose}
       title={product.name}
-      style={{ width: '90%', maxWidth: '700px' }}
+      style={{ width: "90%", maxWidth: "700px" }}
     >
       <div className="mb-4">
         <p className="mb-4">{product.description}</p>
         <div className="flex items-center justify-between mb-6">
           <span className="text-xl font-bold">{product.price}</span>
-          
+
           <QuantitySelector
             quantity={quantity}
             onIncrease={handleIncrease}
@@ -488,15 +487,18 @@ const AddToCartModal = ({ product, onAddToCart, onClose, isOpen, cart, openCartM
             ariaLabel={`Quantity selector for ${product.name}`}
           />
         </div>
-        
-        
+
         <div className="flex justify-end mb-4">
           <Button
             onClick={handleAddToCart}
             variant={quantity === 0 && isInCart ? "secondary" : "primary"}
             disabled={quantity === 0 && !isInCart}
             ariaLabel={getAriaLabel()}
-            className={`${quantity === 0 && !isInCart ? "opacity-50 cursor-not-allowed" : ""} ${quantity === 0 && isInCart ? "bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700" : ""}`}
+            className={`${quantity === 0 && !isInCart ? "opacity-50 cursor-not-allowed" : ""} ${
+              quantity === 0 && isInCart
+                ? "bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700"
+                : ""
+            }`}
           >
             {getButtonText()}
           </Button>
@@ -533,9 +535,17 @@ AddToCartModal.propTypes = {
 };
 
 // Custom CartModal component
-const CartModal = ({ cart, isOpen, onClose, removeFromCart, updateCartItemQuantity, onCheckout }) => {
+const CartModal = ({
+  cart,
+  isOpen,
+  onClose,
+  removeFromCart,
+  updateCartItemQuantity,
+  onCheckout,
+}) => {
   const totalPrice = cart.reduce((sum, item) => {
-    const priceText = typeof item.price === "string" ? item.price.replace(/[^\d.-]/g, "") : item.price;
+    const priceText =
+      typeof item.price === "string" ? item.price.replace(/[^\d.-]/g, "") : item.price;
     const priceValue = parseFloat(priceText);
     return sum + priceValue * item.quantity;
   }, 0);
@@ -549,7 +559,7 @@ const CartModal = ({ cart, isOpen, onClose, removeFromCart, updateCartItemQuanti
       isOpen={isOpen}
       onClose={onClose}
       title="Your Cart"
-      style={{ width: '90%', maxWidth: '900px' }}
+      style={{ width: "90%", maxWidth: "900px" }}
     >
       {cart.length === 0 ? (
         <div className="text-center py-8">
@@ -618,8 +628,8 @@ const CartModal = ({ cart, isOpen, onClose, removeFromCart, updateCartItemQuanti
               >
                 Clear Cart
               </Button>
-              <div 
-                onClick={onCheckout} 
+              <div
+                onClick={onCheckout}
                 className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 cursor-pointer"
                 ariaLabel="Proceed to checkout"
               >
@@ -634,12 +644,14 @@ const CartModal = ({ cart, isOpen, onClose, removeFromCart, updateCartItemQuanti
 };
 
 CartModal.propTypes = {
-  cart: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-  })).isRequired,
+  cart: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   removeFromCart: PropTypes.func.isRequired,
@@ -649,10 +661,10 @@ CartModal.propTypes = {
 
 const ECommContainer = ({ cartContext }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filters, setFilters] = useState({ category: 'all', price: 'all' });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filters, setFilters] = useState({ category: "all", price: "all" });
   const [isAddToCartModalOpen, setIsAddToCartModalOpen] = useState(false);
-  
+
   // Extract cart context values
   const {
     cart = [],
@@ -666,13 +678,13 @@ const ECommContainer = ({ cartContext }) => {
     closeCheckoutModal,
     handleCheckout,
     orderPlaced = false,
-    isProcessing = false
+    isProcessing = false,
   } = cartContext || {};
 
   // Debug logging
-  console.log('ECommContainer cartContext:', cartContext);
-  console.log('ECommContainer cart:', cart);
-  console.log('ECommContainer addToCart:', addToCart);
+  console.log("ECommContainer cartContext:", cartContext);
+  console.log("ECommContainer cart:", cart);
+  console.log("ECommContainer addToCart:", addToCart);
 
   const handleOpenModal = (product) => {
     setSelectedProduct(product);
@@ -700,32 +712,33 @@ const ECommContainer = ({ cartContext }) => {
 
   // Filter products based on search and filters
   const filteredProducts = React.useMemo(() => {
-    return products.filter(product => {
+    return products.filter((product) => {
       // Search filter
-      const matchesSearch = searchQuery === '' || 
+      const matchesSearch =
+        searchQuery === "" ||
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
       // Category filter
-      const matchesCategory = filters.category === 'all' || product.category === filters.category;
-      
+      const matchesCategory = filters.category === "all" || product.category === filters.category;
+
       // Price filter
       let matchesPrice = true;
-      if (filters.price !== 'all') {
-        switch(filters.price) {
-          case 'under1000':
+      if (filters.price !== "all") {
+        switch (filters.price) {
+          case "under1000":
             matchesPrice = product.priceValue < 1000;
             break;
-          case '1000-5000':
+          case "1000-5000":
             matchesPrice = product.priceValue >= 1000 && product.priceValue <= 5000;
             break;
-          case 'above5000':
+          case "above5000":
             matchesPrice = product.priceValue > 5000;
             break;
           // No default needed as matchesPrice is already true
         }
       }
-      
+
       return matchesSearch && matchesCategory && matchesPrice;
     });
   }, [searchQuery, filters]);
@@ -735,20 +748,15 @@ const ECommContainer = ({ cartContext }) => {
       <main className="container mx-auto px-4" aria-labelledby="products-heading">
         {/* Accessibility Banner */}
         <AccessibilityBanner />
-        
-        <h2 className="text-2xl font-bold mb-4">
-          Accessible Products
-        </h2>
+
+        <h2 className="text-2xl font-bold mb-4">Accessible Products</h2>
         <p className="mb-6">
           Explore our accessible products designed for everyone, including people with disabilities.
         </p>
-        
+
         {/* Search and Filter Component */}
-        <SearchAndFilter 
-          onSearchChange={handleSearchChange}
-          onFilterChange={handleFilterChange}
-        />
-        
+        <SearchAndFilter onSearchChange={handleSearchChange} onFilterChange={handleFilterChange} />
+
         {/* No results message */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-8" aria-live="polite">
@@ -756,14 +764,14 @@ const ECommContainer = ({ cartContext }) => {
             <p className="mt-2">Try adjusting your filters or search terms.</p>
           </div>
         )}
-        
+
         {/* Results count for screen readers */}
         {filteredProducts.length > 0 && (
           <div className="sr-only" aria-live="polite">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found
+            {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"} found
           </div>
         )}
-        
+
         <ul className="grid grid-cols-2  gap-4">
           {filteredProducts.map((product) => (
             <li
@@ -775,10 +783,10 @@ const ECommContainer = ({ cartContext }) => {
                 alt={product.alt}
                 className="w-full h-32 object-cover mb-3 rounded"
               />
-              <h3 className="text-lg font-semibold line-clamp-1">
-                {product.name}
-              </h3>
-              <p className="mb-2 text-sm line-clamp-2 h-10 overflow-hidden">{product.description}</p>
+              <h3 className="text-lg font-semibold line-clamp-1">{product.name}</h3>
+              <p className="mb-2 text-sm line-clamp-2 h-10 overflow-hidden">
+                {product.description}
+              </p>
               <span className="block font-bold mb-2 text-blue-700">{product.price}</span>
               <button
                 onClick={() => handleOpenModal(product)}
@@ -791,10 +799,10 @@ const ECommContainer = ({ cartContext }) => {
           ))}
         </ul>
       </main>
-        <AddToCartModal
-          product={selectedProduct}
-          onAddToCart={handleAddToCart}
-          onClose={handleCloseModal}
+      <AddToCartModal
+        product={selectedProduct}
+        onAddToCart={handleAddToCart}
+        onClose={handleCloseModal}
         isOpen={isAddToCartModalOpen}
         cart={cart}
         openCartModal={cartContext?.openCartModal}
@@ -844,7 +852,6 @@ const ECommIssues = () => {
       <ECommContainer />
     </Layout>
   );
-}
-
+};
 
 export default ECommIssues;
