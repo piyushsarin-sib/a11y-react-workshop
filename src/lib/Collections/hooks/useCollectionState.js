@@ -1,8 +1,8 @@
-import { useMemo, useCallback } from 'react';
-import { COLLECTION_PATTERNS } from '../constants/aria-config.js';
-import { buildCollection } from '../utils/buildCollection.js';
-import { buildCollectionAriaProps } from '../utils/buildCollectionAriaProps.js';
-import * as navigationHelpers from '../utils/collectionNavigation.js';
+import { useMemo, useCallback } from "react";
+import { COLLECTION_PATTERNS } from "../constants/aria-config.js";
+import { buildCollection } from "../utils/buildCollection.js";
+import { buildCollectionAriaProps } from "../utils/buildCollectionAriaProps.js";
+import * as navigationHelpers from "../utils/collectionNavigation.js";
 
 /**
  * Hook to build collection state from JSX children or data structures
@@ -25,8 +25,6 @@ import * as navigationHelpers from '../utils/collectionNavigation.js';
  * @param {string} props.ariaLabel - Accessible label for the collection
  * @param {string} props.ariaLabelledBy - ID of element that labels the collection
  * @param {string} props.ariaDescribedBy - ID of element that describes the collection
- * @param {string} props.orientation - 'horizontal' or 'vertical' (optional)
- * @param {string} props.selectionMode - 'none', 'single', or 'multiple' (optional)
  * @returns {Object} Collection state with rich Node objects and navigation methods
  * @returns {Array} return.collection - Hierarchical nodes with sections
  * @returns {Array} return.items - Flat array of focusable items
@@ -44,8 +42,6 @@ export const useCollectionState = ({
   ariaLabel,
   ariaLabelledBy,
   ariaDescribedBy,
-  orientation,
-  selectionMode = 'none',
 }) => {
   // Get pattern config for roles
   const patternConfig = pattern ? COLLECTION_PATTERNS[pattern] : {};
@@ -75,14 +71,12 @@ export const useCollectionState = ({
       ariaLabel,
       ariaLabelledBy,
       ariaDescribedBy,
-      orientation,
-      selectionMode,
     });
-  }, [patternConfig.role, ariaLabel, ariaLabelledBy, ariaDescribedBy, orientation, selectionMode]);
+  }, [patternConfig.role, ariaLabel, ariaLabelledBy, ariaDescribedBy]);
 
   return {
-    collection,        // Hierarchical nodes (sections with childNodes)
-    items: focusableItems,  // Flat array of focusable items only (for keyboard nav)
+    collection, // Hierarchical nodes (sections with childNodes)
+    items: focusableItems, // Flat array of focusable items only (for keyboard nav)
 
     // Navigation methods (similar to React Aria)
     getFirstKey,

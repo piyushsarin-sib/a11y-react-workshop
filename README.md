@@ -56,6 +56,8 @@ accessible-react-workshop/
 │   ├── *.jpeg                        # Workshop images
 │   └── _redirects                    # Vercel redirects
 ├── 📁 src/                           # Source code
+│   ├── 📁 assets/                    # Static assets
+│   │   └── react.svg                 # React logo
 │   ├── 📁 components/                # React components
 │   │   ├── 📁 common/                # Reusable UI components
 │   │   │   ├── 📁 Badge/             # Badge component
@@ -77,11 +79,10 @@ accessible-react-workshop/
 │   │   │   ├── 📁 Select/            # Dropdown select component
 │   │   │   └── 📁 Toast/             # Notification toast component
 │   │   ├── 📁 features/              # Feature-specific components
+│   │   │   ├── 📁 AccessibilityBanner/ # Accessibility info banner
 │   │   │   ├── 📁 AccessibilityCarousel/ # Accessibility info carousel
 │   │   │   ├── 📁 AddToCart/         # Add to cart functionality
 │   │   │   ├── 📁 Cart/              # Shopping cart components
-│   │   │   ├── 📁 Checkout/          # Checkout flow components
-│   │   │   ├── 📁 AccessibilityBanner/ # Accessibility info banner
 │   │   │   ├── 📁 OrderConfirmation/ # Order confirmation flow
 │   │   │   ├── 📁 Product/           # Product display components
 │   │   │   ├── 📁 ProductList/       # Product listing with accessible grid
@@ -90,7 +91,14 @@ accessible-react-workshop/
 │   │   │   ├── 📁 Footer/            # Site footer
 │   │   │   ├── 📁 Header/            # Site header with navigation
 │   │   │   └── 📁 Layout/            # Main layout wrapper
+│   │   ├── 📁 refernces/             # Reference implementations
+│   │   │   ├── FocusTrapFixed.jsx    # Focus trap example
+│   │   │   ├── FocusTrapFixed0.jsx   # Focus trap variation 0
+│   │   │   ├── FocusTrapFixed1.jsx   # Focus trap variation 1
+│   │   │   ├── FocusTrapFixed2.jsx   # Focus trap variation 2
+│   │   │   └── FocusTrapFixed3.jsx   # Focus trap variation 3
 │   │   ├── Footer.jsx                # Legacy footer (deprecated)
+│   │   ├── Header.css                # Header styles
 │   │   ├── Header.jsx                # Legacy header (deprecated)
 │   │   └── Layout.jsx                # Legacy layout (deprecated)
 │   ├── 📁 context/                   # React Context providers
@@ -99,128 +107,91 @@ accessible-react-workshop/
 │   │   ├── CartContextCore.js        # Core cart logic
 │   │   └── CartContextCore.jsx       # Core cart context
 │   ├── 📁 demos/                     # Interactive demonstrations
-│   │   ├── 📁 Expansion/             # Accordion and tree examples
-│   │   │   ├── AccordionExample.jsx
-│   │   │   ├── CollapsibleTreeExample.jsx
-│   │   │   ├── DynamicTreeControlledExample.jsx
-│   │   │   ├── DynamicTreeExample.jsx
-│   │   │   ├── StaticTreeControlledExample.jsx
-│   │   │   └── StaticTreeExample.jsx
-│   │   ├── 📁 HorizontalLists/       # Horizontal navigation examples
-│   │   │   ├── ButtonGroupExample.jsx
-│   │   │   ├── CardGridExample.jsx
-│   │   │   ├── HorizontalListExample.css
-│   │   │   ├── HorizontalListExample.jsx
-│   │   │   ├── NavigationMenuExample.jsx
-│   │   │   └── TagListExample.jsx
-│   │   ├── 📁 KeyboardNavigation/    # Keyboard navigation examples
-│   │   │   ├── Grid2DNavigationExample.jsx
-│   │   │   ├── HorizontalNavigationExample.jsx
-│   │   │   ├── RovingIndexExample.jsx
-│   │   │   └── VerticalNavigationExample.jsx
 │   │   ├── 📁 Overlay/               # Dialog and overlay examples
-│   │   │   ├── MenuWithOverlay.jsx
 │   │   │   ├── DialogExample.jsx
-│   │   │   └── SimpleTooltip.jsx
-│   │   ├── 📁 Selection/             # Selection pattern examples
-│   │   │   ├── EmptyMenuExample.jsx
-│   │   │   ├── MultiSelectionExample.jsx
-│   │   │   ├── SectionedMenuExample.jsx
-│   │   │   ├── SelectionExample.css
-│   │   │   ├── SimpleMenuExample.jsx
-│   │   │   └── SingleSelectionExample.jsx
-│   │   ├── 📁 VerticalLists/         # Vertical list examples
-│   │   │   ├── BasicListExample.jsx
-│   │   │   ├── ListExample.css
-│   │   │   ├── ListExample.jsx
-│   │   │   ├── NestedCollectionWithTitlesExample.jsx
-│   │   │   └── StyledListExample.jsx
+│   │   │   └── PopoverDialogExample.jsx
 │   │   └── index.js                  # Demo exports
 │   ├── 📁 lib/                       # Reusable libraries and utilities
-│   │   ├── 📁 Accordion/             # Accordion component library
-│   │   │   ├── Accordion.css
-│   │   │   ├── Accordion.jsx
-│   │   │   └── index.js
-│   │   ├── 📁 Collections/           # Collection management utilities
-│   │   │   ├── Collection.css
-│   │   │   ├── Collection.jsx        # Enhanced collection component with grid support
-│   │   │   ├── 📁 components/        # Collection sub-components
-│   │   │   │   └── Item.jsx          # Collection item wrapper
+│   │   ├── 📁 Collections/           # Collection management system
+│   │   │   ├── 📁 classic/    # Legacy collection system (deprecated)
+│   │   │   │   ├── Collection.jsx    # Legacy collection with grid support
+│   │   │   │   ├── CollectionContext.js  # Legacy collection context
+│   │   │   │   ├── CollectionLegacy.css  # Legacy collection styles
+│   │   │   │   ├── createCollectionAria.js  # Legacy ARIA factory function
+│   │   │   │   ├── Item.jsx          # Legacy item component (renders elements)
+│   │   │   │   ├── Section.jsx       # Legacy section component
+│   │   │   │   ├── Nested.jsx        # Legacy nested collections
+│   │   │   │   └── Title.jsx         # Legacy title component
+│   │   │   ├── 📁 components/        # Modern collection components
+│   │   │   │   ├── Item.jsx          # Modern item (metadata only)
+│   │   │   │   ├── Section.jsx       # Modern section (metadata only)
+│   │   │   │   └── ItemRenderer.jsx  # Component for rendering items/sections
 │   │   │   ├── 📁 constants/         # ARIA configuration constants
-│   │   │   │   └── aria-config.js    # Grid and list ARIA patterns
+│   │   │   │   └── aria-config.js    # Grid, menu, tree ARIA patterns
 │   │   │   ├── 📁 hooks/
-│   │   │   │   └── useCollectionAria.js
+│   │   │   │   └── useCollectionState.js  # Collection state management
 │   │   │   ├── 📁 utils/             # Collection utility functions
-│   │   │   │   ├── createCollectionAria.js
-│   │   │   │   ├── createItemAria.js
-│   │   │   │   ├── expandableItemUtils.js
-│   │   │   │   ├── getItemKey.js
-│   │   │   │   └── primitives.js
-│   │   │   ├── CollectionContext.js  # Collection context
-│   │   │   └── index.js
+│   │   │   │   ├── buildCollection.js
+│   │   │   │   ├── buildCollectionAriaProps.js
+│   │   │   │   ├── buildNodeAriaProps.js
+│   │   │   │   └── collectionNavigation.js
+│   │   │   └── index.js              # Collection exports
 │   │   ├── 📁 interactions/          # Interaction pattern libraries
-│   │   │   ├── 📁 expansion/         # Expansion patterns
-│   │   │   │   └── useExpandable.js  # Expandable item hook
 │   │   │   ├── 📁 keyboard/          # Keyboard navigation patterns
-│   │   │   │   ├── 📁 delegates/     # Navigation delegates
-│   │   │   │   │   ├── grid2DDelegate.js
-│   │   │   │   │   ├── horizontalDelegate.js
-│   │   │   │   │   ├── index.js
-│   │   │   │   │   └── linear1DDelegate.js
-│   │   │   │   ├── 📁 hooks/
-│   │   │   │   │   ├── useRovingIndex.js    # Roving tabindex pattern
-│   │   │   │   │   └── useArrowNavigation.js # Arrow key navigation
-│   │   │   │   └── 📁 utils/
-│   │   │   │       └── keyboardPrimitives.js
+│   │   │   │   └── 📁 hooks/
+│   │   │   │       └── useKeyboardNavigation.js # Unified keyboard navigation
 │   │   │   └── 📁 selection/         # Selection patterns
-│   │   │       └── useSelectionManager.js
+│   │   │       └── useSelection.js   # Selection state management
 │   │   ├── 📁 Menu/                  # Menu component library
-│   │   │   ├── 📁 hooks/
-│   │   │   │   └── useMenu.js
-│   │   │   ├── index.js
-│   │   │   ├── Menu.jsx
-│   │   │   ├── MenuContext.js
-│   │   │   ├── MenuList.jsx
-│   │   │   ├── MenuOption.jsx
-│   │   │   ├── MenuSection.jsx
-│   │   │   └── MenuTitle.jsx
+│   │   │   ├── index.js              # Menu exports
+│   │   │   ├── MenuList.jsx          # Standalone menu list
+│   │   │   ├── MenuList.css          # Menu styles
+│   │   │   ├── MenuOption.jsx        # Menu item component
+│   │   │   └── MenuSection.jsx       # Menu section component
 │   │   ├── 📁 Tree/                  # Tree component library
 │   │   │   ├── index.js
 │   │   │   ├── Tree.css
 │   │   │   └── Tree.jsx
+│   │   ├── 📁 utils/                 # Shared utility functions
+│   │   │   ├── chain.js              # Function chaining utility
+│   │   │   ├── mergeProps.js         # Props merging utility
+│   │   │   └── index.js              # Utility exports
 │   │   └── 📁 Overlay/               # Overlay management system
 │   │       ├── 📁 components/        # Overlay components
-│   │       │   ├── DialogOverlay.jsx
-│   │       │   ├── Popover.jsx
-│   │       │   ├── PopoverBackdrop.jsx
-│   │       │   ├── PopoverContent.jsx
-│   │       │   └── Tooltip.jsx
-│   │       ├── constants.js          # Overlay constants
+│   │       │   ├── Backdrop.jsx      # Backdrop component
+│   │       │   ├── BaseOverlay.jsx   # Base overlay component
+│   │       │   ├── DialogHeader.jsx  # Dialog header component
+│   │       │   ├── DialogOverlay.jsx # Modal dialog overlay
+│   │       │   └── PopupOverlay.jsx  # Non-modal popup overlay
 │   │       ├── 📁 helpers/           # Overlay helper functions
-│   │       │   ├── createFocusTrap.js
-│   │       │   ├── getFocusableElements.js
-│   │       │   ├── getScrollbarWidth.js
-│   │       │   ├── inertOthers.js
-│   │       │   └── platform.js
+│   │       │   ├── flattenProps.js   # Props flattening utility
+│   │       │   ├── focusUtils.js     # Focus management utilities
+│   │       │   ├── keyHandlers.js    # Keyboard event handlers
+│   │       │   ├── keyUtils.js       # Key detection utilities
+│   │       │   └── positionHelpers.js # Positioning calculations
 │   │       ├── 📁 hooks/             # Overlay hooks
-│   │       │   ├── useClickOutside.js
-│   │       │   ├── 📁 useFocusManagement/
-│   │       │   │   ├── index.js
-│   │       │   │   ├── useAutoFocus.js
-│   │       │   │   ├── useRestoreFocus.js
-│   │       │   │   └── useStoreFocus.js
-│   │       │   ├── useInert.js
-│   │       │   ├── useKeyboardHandlers.js
-│   │       │   ├── useOverlay.js
-│   │       │   ├── usePosition.js
-│   │       │   └── useScrollLock.js
-│   │       ├── index.js
-│   │       └── Overlay.css
+│   │       │   ├── useBaseOverlay.js # Base overlay hook
+│   │       │   ├── useClickOutside.js # Click outside detection
+│   │       │   ├── useDialog.js      # Dialog overlay hook
+│   │       │   ├── useEscapeKey.js   # Escape key handler
+│   │       │   ├── useFocusTrap.js   # Focus trap implementation
+│   │       │   ├── useInert.js       # Inert background elements
+│   │       │   ├── usePopup.js       # Popup overlay hook
+│   │       │   ├── usePosition.js    # Position calculation hook
+│   │       │   ├── useScrollLock.js  # Scroll lock for modals
+│   │       │   └── 📁 useFocusManagement/
+│   │       │       ├── index.js
+│   │       │       ├── useAutoFocus.js # Auto-focus on open
+│   │       │       └── useRestoreFocus.js # Restore focus on close
+│   │       ├── constants.js          # Overlay constants
+│   │       ├── index.js              # Overlay exports
+│   │       └── Overlay.css           # Overlay styles
 │   ├── 📁 pages/                     # Main application pages
+│   │   ├── 📁 BestPracticesPage/     # Best practices page
 │   │   ├── 📁 DemoPage/              # Demo showcase page
 │   │   ├── 📁 ECommercePage/         # E-commerce workshop page
-│   │   ├── 📁 ExercisesPage/         # Exercise instructions page
-│   │   └── 📁 LandingPage/           # Home page
+│   │   ├── 📁 LandingPage/           # Home page
+│   │   └── 📁 ReferencesPage/        # References page
 │   ├── 📁 playground/                # Interactive playground components
 │   │   ├── 📁 ECommIssues/           # E-commerce accessibility issues
 │   │   │   ├── ECommIssues.jsx       # Main issues demonstration
@@ -273,12 +244,6 @@ accessible-react-workshop/
 │   │   │   ├── solved.jsx            # Complete solution
 │   │   │   └── index.js              # Export
 │   │   └── index.js                  # Playground exports
-│   ├── 📁 refernces/                 # Reference implementations
-│   │   ├── FocusTrapFixed.jsx        # Focus trap examples
-│   │   ├── FocusTrapFixed0.jsx
-│   │   ├── FocusTrapFixed1.jsx
-│   │   ├── FocusTrapFixed2.jsx
-│   │   └── FocusTrapFixed3.jsx
 │   ├── 📁 styles/                    # Global styles and CSS
 │   │   ├── accessibility.css         # Accessibility-specific styles
 │   │   ├── index.css                 # Main stylesheet
@@ -305,12 +270,14 @@ accessible-react-workshop/
 ## 🎓 Workshop Structure
 
 ### **Phase 1: Identify Issues**
+
 - Navigate the e-commerce page with mouse (seems fine)
 - Try keyboard-only navigation (exposes problems)
 - Use screen reader to understand the experience
 - Document accessibility barriers
 
 ### **Phase 2: Progressive Fixes**
+
 1. **Skip Links** - Quick navigation to main content
 2. **Heading Hierarchy** - Proper h1 → h2 → h3 structure
 3. **Button Semantics** - Proper interactive element markup
@@ -323,6 +290,7 @@ accessible-react-workshop/
 10. **Grid Patterns** - Adobe spec-compliant card grids with row/rowheader pattern
 
 ### **Phase 3: Testing & Validation**
+
 - **Keyboard testing** - Tab navigation, Enter/Space activation
 - **Screen reader testing** - NVDA, VoiceOver, JAWS
 - **Focus testing** - Visible indicators and logical order
@@ -351,6 +319,7 @@ npm run prepare    # Setup Husky git hooks
 ## 🎨 Key Components
 
 ### **Common Components** (`src/components/common/`)
+
 Reusable UI components with built-in accessibility features:
 
 - **Button** - Accessible button with loading states and variants
@@ -363,6 +332,7 @@ Reusable UI components with built-in accessibility features:
 - **QuantitySelector** - Increment/decrement controls with keyboard support
 
 ### **Feature Components** (`src/components/features/`)
+
 Business logic components for the e-commerce workshop:
 
 - **Product** - Product display and interaction
@@ -375,6 +345,7 @@ Business logic components for the e-commerce workshop:
 - **OrderConfirmation** - Checkout completion flow
 
 ### **Demo Components** (`src/demos/`)
+
 Interactive examples demonstrating accessibility patterns:
 
 - **Keyboard Navigation** - Roving tabindex, arrow key navigation, dual navigation (Tab + Arrows)
@@ -386,6 +357,7 @@ Interactive examples demonstrating accessibility patterns:
 ## 🔧 Development Guidelines
 
 ### **Accessibility Standards**
+
 - **WCAG 2.1 AA** compliance
 - **ARIA 1.1** implementation
 - **Adobe Accessibility Specifications** for card grids
@@ -395,6 +367,7 @@ Interactive examples demonstrating accessibility patterns:
 - **Focus indicators** visible on all interactive elements
 
 ### **Code Quality**
+
 - **ESLint** with jsx-a11y plugin
 - **PropTypes** for type checking
 - **Consistent naming** conventions
@@ -402,6 +375,7 @@ Interactive examples demonstrating accessibility patterns:
 - **Error boundaries** for resilience
 
 ### **Testing Approach**
+
 - **Keyboard-only** navigation testing (Tab, Shift+Tab, Arrow keys, Enter, Space, Escape)
 - **Screen reader** testing (NVDA, VoiceOver, JAWS)
 - **Color contrast** validation (WebAIM Contrast Checker)
@@ -413,6 +387,7 @@ Interactive examples demonstrating accessibility patterns:
 ## 📚 Learning Resources
 
 ### **Accessibility Guidelines**
+
 - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 - [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
 - [Adobe Accessibility Specifications](https://opensource.adobe.com/spectrum-web-components/components/)
@@ -421,6 +396,7 @@ Interactive examples demonstrating accessibility patterns:
 - [Grid Pattern ARIA Specification](https://www.w3.org/WAI/ARIA/apg/patterns/grid/)
 
 ### **React Accessibility**
+
 - [React Accessibility Documentation](https://reactjs.org/docs/accessibility.html)
 - [Inclusive Components](https://inclusive-components.design/)
 - [A11y Project](https://www.a11yproject.com/)
@@ -436,6 +412,7 @@ We welcome contributions! Please see our contributing guidelines:
 5. **Submit** a pull request
 
 ### **Development Setup**
+
 ```bash
 # Install dependencies
 npm install
@@ -461,6 +438,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 ## 🌟 Recent Enhancements
 
 ### **Focus Management Improvements**
+
 - ✅ Enhanced focus trap with dynamic disabled element detection
 - ✅ Automatic focus restoration to previously focused element
 - ✅ `getFocusableElements()` function that queries fresh on Tab key press
@@ -468,6 +446,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 - ✅ Timeout-based focus to ensure DOM readiness
 
 ### **Product Grid Accessibility**
+
 - ✅ Adobe spec-compliant card grid pattern
 - ✅ `role="grid"` with `role="row"` and `role="rowheader"` structure
 - ✅ Proper ARIA attributes: `aria-rowindex`, `aria-colindex`, `aria-labelledby`, `aria-describedby`
@@ -475,6 +454,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 - ✅ Collection component handles both navigation patterns automatically
 
 ### **E-Commerce UX Improvements**
+
 - ✅ Streamlined checkout modal (immediate order placement)
 - ✅ Enhanced AddToCart modal with "Go to Cart" link (keyboard-inaccessible by design)
 - ✅ Dynamic button states based on quantity and cart status
@@ -482,6 +462,7 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 - ✅ Updated footer links: Home, Best Practices, Reference links
 
 ### **Accessibility Banner**
+
 - ✅ Non-button styling for disability type tags (Motor, Visual, Hearing, Cognitive)
 - ✅ Pill-shaped badges with subtle borders instead of clickable-looking boxes
 
@@ -489,4 +470,4 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 
 **Happy accessibility learning! 🎯♿**
 
-*Remember: Accessibility isn't just about compliance - it's about creating inclusive experiences for all users.*
+_Remember: Accessibility isn't just about compliance - it's about creating inclusive experiences for all users._

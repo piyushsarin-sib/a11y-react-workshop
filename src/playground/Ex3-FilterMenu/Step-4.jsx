@@ -42,10 +42,6 @@ const MenuWithOverlay = () => {
   return (
     <div style={{ padding: "50px" }}>
       <Checkpoints />
-      <h3 style={{ marginBottom: "20px" }}>Menu with Overlay (Default)</h3>
-      <p style={{ marginBottom: "20px", color: "#666" }}>
-        Click the button to open a menu. Use ESC to close, or click outside.
-      </p>
 
       <Button
         variant="secondary"

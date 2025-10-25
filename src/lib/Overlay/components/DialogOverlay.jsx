@@ -1,14 +1,14 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
-import BaseOverlay from './BaseOverlay';
-import DialogHeader from './DialogHeader';
-import useFocusTrap from '../hooks/useFocusTrap';
-import { useAutoFocus } from '../hooks/useFocusManagement';
-import useInert from '../hooks/useInert';
-import useScrollLock from '../hooks/useScrollLock';
-import { getStaticPositionStyles } from '../helpers/positionHelpers';
-import { PLACEMENTS } from '../constants';
-import '../Overlay.css';
+import React, { useRef } from "react";
+import PropTypes from "prop-types";
+import BaseOverlay from "./BaseOverlay";
+import DialogHeader from "./DialogHeader";
+import useFocusTrap from "../hooks/useFocusTrap";
+import { useAutoFocus } from "../hooks/useFocusManagement";
+import useInert from "../hooks/useInert";
+import useScrollLock from "../hooks/useScrollLock";
+import { getStaticPositionStyles } from "../helpers/positionHelpers";
+import { PLACEMENTS } from "../constants";
+import "../Overlay.css";
 
 /**
  * DialogOverlay - Modal dialog with focus trap
@@ -40,9 +40,9 @@ const DialogOverlay = ({
 
   // Dialog-specific props
   backdrop = false,
-  closeOnOutsideClick = true,  // Default: close on outside click (including backdrop)
+  closeOnOutsideClick = true, // Default: close on outside click (including backdrop)
   focusOnOpen = true,
-  placement = PLACEMENTS.CENTER,  // Static placement: center, top-center, bottom-center
+  placement = PLACEMENTS.CENTER, // Static placement: center, top-center, bottom-center
   portalTarget,
 
   // Optional title and close button
@@ -51,7 +51,7 @@ const DialogOverlay = ({
 
   // Styling
   style = {},
-  className = '',
+  className = "",
 
   // Children
   children,
@@ -87,19 +87,18 @@ const DialogOverlay = ({
     <div
       id={body.id}
       role={body.role}
-      aria-modal={body['aria-modal']}
-      aria-labelledby={body['aria-labelledby']}
-      aria-describedby={body['aria-describedby']}
+      aria-modal={body["aria-modal"]}
+      aria-label={title}
       tabIndex={-1}
       className={`dialog-overlay__content ${className}`}
       style={{
-        padding: title || showCloseButton ? '24px' : '0',
+        padding: title || showCloseButton ? "24px" : "0",
         ...style,
       }}
     >
       <DialogHeader
         title={title}
-        titleId={body['aria-labelledby']}
+        titleId={body["aria-labelledby"]}
         showCloseButton={showCloseButton}
         onClose={close}
       />
@@ -131,7 +130,7 @@ const DialogOverlay = ({
   );
 };
 
-DialogOverlay.displayName = 'DialogOverlay';
+DialogOverlay.displayName = "DialogOverlay";
 
 DialogOverlay.propTypes = {
   // From hook
@@ -144,9 +143,9 @@ DialogOverlay.propTypes = {
     id: PropTypes.string,
     visible: PropTypes.bool,
     role: PropTypes.string,
-    'aria-modal': PropTypes.string,
-    'aria-labelledby': PropTypes.string,
-    'aria-describedby': PropTypes.string,
+    "aria-modal": PropTypes.string,
+    "aria-labelledby": PropTypes.string,
+    "aria-describedby": PropTypes.string,
   }).isRequired,
   close: PropTypes.func.isRequired,
 
@@ -154,7 +153,7 @@ DialogOverlay.propTypes = {
   backdrop: PropTypes.bool,
   closeOnOutsideClick: PropTypes.bool,
   focusOnOpen: PropTypes.bool,
-  placement: PropTypes.string,  // Static placement: center, top-center, bottom-center
+  placement: PropTypes.string, // Static placement: center, top-center, bottom-center
   portalTarget: PropTypes.oneOfType([
     PropTypes.instanceOf(Element),
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),

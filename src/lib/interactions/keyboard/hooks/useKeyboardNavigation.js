@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { mergeRefs as mergeRefsUtil } from "@lib/utils";
 
 /**
  * Simplified keyboard navigation hook that uses collection navigation methods
@@ -44,12 +45,15 @@ export const useKeyboardNavigation = ({
   }, [activeKey, disabled]);
 
   // Navigate to specific key
-  const navigateTo = useCallback((newKey) => {
-    if (disabled || !newKey) return;
-    const oldKey = activeKey;
-    setActiveKey(newKey);
-    onActiveChange?.(newKey, oldKey);
-  }, [activeKey, disabled, onActiveChange]);
+  const navigateTo = useCallback(
+    (newKey) => {
+      if (disabled || !newKey) return;
+      const oldKey = activeKey;
+      setActiveKey(newKey);
+      onActiveChange?.(newKey, oldKey);
+    },
+    [activeKey, disabled, onActiveChange],
+  );
 
   // Navigation methods (delegate to collection with loop support)
   const getNextKey = useCallback(() => {
@@ -71,88 +75,107 @@ export const useKeyboardNavigation = ({
   }, [collection]);
 
   // Keyboard event handler
-  const handleKeyDown = useCallback((event) => {
-    if (disabled) return;
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (disabled) return;
 
-    // Key mappings based on orientation
-    const keyMappings = {
-      vertical: {
-        ArrowDown: getNextKey,
-        ArrowUp: getPrevKey,
-        Home: getFirstKey,
-        End: getLastKey,
-      },
-      horizontal: {
-        ArrowRight: getNextKey,
-        ArrowLeft: getPrevKey,
-        Home: getFirstKey,
-        End: getLastKey,
-      },
-    };
+      // Key mappings based on orientation
+      const keyMappings = {
+        vertical: {
+          ArrowDown: getNextKey,
+          ArrowUp: getPrevKey,
+          Home: getFirstKey,
+          End: getLastKey,
+        },
+        horizontal: {
+          ArrowRight: getNextKey,
+          ArrowLeft: getPrevKey,
+          Home: getFirstKey,
+          End: getLastKey,
+        },
+      };
 
-    const handler = keyMappings[orientation]?.[event.key];
-    if (!handler) return;
+      const handler = keyMappings[orientation]?.[event.key];
+      if (!handler) return;
 
-    // If no active key, move to first item on any navigation key
-    let nextKey;
-    if (!activeKey) {
-      nextKey = collection?.getFirstKey?.();
-    } else {
-      nextKey = handler();
-    }
+      // If no active key, move to first item on any navigation key
+      let nextKey;
+      if (!activeKey) {
+        nextKey = collection?.getFirstKey?.();
+      } else {
+        nextKey = handler();
+      }
 
-    if (nextKey !== null) {
-      navigateTo(nextKey);
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }, [disabled, orientation, navigateTo, getNextKey, getPrevKey, getFirstKey, getLastKey, activeKey, collection]);
+      if (nextKey !== null) {
+        navigateTo(nextKey);
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    },
+    [
+      disabled,
+      orientation,
+      navigateTo,
+      getNextKey,
+      getPrevKey,
+      getFirstKey,
+      getLastKey,
+      activeKey,
+      collection,
+    ],
+  );
 
   // Get props for collection container
   const getCollectionProps = useCallback(() => {
     if (disabled) return {};
 
     return {
-      tabIndex: activeKey ? -1 : 0,
       onKeyDown: handleKeyDown,
     };
-  }, [disabled, handleKeyDown, activeKey]);
+  }, [disabled, handleKeyDown]);
 
-  // Helper to merge refs
-  const mergeRefs = (key, userRef) => (element) => {
-    if (element) {
-      itemRefs.current.set(key, element);
-    } else {
-      itemRefs.current.delete(key);
-    }
-    if (userRef) {
-      if (typeof userRef === 'function') {
-        userRef(element);
+  // Helper to merge refs and manage itemRefs Map
+  const mergeRefs = (key, userRef) => {
+    // Ref callback to manage itemRefs Map
+    const trackRef = (element) => {
+      if (element) {
+        itemRefs.current.set(key, element);
       } else {
-        userRef.current = element;
+        itemRefs.current.delete(key);
       }
-    }
+    };
+
+    // Use utility mergeRefs to combine tracking ref with user ref
+    return mergeRefsUtil(trackRef, userRef);
   };
 
   // Get props for individual items
-  const getItemProps = useCallback((key, options = {}) => {
-    if (disabled) return {};
+  const getItemProps = useCallback(
+    (key, options = {}) => {
+      if (disabled) return {};
 
-    const isActive = key === activeKey;
-    const { focusable = true, ref, onFocus } = options;
+      const isActive = key === activeKey;
+      const { focusable = true, ref, onFocus, ariaProps } = options;
 
-    return {
-      tabIndex: isActive && focusable ? 0 : -1,
-      "data-active": isActive,
-      ref: mergeRefs(key, ref),
-      onFocus: (event) => {
-        if (!isActive && event.target === event.currentTarget) {
-          navigateTo(key);
-        }
-        onFocus?.(event);
-      },
-    };
-  }, [disabled, activeKey, navigateTo]);
+      // Respect initial tabIndex from ariaProps when there's no activeKey
+      // This allows tree pattern to set tabIndex: 0 on first item without triggering focus
+      const initialTabIndex = ariaProps?.tabIndex;
+      const shouldUseInitialTabIndex = !activeKey && typeof initialTabIndex === "number";
+
+      return {
+        tabIndex: isActive && focusable ? 0 : shouldUseInitialTabIndex ? initialTabIndex : -1,
+        "data-active": isActive,
+        ref: mergeRefs(key, ref),
+        onFocus: (event) => {
+          if (!isActive && event.target === event.currentTarget) {
+            navigateTo(key);
+          }
+          onFocus?.(event);
+        },
+      };
+    },
+    [disabled, activeKey, navigateTo],
+  );
 
   // Check if key is active
   const isActive = useCallback((key) => key === activeKey, [activeKey]);

@@ -55,10 +55,16 @@ export function ItemRenderer({
     } = node.props || {};
 
     return (
-      <SectionWrapper {...mergeProps({ role: "presentation" }, customProps)}>
-        <div id={headingId}>{node.rendered}</div>
+      <SectionWrapper {...mergeProps({ role: node.sectionWrapperRole }, customProps)}>
+        <div id={headingId} role={node.sectionTitleRole} className="menu-section-title">
+          {node.rendered}
+        </div>
         {hasChildren && (
-          <SectionGroup role="group" aria-labelledby={headingId}>
+          <SectionGroup
+            role={node.sectionGroupRole}
+            aria-labelledby={headingId}
+            tabIndex={undefined}
+          >
             {renderChildren(node.childNodes)}
           </SectionGroup>
         )}
@@ -83,7 +89,7 @@ export function ItemRenderer({
     { style: node.indentStyle },
     customPropsFromNode,
     node.ariaProps, // Pre-computed ARIA attributes from useCollectionState
-    nav.getItemProps(node.key),
+    nav.getItemProps(node.key, node),
     selection ? selection.getItemSelectionProps(node.key, node) : {},
   );
 
@@ -94,7 +100,7 @@ export function ItemRenderer({
     return (
       <ItemElement {...itemProps}>
         {node.rendered}
-        <SectionGroup role="group">
+        <SectionGroup role="group" tabIndex={undefined}>
           {renderChildren(node.childNodes)}
         </SectionGroup>
       </ItemElement>

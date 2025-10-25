@@ -11,78 +11,57 @@ const TreeList = () => {
   };
 
   return (
-    <div>
-      <h3>Tree Component Example with Selection</h3>
+    <Tree
+      ariaLabel="File explorer"
+      selectionMode="single"
+      selectedKeys={selectedKeys}
+      onChange={handleSelectionChange}
+    >
+      <Section key="categories" title="📦 Categories" className="highlighted-section">
+        <Item key="hearing">
+          <div>Hearing Assistance</div>
+        </Item>
+        <Item key="vision">
+          <div>Visual Assistance</div>
+        </Item>
+        <Item key="mobility">
+          <div>Mobility Aids</div>
+        </Item>
+        <Item key="sensory">
+          <div>Sensory Tools</div>
+        </Item>
+      </Section>
 
-      <div
-        style={{
-          marginBottom: "16px",
-          padding: "12px",
-          backgroundColor: "#e8f4f8",
-          borderRadius: "4px",
-        }}
-      >
-        <strong>Selected:</strong> {selectedKeys.length > 0 ? selectedKeys.join(", ") : "None"}
-      </div>
+      <Section key="prices" title="💰 Price Ranges">
+        <Item key="under1000">
+          <div>Under ₹1,000</div>
+        </Item>
+        <Item key="1000-5000">
+          <div>₹1,000 - ₹5,000</div>
+        </Item>
+        <Item key="above5000">
+          <div>Above ₹5,000</div>
+        </Item>
+      </Section>
 
-      <Tree
-        ariaLabel="File explorer"
-        selectionMode="single"
-        selectedKeys={selectedKeys}
-        onChange={handleSelectionChange}
-      >
-        <Section key="documents" title="Documents" className="highlighted-section">
-          <Item key="doc1" className="important-file">
-            <div>📄 Resume.pdf</div>
-          </Item>
-          <Item key="doc2">
-            <div>📄 CoverLetter.docx</div>
-          </Item>
-          <Item key="folder1">
-            <div>📁 Projects</div>
-            <Item key="project1">
-              <div>📄 ProjectA.pptx</div>
+      <Section key="availability" title="📦 Availability">
+        <Item key="india">
+          <div>India</div>
+          <Item key="maharashtra">
+            <div>Maharashtra</div>
+            <Item key="mumbai" style={{ color: "red", fontWeight: "bold" }}>
+              <div>Mumbai</div>
             </Item>
-            <Item key="project2" style={{ color: "red", fontWeight: "bold" }}>
-              <div>📄 ProjectB.xlsx</div>
-            </Item>
-          </Item>
-        </Section>
-
-        <Section key="media" title="Media">
-          <Item key="photo1">
-            <div>🖼️ Vacation.jpg</div>
-          </Item>
-          <Item key="photo2">
-            <div>🖼️ Family.png</div>
-          </Item>
-          <Item key="video1">
-            <div>🎥 Birthday.mp4</div>
-          </Item>
-        </Section>
-
-        <Section key="code" title="Code">
-          <Item key="code1">
-            <div>📝 index.js</div>
-          </Item>
-          <Item key="src">
-            <div>📁 src</div>
-            <Item key="components">
-              <div>📁 components</div>
-              <Item key="button">
-                <div>Button.jsx</div>
-              </Item>
-              <Item key="input">
-                <div>Input.jsx</div>
-              </Item>
-            </Item>
-            <Item key="utils">
-              <div>📁 utils</div>
+            <Item key="pune" className="featured-location">
+              <div>Pune</div>
             </Item>
           </Item>
-        </Section>
-      </Tree>
-    </div>
+          <Item key="karnataka">
+            <div>Karnataka</div>
+          </Item>
+        </Item>
+      </Section>
+    </Tree>
   );
 };
 
