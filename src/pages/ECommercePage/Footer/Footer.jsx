@@ -1,8 +1,9 @@
 import React from 'react';
-import Link from '../../common/Link';
+import Link from '@components/common/Link';
 
 const Footer = () => (
   <footer 
+    id="footer"
     className="bg-gray-800 text-white mt-12"
   >
     <div className="container mx-auto px-4 py-6">

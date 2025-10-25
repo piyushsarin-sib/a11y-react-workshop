@@ -22,18 +22,15 @@ const ProductList = ({ products, onAddToCart }) => {
         {products.length} {products.length === 1 ? "product" : "products"} found
       </div>
 
-      {/* Grid using enhanced Collection component with dual navigation */}
+      {/* Section using Collection component - no grid role needed, CSS Grid handles visual layout */}
       <Collection
-        as="div"
+        as="section"
         items={products}
         itemAs="article"
         className="grid grid-cols-2 gap-4"
-        pattern="grid"
         ariaLabel="Product cards"
-        colCount={2}
         getTitleId={(key) => `${baseId}-title-${key}`}
         getDescriptionId={(key) => `${baseId}-desc-${key}`}
-        enableArrowNavigation={true}
         getItemProps={() => ({
           className:
             "border rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow focus-within:ring-2 focus-within:ring-blue-500",

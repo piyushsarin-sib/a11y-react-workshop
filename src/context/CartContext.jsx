@@ -65,9 +65,7 @@ export const CartProvider = ({ children }) => {
   
   const closeConfirmationModal = useCallback(() => {
     confirmationModalState.close();
-    // Clear cart and customer info after confirmation modal is closed
-    setCart([]);
-    setCustomerInfo({ name: '', phone: '' });
+    // Cart is already cleared when order was placed
   }, [confirmationModalState]);
 
   const updateCustomerInfo = useCallback((info) => {
@@ -77,11 +75,15 @@ export const CartProvider = ({ children }) => {
   const placeOrder = useCallback(() => {
     // This would typically connect to a backend service
     console.log('Placing order:', { items: cart, customer: customerInfo });
+    
+    // Clear cart and customer info immediately when order is placed
+    setCart([]);
+    setCustomerInfo({ name: '', phone: '' });
+    
     // Close the cart modal
     closeCartModal();
     // Show the confirmation modal
     confirmationModalState.open();
-    // Don't clear the cart yet - we'll do that when the confirmation modal is closed
   }, [cart, customerInfo, closeCartModal, confirmationModalState]);
 
   const totalItems = useMemo(() => {

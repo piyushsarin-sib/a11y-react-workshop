@@ -6,8 +6,8 @@ import SearchAndFilter from "@components/features/SearchAndFilter";
 import ProductList from "@components/features/ProductList";
 import Panel from "@components/common/Panel";
 import CartModal from "@components/features/Cart/CartModal";
-import Header from '@components/layout/Header';
-import Footer from '@components/layout/Footer';
+import Header from './Header';
+import Footer from './Footer';
 
 
 import { useDialog } from "@lib/Overlay";
@@ -209,10 +209,6 @@ const ECommercePage = () => {
   return (
     <CartProvider>
       <div className="bg-gray-50 min-h-screen flex flex-col">
-        {/* Skip to main content link - first focusable element */}
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
         <Header />
         <main id="main-content" className="flex-grow" tabIndex={-1}>
           <ECommerce/>
