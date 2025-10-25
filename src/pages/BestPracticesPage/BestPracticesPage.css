@@ -2,6 +2,12 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Offset anchor links to account for fixed headers */
+.best-practices-page section[id] {
+  scroll-margin-top: 2rem;
 }
 
 .container {
