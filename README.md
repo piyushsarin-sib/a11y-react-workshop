@@ -136,8 +136,6 @@ accessible-react-workshop/
 │   │   │   │   ├── buildNodeAriaProps.js
 │   │   │   │   └── collectionNavigation.js
 │   │   │   └── index.js              # Collection exports
-│   │   ├── 📁 css/                   # Legacy CSS files
-│   │   │   └── SelectionExample.css  # Selection example styles (unused)
 │   │   ├── 📁 interactions/          # Interaction pattern libraries
 │   │   │   ├── 📁 keyboard/          # Keyboard navigation patterns
 │   │   │   │   └── 📁 hooks/
