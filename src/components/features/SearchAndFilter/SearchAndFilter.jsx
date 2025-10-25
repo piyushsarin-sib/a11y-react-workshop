@@ -242,9 +242,8 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
                   type="button"
                   onClick={() => {
                     const newCategories = selectedCategories.filter((c) => c !== catId);
-                    const categoriesToSet = newCategories.length > 0 ? newCategories : ["all-cat"];
-                    setSelectedCategories(categoriesToSet);
-                    onFilterChange({ categories: categoriesToSet, prices: selectedPrices });
+                    setSelectedCategories(newCategories);
+                    onFilterChange({ categories: newCategories, prices: selectedPrices });
                   }}
                   className="ml-1 inline-flex text-blue-700 accessible-focus"
                   aria-label={`Remove category filter: ${
@@ -268,9 +267,8 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
                   type="button"
                   onClick={() => {
                     const newPrices = selectedPrices.filter((p) => p !== priceId);
-                    const pricesToSet = newPrices.length > 0 ? newPrices : ["all-prices"];
-                    setSelectedPrices(pricesToSet);
-                    onFilterChange({ categories: selectedCategories, prices: pricesToSet });
+                    setSelectedPrices(newPrices);
+                    onFilterChange({ categories: selectedCategories, prices: newPrices });
                   }}
                   className="ml-1 inline-flex text-blue-700 accessible-focus"
                   aria-label={`Remove price filter: ${

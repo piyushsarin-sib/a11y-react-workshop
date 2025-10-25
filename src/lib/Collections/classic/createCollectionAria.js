@@ -67,10 +67,11 @@ export const createCollectionAria = ({
     const defaultOrientation = ROLE_ORIENTATION_DEFAULTS[effectiveRole];
 
     // Only add aria-orientation if:
-    // 1. Role supports orientation (default is not null), AND
-    // 2. Orientation is explicitly set or from pattern, AND
-    // 3. It differs from the role's default
-    if (defaultOrientation !== null && finalOrientation && finalOrientation !== defaultOrientation) {
+    // 1. There's an effective role (not using semantic HTML without role), AND
+    // 2. Role supports orientation (default is not null), AND
+    // 3. Orientation is explicitly set or from pattern, AND
+    // 4. It differs from the role's default
+    if (effectiveRole && defaultOrientation !== null && finalOrientation && finalOrientation !== defaultOrientation) {
       props["aria-orientation"] = finalOrientation;
     }
 

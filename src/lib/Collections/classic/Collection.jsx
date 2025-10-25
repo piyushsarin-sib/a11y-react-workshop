@@ -168,19 +168,25 @@ const Collection = React.forwardRef(({
               const content = renderFn(item);
               const behaviorProps = getItemProps?.(key, item) || {};
               
+              // Generate title and description IDs if provided
+              const titleId = getTitleId?.(key, item);
+              const descId = getDescriptionId?.(key, item);
+              
+              // Add aria-labelledby and aria-describedby if IDs are provided
+              const labelingProps = {
+                ...(titleId && { 'aria-labelledby': titleId }),
+                ...(descId && { 'aria-describedby': descId }),
+              };
+              
               // Each card gets its own row (row→rowheader pattern)
               const rowIndex = index + 1;
 
               // Grid pattern: wrap in row with rowheader or gridcell
               if (isGridPattern) {
-                const titleId = getTitleId?.(key, item);
-                const descId = getDescriptionId?.(key, item);
-                
                 const itemAriaProps = {
                   role: gridItemRole,
                   'aria-colindex': 1,
-                  ...(titleId && { 'aria-labelledby': titleId }),
-                  ...(descId && { 'aria-describedby': descId }),
+                  ...labelingProps,
                 };
 
                 // Add ref for arrow navigation
@@ -227,7 +233,7 @@ const Collection = React.forwardRef(({
               if (ItemInnerElement) {
                 return (
                   <ItemElement key={key} role="presentation">
-                    <ItemInnerElement {...behaviorProps} {...itemInnerProps}>
+                    <ItemInnerElement {...behaviorProps} {...itemInnerProps} {...labelingProps}>
                       {content}
                     </ItemInnerElement>
                   </ItemElement>
@@ -236,7 +242,7 @@ const Collection = React.forwardRef(({
 
               // Simple structure
               return (
-                <ItemElement key={key} {...behaviorProps}>
+                <ItemElement key={key} {...behaviorProps} {...labelingProps}>
                   {content}
                 </ItemElement>
               );
