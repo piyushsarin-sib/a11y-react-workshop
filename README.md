@@ -56,6 +56,8 @@ accessible-react-workshop/
 │   ├── *.jpeg                        # Workshop images
 │   └── _redirects                    # Vercel redirects
 ├── 📁 src/                           # Source code
+│   ├── 📁 assets/                    # Static assets
+│   │   └── react.svg                 # React logo
 │   ├── 📁 components/                # React components
 │   │   ├── 📁 common/                # Reusable UI components
 │   │   │   ├── 📁 Badge/             # Badge component
@@ -77,11 +79,10 @@ accessible-react-workshop/
 │   │   │   ├── 📁 Select/            # Dropdown select component
 │   │   │   └── 📁 Toast/             # Notification toast component
 │   │   ├── 📁 features/              # Feature-specific components
+│   │   │   ├── 📁 AccessibilityBanner/ # Accessibility info banner
 │   │   │   ├── 📁 AccessibilityCarousel/ # Accessibility info carousel
 │   │   │   ├── 📁 AddToCart/         # Add to cart functionality
 │   │   │   ├── 📁 Cart/              # Shopping cart components
-│   │   │   ├── 📁 Checkout/          # Checkout flow components
-│   │   │   ├── 📁 AccessibilityBanner/ # Accessibility info banner
 │   │   │   ├── 📁 OrderConfirmation/ # Order confirmation flow
 │   │   │   ├── 📁 Product/           # Product display components
 │   │   │   ├── 📁 ProductList/       # Product listing with accessible grid
@@ -90,7 +91,14 @@ accessible-react-workshop/
 │   │   │   ├── 📁 Footer/            # Site footer
 │   │   │   ├── 📁 Header/            # Site header with navigation
 │   │   │   └── 📁 Layout/            # Main layout wrapper
+│   │   ├── 📁 refernces/             # Reference implementations
+│   │   │   ├── FocusTrapFixed.jsx    # Focus trap example
+│   │   │   ├── FocusTrapFixed0.jsx   # Focus trap variation 0
+│   │   │   ├── FocusTrapFixed1.jsx   # Focus trap variation 1
+│   │   │   ├── FocusTrapFixed2.jsx   # Focus trap variation 2
+│   │   │   └── FocusTrapFixed3.jsx   # Focus trap variation 3
 │   │   ├── Footer.jsx                # Legacy footer (deprecated)
+│   │   ├── Header.css                # Header styles
 │   │   ├── Header.jsx                # Legacy header (deprecated)
 │   │   └── Layout.jsx                # Legacy layout (deprecated)
 │   ├── 📁 context/                   # React Context providers
@@ -104,10 +112,6 @@ accessible-react-workshop/
 │   │   │   └── PopoverDialogExample.jsx
 │   │   └── index.js                  # Demo exports
 │   ├── 📁 lib/                       # Reusable libraries and utilities
-│   │   ├── 📁 Accordion/             # Accordion component library
-│   │   │   ├── Accordion.css
-│   │   │   ├── Accordion.jsx
-│   │   │   └── index.js
 │   │   ├── 📁 Collections/           # Collection management system
 │   │   │   ├── 📁 __deprecated__/    # Legacy collection system (deprecated)
 │   │   │   │   ├── Collection.jsx    # Legacy collection with grid support
@@ -132,20 +136,12 @@ accessible-react-workshop/
 │   │   │   │   ├── buildNodeAriaProps.js
 │   │   │   │   └── collectionNavigation.js
 │   │   │   └── index.js              # Collection exports
+│   │   ├── 📁 css/                   # Legacy CSS files
+│   │   │   └── SelectionExample.css  # Selection example styles (unused)
 │   │   ├── 📁 interactions/          # Interaction pattern libraries
-│   │   │   ├── 📁 expansion/         # Expansion patterns
-│   │   │   │   └── useExpandable.js  # Expandable item hook
 │   │   │   ├── 📁 keyboard/          # Keyboard navigation patterns
-│   │   │   │   ├── 📁 delegates/     # Navigation delegates
-│   │   │   │   │   ├── grid2DDelegate.js
-│   │   │   │   │   ├── horizontalDelegate.js
-│   │   │   │   │   ├── index.js
-│   │   │   │   │   └── linear1DDelegate.js
-│   │   │   │   ├── 📁 hooks/
-│   │   │   │   │   ├── useRovingTabIndex.js    # Roving tabindex pattern
-│   │   │   │   │   └── useKeyboardNavigation.js # Unified keyboard navigation
-│   │   │   │   └── 📁 utils/
-│   │   │   │       └── keyboardPrimitives.js
+│   │   │   │   └── 📁 hooks/
+│   │   │   │       └── useKeyboardNavigation.js # Unified keyboard navigation
 │   │   │   └── 📁 selection/         # Selection patterns
 │   │   │       └── useSelection.js   # Selection state management
 │   │   ├── 📁 Menu/                  # Menu component library
@@ -164,37 +160,40 @@ accessible-react-workshop/
 │   │   │   └── index.js              # Utility exports
 │   │   └── 📁 Overlay/               # Overlay management system
 │   │       ├── 📁 components/        # Overlay components
-│   │       │   ├── DialogOverlay.jsx
-│   │       │   ├── Popover.jsx
-│   │       │   ├── PopoverBackdrop.jsx
-│   │       │   ├── PopoverContent.jsx
-│   │       │   └── Tooltip.jsx
-│   │       ├── constants.js          # Overlay constants
+│   │       │   ├── Backdrop.jsx      # Backdrop component
+│   │       │   ├── BaseOverlay.jsx   # Base overlay component
+│   │       │   ├── DialogHeader.jsx  # Dialog header component
+│   │       │   ├── DialogOverlay.jsx # Modal dialog overlay
+│   │       │   └── PopupOverlay.jsx  # Non-modal popup overlay
 │   │       ├── 📁 helpers/           # Overlay helper functions
-│   │       │   ├── createFocusTrap.js
-│   │       │   ├── getFocusableElements.js
-│   │       │   ├── getScrollbarWidth.js
-│   │       │   ├── inertOthers.js
-│   │       │   └── platform.js
+│   │       │   ├── flattenProps.js   # Props flattening utility
+│   │       │   ├── focusUtils.js     # Focus management utilities
+│   │       │   ├── keyHandlers.js    # Keyboard event handlers
+│   │       │   ├── keyUtils.js       # Key detection utilities
+│   │       │   └── positionHelpers.js # Positioning calculations
 │   │       ├── 📁 hooks/             # Overlay hooks
-│   │       │   ├── useClickOutside.js
-│   │       │   ├── 📁 useFocusManagement/
-│   │       │   │   ├── index.js
-│   │       │   │   ├── useAutoFocus.js
-│   │       │   │   ├── useRestoreFocus.js
-│   │       │   │   └── useStoreFocus.js
-│   │       │   ├── useInert.js
-│   │       │   ├── useKeyboardHandlers.js
-│   │       │   ├── useOverlay.js
-│   │       │   ├── usePosition.js
-│   │       │   └── useScrollLock.js
-│   │       ├── index.js
-│   │       └── Overlay.css
+│   │       │   ├── useBaseOverlay.js # Base overlay hook
+│   │       │   ├── useClickOutside.js # Click outside detection
+│   │       │   ├── useDialog.js      # Dialog overlay hook
+│   │       │   ├── useEscapeKey.js   # Escape key handler
+│   │       │   ├── useFocusTrap.js   # Focus trap implementation
+│   │       │   ├── useInert.js       # Inert background elements
+│   │       │   ├── usePopup.js       # Popup overlay hook
+│   │       │   ├── usePosition.js    # Position calculation hook
+│   │       │   ├── useScrollLock.js  # Scroll lock for modals
+│   │       │   └── 📁 useFocusManagement/
+│   │       │       ├── index.js
+│   │       │       ├── useAutoFocus.js # Auto-focus on open
+│   │       │       └── useRestoreFocus.js # Restore focus on close
+│   │       ├── constants.js          # Overlay constants
+│   │       ├── index.js              # Overlay exports
+│   │       └── Overlay.css           # Overlay styles
 │   ├── 📁 pages/                     # Main application pages
+│   │   ├── 📁 BestPracticesPage/     # Best practices page
 │   │   ├── 📁 DemoPage/              # Demo showcase page
 │   │   ├── 📁 ECommercePage/         # E-commerce workshop page
-│   │   ├── 📁 ExercisesPage/         # Exercise instructions page
-│   │   └── 📁 LandingPage/           # Home page
+│   │   ├── 📁 LandingPage/           # Home page
+│   │   └── 📁 ReferencesPage/        # References page
 │   ├── 📁 playground/                # Interactive playground components
 │   │   ├── 📁 ECommIssues/           # E-commerce accessibility issues
 │   │   │   ├── ECommIssues.jsx       # Main issues demonstration
@@ -247,12 +246,6 @@ accessible-react-workshop/
 │   │   │   ├── solved.jsx            # Complete solution
 │   │   │   └── index.js              # Export
 │   │   └── index.js                  # Playground exports
-│   ├── 📁 refernces/                 # Reference implementations
-│   │   ├── FocusTrapFixed.jsx        # Focus trap examples
-│   │   ├── FocusTrapFixed0.jsx
-│   │   ├── FocusTrapFixed1.jsx
-│   │   ├── FocusTrapFixed2.jsx
-│   │   └── FocusTrapFixed3.jsx
 │   ├── 📁 styles/                    # Global styles and CSS
 │   │   ├── accessibility.css         # Accessibility-specific styles
 │   │   ├── index.css                 # Main stylesheet
