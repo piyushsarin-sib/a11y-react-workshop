@@ -76,7 +76,7 @@ const RadioGroup = ({
     >
       <legend className="text-sm font-medium text-gray-700 mb-2">
         {legend}
-        {required && <span aria-hidden="true" className="text-red-500 ml-1">*</span>}
+        {required && <span aria-hidden="true" className="text-red-600 ml-1">*</span>}
       </legend>
       <div>
         {options.map((option) => (
@@ -92,7 +92,7 @@ const RadioGroup = ({
         ))}
       </div>
       {hasError && (
-        <p id={errorId} className="mt-1 text-sm text-red-500" role="alert">
+        <p id={errorId} className="mt-1 text-sm text-red-600" role="alert">
           {error}
         </p>
       )}

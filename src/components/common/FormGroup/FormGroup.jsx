@@ -50,7 +50,7 @@ const FormGroup = ({
           className={`block text-sm font-medium text-gray-700 mb-1 ${labelClassName}`}
         >
           {label}
-          {required && <span aria-hidden="true" className="text-red-500 ml-1">*</span>}
+          {required && <span aria-hidden="true" className="text-red-600 ml-1">*</span>}
         </label>
       )}
       

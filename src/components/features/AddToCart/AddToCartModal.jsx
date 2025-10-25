@@ -121,7 +121,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
           <Button
             onClick={handleGoToCart}
             variant="ghost"
-            className={`text-lg ${isGoToCartDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-blue-600 hover:text-blue-800 underline'}`}
+            className={`text-lg ${isGoToCartDisabled ? 'text-gray-600 cursor-not-allowed' : 'text-blue-600 hover:text-blue-800 underline'}`}
             disabled={isGoToCartDisabled}
             ariaLabel="Go to Cart"
           >

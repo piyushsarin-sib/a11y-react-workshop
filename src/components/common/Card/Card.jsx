@@ -8,7 +8,7 @@ const Card = ({
   ...props
 }) => {
   const baseStyles = 'bg-white rounded-lg overflow-hidden';
-  const elevationStyles = elevated ? 'shadow-md hover:shadow-lg transition-shadow' : 'border border-gray-200';
+  const elevationStyles = elevated ? 'shadow-md hover:shadow-lg transition-shadow' : 'border border-gray-300';
   
   return (
     <div 

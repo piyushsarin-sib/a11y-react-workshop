@@ -53,7 +53,7 @@ const Rating = ({
           <Button
             key={star}
             onClick={() => handleRatingChange(star)}
-            className={`p-0 ${sizeClasses[size]} ${value >= star ? 'text-yellow-400' : 'text-gray-300'} ${disabled ? 'cursor-not-allowed opacity-70' : 'hover:text-yellow-500'}`}
+            className={`p-0 ${sizeClasses[size]} ${value >= star ? 'text-yellow-400' : 'text-gray-600'} ${disabled ? 'cursor-not-allowed opacity-70' : 'hover:text-yellow-500'}`}
             ariaLabel={`${star} star${star !== 1 ? 's' : ''}, ${getRatingText(star)}`}
             aria-pressed={value === star}
             disabled={disabled}

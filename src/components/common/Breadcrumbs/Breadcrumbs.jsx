@@ -21,7 +21,7 @@ const Breadcrumbs = ({
           return (
             <li key={index} className="flex items-center">
               {index > 0 && (
-                <span className="mx-2 text-gray-400" aria-hidden="true">
+                <span className="mx-2 text-gray-600" aria-hidden="true">
                   {separator}
                 </span>
               )}

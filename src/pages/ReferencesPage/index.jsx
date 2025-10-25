@@ -257,7 +257,7 @@ const ReferencesPage = () => {
               <h3 id="wcag-checklist" className="text-xl font-semibold mb-4">WCAG 2.1 AA Checklist</h3>
               <ul className="space-y-2 text-sm" aria-labelledby="wcag-checklist">
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2" aria-hidden="true">✓</span>
+                  <span className="text-green-600 mr-2" aria-hidden="true">✓</span>
                   <span>Images have appropriate alt text</span>
                 </li>
                 {/* More checklist items... */}

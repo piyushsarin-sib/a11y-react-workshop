@@ -141,7 +141,7 @@ const CartModalWithForm = () => {
                 </div>
                 <Button
                   onClick={() => handleRemoveItem(item.id)}
-                  className="ml-4 text-red-500 p-1"
+                  className="ml-4 text-red-600 p-1"
                   ariaLabel={`Remove ${item.name} from cart`}
                   variant="ghost"
                   size="small"

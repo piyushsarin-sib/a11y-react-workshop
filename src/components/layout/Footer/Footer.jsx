@@ -2,11 +2,14 @@ import React from 'react';
 import Link from '../../common/Link';
 
 const Footer = () => (
-  <footer className="bg-gray-800 text-white mt-12">
+  <footer 
+    className="bg-gray-800 text-white mt-12"
+  >
     <div className="container mx-auto px-4 py-6">
       <a 
         href="#top" 
-        className="block text-center mb-4 underline focus:outline-none focus:ring-2 focus:ring-white"
+        className="block text-center mb-4 underline hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-white rounded px-2 py-1"
+        style={{ color: "#ffffff" }}
         aria-label="Skip to top of page"
       >
         Back to top
@@ -17,6 +20,7 @@ const Footer = () => (
             <Link 
               to="/" 
               className="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
+              style={{ color: "#ffffff" }}
               aria-label="Home, Link Go to homepage"
             >
               Home
@@ -26,6 +30,7 @@ const Footer = () => (
             <Link 
               to="/best-practices" 
               className="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
+              style={{ color: "#ffffff" }}
               aria-label="View accessibility best practices"
             >
               Best Practices
@@ -35,6 +40,7 @@ const Footer = () => (
             <Link 
               to="/references" 
               className="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
+              style={{ color: "#ffffff" }}
               aria-label="View reference materials"
             >
               Reference
@@ -42,7 +48,9 @@ const Footer = () => (
           </li>
         </ul>
       </nav>
-      <p className="text-center mt-4 text-sm">&copy; 2025 Brevo. All rights reserved.</p>
+      <p className="text-center mt-4 text-sm" style={{ color: "#ffffff" }}>
+        &copy; 2025 Brevo. All rights reserved.
+      </p>
     </div>
   </footer>
 );

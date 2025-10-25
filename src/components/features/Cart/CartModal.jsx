@@ -66,7 +66,7 @@ const CartModal = () => {
                 </div>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="ml-4 text-red-500 p-1 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded hover:bg-red-50 transition-colors"
+                  className="ml-4 text-red-600 p-1 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded hover:bg-red-50 transition-colors"
                   aria-label={`Remove ${item.name} from cart`}
                 >
                   <svg
