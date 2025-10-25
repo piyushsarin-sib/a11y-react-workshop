@@ -10,9 +10,10 @@
  * @param {number} options.level - Nesting level
  * @param {boolean} options.isSection - Whether node is a section
  * @param {boolean} options.hasChildren - Whether node has child items
- * @returns {Object} ARIA attributes for the node (role, aria-level, aria-expanded)
+ * @param {boolean} options.isFirstFocusable - Whether this is the first focusable item
+ * @returns {Object} ARIA attributes for the node (role, aria-level, aria-expanded, tabIndex)
  */
-export function buildNodeAriaProps({ pattern, itemRole, level, isSection, hasChildren }) {
+export function buildNodeAriaProps({ pattern, itemRole, level, isSection, hasChildren, isFirstFocusable }) {
   const ariaProps = {};
 
   if (!isSection && itemRole) {
@@ -25,6 +26,11 @@ export function buildNodeAriaProps({ pattern, itemRole, level, isSection, hasChi
       // Add aria-expanded for items with children (always true since they're visible)
       if (hasChildren) {
         ariaProps['aria-expanded'] = true;
+      }
+
+      // First focusable item gets tabIndex 0 (for roving tabindex pattern)
+      if (isFirstFocusable) {
+        ariaProps.tabIndex = 0;
       }
     }
   }

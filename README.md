@@ -99,65 +99,39 @@ accessible-react-workshop/
 │   │   ├── CartContextCore.js        # Core cart logic
 │   │   └── CartContextCore.jsx       # Core cart context
 │   ├── 📁 demos/                     # Interactive demonstrations
-│   │   ├── 📁 Expansion/             # Accordion and tree examples
-│   │   │   ├── AccordionExample.jsx
-│   │   │   ├── CollapsibleTreeExample.jsx
-│   │   │   ├── DynamicTreeControlledExample.jsx
-│   │   │   ├── DynamicTreeExample.jsx
-│   │   │   ├── StaticTreeControlledExample.jsx
-│   │   │   └── StaticTreeExample.jsx
-│   │   ├── 📁 HorizontalLists/       # Horizontal navigation examples
-│   │   │   ├── ButtonGroupExample.jsx
-│   │   │   ├── CardGridExample.jsx
-│   │   │   ├── HorizontalListExample.css
-│   │   │   ├── HorizontalListExample.jsx
-│   │   │   ├── NavigationMenuExample.jsx
-│   │   │   └── TagListExample.jsx
-│   │   ├── 📁 KeyboardNavigation/    # Keyboard navigation examples
-│   │   │   ├── Grid2DNavigationExample.jsx
-│   │   │   ├── HorizontalNavigationExample.jsx
-│   │   │   ├── RovingIndexExample.jsx
-│   │   │   └── VerticalNavigationExample.jsx
 │   │   ├── 📁 Overlay/               # Dialog and overlay examples
-│   │   │   ├── MenuWithOverlay.jsx
 │   │   │   ├── DialogExample.jsx
-│   │   │   └── SimpleTooltip.jsx
-│   │   ├── 📁 Selection/             # Selection pattern examples
-│   │   │   ├── EmptyMenuExample.jsx
-│   │   │   ├── MultiSelectionExample.jsx
-│   │   │   ├── SectionedMenuExample.jsx
-│   │   │   ├── SelectionExample.css
-│   │   │   ├── SimpleMenuExample.jsx
-│   │   │   └── SingleSelectionExample.jsx
-│   │   ├── 📁 VerticalLists/         # Vertical list examples
-│   │   │   ├── BasicListExample.jsx
-│   │   │   ├── ListExample.css
-│   │   │   ├── ListExample.jsx
-│   │   │   ├── NestedCollectionWithTitlesExample.jsx
-│   │   │   └── StyledListExample.jsx
+│   │   │   └── PopoverDialogExample.jsx
 │   │   └── index.js                  # Demo exports
 │   ├── 📁 lib/                       # Reusable libraries and utilities
 │   │   ├── 📁 Accordion/             # Accordion component library
 │   │   │   ├── Accordion.css
 │   │   │   ├── Accordion.jsx
 │   │   │   └── index.js
-│   │   ├── 📁 Collections/           # Collection management utilities
-│   │   │   ├── Collection.css
-│   │   │   ├── Collection.jsx        # Enhanced collection component with grid support
-│   │   │   ├── 📁 components/        # Collection sub-components
-│   │   │   │   └── Item.jsx          # Collection item wrapper
+│   │   ├── 📁 Collections/           # Collection management system
+│   │   │   ├── 📁 __deprecated__/    # Legacy collection system (deprecated)
+│   │   │   │   ├── Collection.jsx    # Legacy collection with grid support
+│   │   │   │   ├── CollectionContext.js  # Legacy collection context
+│   │   │   │   ├── CollectionLegacy.css  # Legacy collection styles
+│   │   │   │   ├── createCollectionAria.js  # Legacy ARIA factory function
+│   │   │   │   ├── Item.jsx          # Legacy item component (renders elements)
+│   │   │   │   ├── Section.jsx       # Legacy section component
+│   │   │   │   ├── Nested.jsx        # Legacy nested collections
+│   │   │   │   └── Title.jsx         # Legacy title component
+│   │   │   ├── 📁 components/        # Modern collection components
+│   │   │   │   ├── Item.jsx          # Modern item (metadata only)
+│   │   │   │   ├── Section.jsx       # Modern section (metadata only)
+│   │   │   │   └── ItemRenderer.jsx  # Component for rendering items/sections
 │   │   │   ├── 📁 constants/         # ARIA configuration constants
-│   │   │   │   └── aria-config.js    # Grid and list ARIA patterns
+│   │   │   │   └── aria-config.js    # Grid, menu, tree ARIA patterns
 │   │   │   ├── 📁 hooks/
-│   │   │   │   └── useCollectionAria.js
+│   │   │   │   └── useCollectionState.js  # Collection state management
 │   │   │   ├── 📁 utils/             # Collection utility functions
-│   │   │   │   ├── createCollectionAria.js
-│   │   │   │   ├── createItemAria.js
-│   │   │   │   ├── expandableItemUtils.js
-│   │   │   │   ├── getItemKey.js
-│   │   │   │   └── primitives.js
-│   │   │   ├── CollectionContext.js  # Collection context
-│   │   │   └── index.js
+│   │   │   │   ├── buildCollection.js
+│   │   │   │   ├── buildCollectionAriaProps.js
+│   │   │   │   ├── buildNodeAriaProps.js
+│   │   │   │   └── collectionNavigation.js
+│   │   │   └── index.js              # Collection exports
 │   │   ├── 📁 interactions/          # Interaction pattern libraries
 │   │   │   ├── 📁 expansion/         # Expansion patterns
 │   │   │   │   └── useExpandable.js  # Expandable item hook
@@ -168,26 +142,26 @@ accessible-react-workshop/
 │   │   │   │   │   ├── index.js
 │   │   │   │   │   └── linear1DDelegate.js
 │   │   │   │   ├── 📁 hooks/
-│   │   │   │   │   ├── useRovingIndex.js    # Roving tabindex pattern
-│   │   │   │   │   └── useArrowNavigation.js # Arrow key navigation
+│   │   │   │   │   ├── useRovingTabIndex.js    # Roving tabindex pattern
+│   │   │   │   │   └── useKeyboardNavigation.js # Unified keyboard navigation
 │   │   │   │   └── 📁 utils/
 │   │   │   │       └── keyboardPrimitives.js
 │   │   │   └── 📁 selection/         # Selection patterns
-│   │   │       └── useSelectionManager.js
+│   │   │       └── useSelection.js   # Selection state management
 │   │   ├── 📁 Menu/                  # Menu component library
-│   │   │   ├── 📁 hooks/
-│   │   │   │   └── useMenu.js
-│   │   │   ├── index.js
-│   │   │   ├── Menu.jsx
-│   │   │   ├── MenuContext.js
-│   │   │   ├── MenuList.jsx
-│   │   │   ├── MenuOption.jsx
-│   │   │   ├── MenuSection.jsx
-│   │   │   └── MenuTitle.jsx
+│   │   │   ├── index.js              # Menu exports
+│   │   │   ├── MenuList.jsx          # Standalone menu list
+│   │   │   ├── MenuList.css          # Menu styles
+│   │   │   ├── MenuOption.jsx        # Menu item component
+│   │   │   └── MenuSection.jsx       # Menu section component
 │   │   ├── 📁 Tree/                  # Tree component library
 │   │   │   ├── index.js
 │   │   │   ├── Tree.css
 │   │   │   └── Tree.jsx
+│   │   ├── 📁 utils/                 # Shared utility functions
+│   │   │   ├── chain.js              # Function chaining utility
+│   │   │   ├── mergeProps.js         # Props merging utility
+│   │   │   └── index.js              # Utility exports
 │   │   └── 📁 Overlay/               # Overlay management system
 │   │       ├── 📁 components/        # Overlay components
 │   │       │   ├── DialogOverlay.jsx

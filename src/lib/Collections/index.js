@@ -1,5 +1,5 @@
 // Main Collection Component (legacy - uses createCollectionAria internally)
-export { default as Collection } from './Collection';
+export { default as Collection } from './__deprecated__/Collection';
 
 // Modern Components
 export { ItemRenderer } from './components/ItemRenderer';
@@ -14,4 +14,4 @@ export { buildCollectionAriaProps } from './utils/buildCollectionAriaProps';
 export { buildNodeAriaProps } from './utils/buildNodeAriaProps';
 
 // Legacy utility (used by legacy Collection.jsx - kept for backward compatibility)
-export { createCollectionAria } from './components/legacy/createCollectionAria';
+export { createCollectionAria } from './__deprecated__/createCollectionAria';

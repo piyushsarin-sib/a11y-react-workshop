@@ -13,7 +13,7 @@
  * - role="treeitem" for tree patterns
  */
 import React from "react";
-import { useCollectionContext } from "../../CollectionContext.js";
+import { useCollectionContext } from "./CollectionContext.js";
 
 const Item = React.forwardRef(({
   children,

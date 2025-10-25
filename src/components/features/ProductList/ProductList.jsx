@@ -1,7 +1,7 @@
 import { useId } from "react";
 import PropTypes from "prop-types";
 import Button from "@common/Button";
-import Collection from "@lib/Collections/Collection";
+import Collection from "@lib/Collections/__deprecated__/Collection";
 
 const ProductList = ({ products, onAddToCart }) => {
   const baseId = useId();

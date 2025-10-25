@@ -25,7 +25,7 @@ const Checkpoints = () => {
         <ul style={{ margin: "4px 0" }}>
           <li><strong>Trigger Button:</strong> aria-haspopup="menu", aria-expanded, aria-controls</li>
           <li><strong>Menu Container:</strong> role="menu", id (linked to trigger), tabindex="0"</li>
-          <li><strong>Menu Items:</strong> role="menuitem", aria-selected for selection state</li>
+          <li><strong>Menu Items:</strong> role="menuitemcheckbox", aria-checked for selection state</li>
           <li><strong>Popup Wrapper:</strong> Presentational container for overlay positioning</li>
           <li><strong>Keyboard Navigation:</strong> Arrow keys (↑↓) for navigation</li>
           <li><strong>Close Menu:</strong> ESC, Tab, Shift+Tab, or click outside</li>

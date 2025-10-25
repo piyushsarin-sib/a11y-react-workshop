@@ -11,7 +11,17 @@ export const COLLECTION_PATTERNS = {
   menu: {
     role: "menu",
     itemRole: "menuitem",
-    selectionAttribute: "aria-selected",
+    selectionAttribute: null,
+  },
+  menucheckbox: {
+    role: "menu",
+    itemRole: "menuitemcheckbox",
+    selectionAttribute: "aria-checked",
+  },
+  menuradio: {
+    role: "menu",
+    itemRole: "menuitemradio",
+    selectionAttribute: "aria-checked",
   },
   tabs: {
     role: "tablist",

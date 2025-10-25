@@ -25,7 +25,7 @@ const MenuList = React.forwardRef(
   (
     {
       children,
-      pattern = "menu",
+      pattern = "menucheckbox",
       orientation = "vertical",
       ariaLabel,
       ariaLabelledBy,
@@ -69,23 +69,22 @@ const MenuList = React.forwardRef(
       selectionMode,
       selectedKeys,
       onChange,
-      pattern: "menu",
+      pattern,
       label: ariaLabel,
     });
 
     // Merge all props using mergeProps utility
     const wrapperProps = mergeProps(
-      { className: "menu-list" },
       state.getCollectionProps(),
       nav.getCollectionProps(),
-      { ref, ...props }
+      { ref, ...props },
     );
 
     // Render menu from hierarchical collection using ItemRenderer component
 
     return (
       <WrapperElement {...wrapperProps}>
-        {state.collection.map(node => (
+        {state.collection.map((node) => (
           <ItemRenderer
             key={node.key}
             node={node}

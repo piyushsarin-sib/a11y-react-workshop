@@ -5,7 +5,7 @@ import {
   ROLES_WITH_MULTISELECTABLE,
   COLLECTION_ITEM_ROLES,
   SEMANTIC_ELEMENT_ROLES,
-} from "../../constants/aria-config.js";
+} from "../constants/aria-config.js";
 
 /**
  * Factory function for generating ARIA attributes for collection components

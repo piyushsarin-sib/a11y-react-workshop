@@ -9,12 +9,12 @@
  */
 import React from "react";
 import "./CollectionLegacy.css";
-import { createCollectionAria } from "./components/legacy/createCollectionAria";
+import { createCollectionAria } from "./createCollectionAria";
 import CollectionContext, { useCollectionContext } from "./CollectionContext.js";
-import Item from "./components/legacy/Item.jsx";
-import Title from "./components/legacy/Title.jsx";
-import NestedCollection from "./components/legacy/Nested.jsx";
-import Section from "./components/legacy/Section.jsx";
+import Item from "./Item.jsx";
+import Title from "./Title.jsx";
+import NestedCollection from "./Nested.jsx";
+import Section from "./Section.jsx";
 
 /**
  * Simplified Collection component

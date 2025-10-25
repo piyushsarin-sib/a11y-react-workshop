@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { mergeRefs as mergeRefsUtil } from "@lib/utils";
 
 /**
  * Simplified keyboard navigation hook that uses collection navigation methods
@@ -113,25 +114,23 @@ export const useKeyboardNavigation = ({
     if (disabled) return {};
 
     return {
-      tabIndex: activeKey ? -1 : 0,
       onKeyDown: handleKeyDown,
     };
-  }, [disabled, handleKeyDown, activeKey]);
+  }, [disabled, handleKeyDown]);
 
-  // Helper to merge refs
-  const mergeRefs = (key, userRef) => (element) => {
-    if (element) {
-      itemRefs.current.set(key, element);
-    } else {
-      itemRefs.current.delete(key);
-    }
-    if (userRef) {
-      if (typeof userRef === 'function') {
-        userRef(element);
+  // Helper to merge refs and manage itemRefs Map
+  const mergeRefs = (key, userRef) => {
+    // Ref callback to manage itemRefs Map
+    const trackRef = (element) => {
+      if (element) {
+        itemRefs.current.set(key, element);
       } else {
-        userRef.current = element;
+        itemRefs.current.delete(key);
       }
-    }
+    };
+
+    // Use utility mergeRefs to combine tracking ref with user ref
+    return mergeRefsUtil(trackRef, userRef);
   };
 
   // Get props for individual items
@@ -139,10 +138,15 @@ export const useKeyboardNavigation = ({
     if (disabled) return {};
 
     const isActive = key === activeKey;
-    const { focusable = true, ref, onFocus } = options;
+    const { focusable = true, ref, onFocus, ariaProps } = options;
+
+    // Respect initial tabIndex from ariaProps when there's no activeKey
+    // This allows tree pattern to set tabIndex: 0 on first item without triggering focus
+    const initialTabIndex = ariaProps?.tabIndex;
+    const shouldUseInitialTabIndex = !activeKey && typeof initialTabIndex === 'number';
 
     return {
-      tabIndex: isActive && focusable ? 0 : -1,
+      tabIndex: isActive && focusable ? 0 : (shouldUseInitialTabIndex ? initialTabIndex : -1),
       "data-active": isActive,
       ref: mergeRefs(key, ref),
       onFocus: (event) => {

@@ -5,8 +5,8 @@
  * Renders proper ARIA structure with role="group" and aria-labelledby.
  */
 import React from "react";
-import { useCollectionContext } from "../../CollectionContext.js";
-import CollectionContext from "../../CollectionContext.js";
+import { useCollectionContext } from "./CollectionContext.js";
+import CollectionContext from "./CollectionContext.js";
 
 const Section = React.forwardRef(({
   title,

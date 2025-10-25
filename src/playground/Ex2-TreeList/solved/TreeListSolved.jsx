@@ -11,72 +11,57 @@ const TreeList = () => {
   };
 
   return (
-    <div>
-      <h3>Tree Component Example with Selection</h3>
+    <Tree
+      ariaLabel="File explorer"
+      selectionMode="single"
+      selectedKeys={selectedKeys}
+      onChange={handleSelectionChange}
+    >
+      <Section key="categories" title="📦 Categories" className="highlighted-section">
+        <Item key="hearing">
+          <div>Hearing Assistance</div>
+        </Item>
+        <Item key="vision">
+          <div>Visual Assistance</div>
+        </Item>
+        <Item key="mobility">
+          <div>Mobility Aids</div>
+        </Item>
+        <Item key="sensory">
+          <div>Sensory Tools</div>
+        </Item>
+      </Section>
 
-      <div
-        style={{
-          marginBottom: "16px",
-          padding: "12px",
-          backgroundColor: "#e8f4f8",
-          borderRadius: "4px",
-        }}
-      >
-        <strong>Selected:</strong> {selectedKeys.length > 0 ? selectedKeys.join(", ") : "None"}
-      </div>
+      <Section key="prices" title="💰 Price Ranges">
+        <Item key="under1000">
+          <div>Under ₹1,000</div>
+        </Item>
+        <Item key="1000-5000">
+          <div>₹1,000 - ₹5,000</div>
+        </Item>
+        <Item key="above5000">
+          <div>Above ₹5,000</div>
+        </Item>
+      </Section>
 
-      <Tree
-        ariaLabel="File explorer"
-        selectionMode="single"
-        selectedKeys={selectedKeys}
-        onChange={handleSelectionChange}
-      >
-        <Section key="categories" title="📦 Categories" className="highlighted-section">
-          <Item key="hearing">
-            <div>Hearing Assistance</div>
-          </Item>
-          <Item key="vision">
-            <div>Visual Assistance</div>
-          </Item>
-          <Item key="mobility">
-            <div>Mobility Aids</div>
-          </Item>
-          <Item key="sensory">
-            <div>Sensory Tools</div>
-          </Item>
-        </Section>
-
-        <Section key="prices" title="💰 Price Ranges">
-          <Item key="under1000">
-            <div>Under ₹1,000</div>
-          </Item>
-          <Item key="1000-5000">
-            <div>₹1,000 - ₹5,000</div>
-          </Item>
-          <Item key="above5000">
-            <div>Above ₹5,000</div>
-          </Item>
-        </Section>
-
-        <Section key="availability" title="📦 Availability">
-          <Item key="india">
-            <div>India</div>
-            <Item key="maharashtra">
-              <div>Maharashtra</div>
-              <Item key="mumbai" style={{ color: "red", fontWeight: "bold" }}>
-                <div>Mumbai</div>
-              </Item>
-              <Item key="pune" className="featured-location">
-                <div>Pune</div>
-              </Item>
+      <Section key="availability" title="📦 Availability">
+        <Item key="india">
+          <div>India</div>
+          <Item key="maharashtra">
+            <div>Maharashtra</div>
+            <Item key="mumbai" style={{ color: "red", fontWeight: "bold" }}>
+              <div>Mumbai</div>
             </Item>
-            <Item key="karnataka">
-              <div>Karnataka</div>
+            <Item key="pune" className="featured-location">
+              <div>Pune</div>
             </Item>
           </Item>
-        </Section>
-      </Tree>
-    </div>
+          <Item key="karnataka">
+            <div>Karnataka</div>
+          </Item>
+        </Item>
+      </Section>
+    </Tree>
   );
 };
 
