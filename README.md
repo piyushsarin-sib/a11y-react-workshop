@@ -113,7 +113,7 @@ accessible-react-workshop/
 │   │   └── index.js                  # Demo exports
 │   ├── 📁 lib/                       # Reusable libraries and utilities
 │   │   ├── 📁 Collections/           # Collection management system
-│   │   │   ├── 📁 __deprecated__/    # Legacy collection system (deprecated)
+│   │   │   ├── 📁 classic/    # Legacy collection system (deprecated)
 │   │   │   │   ├── Collection.jsx    # Legacy collection with grid support
 │   │   │   │   ├── CollectionContext.js  # Legacy collection context
 │   │   │   │   ├── CollectionLegacy.css  # Legacy collection styles
