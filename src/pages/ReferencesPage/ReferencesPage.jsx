@@ -67,6 +67,22 @@ const ReferencesPage = () => {
             </article>
 
             <article className="reference-card">
+              <h3 className="text-xl font-semibold mb-3">MDN Semantic HTML</h3>
+              <p className="text-gray-700 mb-4">
+                Complete reference guide to HTML elements and their proper semantic usage.
+              </p>
+              <a 
+                href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="View MDN HTML Elements Reference (opens in new tab)"
+              >
+                View HTML Elements Reference →
+              </a>
+            </article>
+
+            <article className="reference-card">
               <h3 className="text-xl font-semibold mb-3">Web Accessibility Initiative (WAI)</h3>
               <p className="text-gray-700 mb-4">
                 W3C's initiative for web accessibility standards and resources.
@@ -165,6 +181,70 @@ const ReferencesPage = () => {
           <h2 id="tools-heading" className="text-3xl font-bold text-gray-900 mb-6">Testing Tools</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <article className="tool-card">
+              <h3 className="text-lg font-semibold mb-3">eslint-plugin-jsx-a11y</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Linting accessibility issues.
+              </p>
+              <a 
+                href="https://www.npmjs.com/package/eslint-plugin-jsx-a11y" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="View eslint-plugin-jsx-a11y on npm (opens in new tab)"
+              >
+                View on npm →
+              </a>
+            </article>
+
+            <article className="tool-card">
+              <h3 className="text-lg font-semibold mb-3">@axe-core/react</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Runtime accessibility testing.
+              </p>
+              <a 
+                href="https://www.npmjs.com/package/@axe-core/react" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="View @axe-core/react on npm (opens in new tab)"
+              >
+                View on npm →
+              </a>
+            </article>
+
+            <article className="tool-card">
+              <h3 className="text-lg font-semibold mb-3">no-mouse-days</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Practice navigating apps without a mouse.
+              </p>
+              <a 
+                href="https://nomousedays.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="Visit no-mouse-days website (opens in new tab)"
+              >
+                Visit Website →
+              </a>
+            </article>
+
+            <article className="tool-card">
+              <h3 className="text-lg font-semibold mb-3">cypress-axe</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Automated tests in Cypress.
+              </p>
+              <a 
+                href="https://www.npmjs.com/package/cypress-axe" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="View cypress-axe on npm (opens in new tab)"
+              >
+                View on npm →
+              </a>
+            </article>
+
+            <article className="tool-card">
               <h3 className="text-lg font-semibold mb-3">Axe DevTools</h3>
               <p className="text-gray-700 mb-4 text-sm">
                 Browser extension for automated accessibility testing.
@@ -180,7 +260,21 @@ const ReferencesPage = () => {
               </a>
             </article>
 
-            {/* More tool cards with same pattern... */}
+            <article className="tool-card">
+              <h3 className="text-lg font-semibold mb-3">WAVE</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Web Accessibility Evaluation Tool.
+              </p>
+              <a 
+                href="https://wave.webaim.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="Visit WAVE website (opens in new tab)"
+              >
+                Visit WAVE →
+              </a>
+            </article>
           </div>
         </section>
 
@@ -202,7 +296,45 @@ const ReferencesPage = () => {
                     React Accessibility Documentation
                   </a>
                 </li>
-                {/* More list items... */}
+                <li>
+                  <a 
+                    href="https://alphagov.github.io/accessibility-personas/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                    aria-label="GOV.UK Accessibility Personas (opens in new tab)"
+                  >
+                    GOV.UK Accessibility Personas
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="resource-category">
+              <h3 id="color-contrast" className="text-xl font-semibold mb-4">Color & Contrast</h3>
+              <ul className="space-y-3" aria-labelledby="color-contrast">
+                <li>
+                  <a 
+                    href="https://web-accessibility-v3.vercel.app/topics/visual-considerations/color-contrast" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                    aria-label="Color Contrast Guide (opens in new tab)"
+                  >
+                    Color Contrast Guide
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.tpgi.com/when-i-get-that-low-contrast-feeling-i-need-non-textual-healing/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                    aria-label="TPGI: Non-Textual Contrast Solutions (opens in new tab)"
+                  >
+                    TPGI: Non-Textual Contrast Solutions
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -220,7 +352,17 @@ const ReferencesPage = () => {
                     NVDA (Free Windows Screen Reader)
                   </a>
                 </li>
-                {/* More list items... */}
+                <li>
+                  <a 
+                    href="https://axesslab.com/what-is-a-screen-reader/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                    aria-label="What is a Screen Reader? by Axess Lab (opens in new tab)"
+                  >
+                    What is a Screen Reader? (Axess Lab)
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -245,7 +387,70 @@ const ReferencesPage = () => {
                 Visit WebAIM →
               </a>
             </article>
-            {/* More learning cards... */}
+
+            <article className="learning-card">
+              <h3 className="text-lg font-semibold mb-3">Frontend Masters: React Accessibility</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Comprehensive course on building accessible React applications.
+              </p>
+              <a 
+                href="https://frontendmasters.com/courses/react-accessibility/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="View React Accessibility Course (opens in new tab)"
+              >
+                View Course →
+              </a>
+            </article>
+
+            <article className="learning-card">
+              <h3 className="text-lg font-semibold mb-3">Frontend Masters: Enterprise Accessibility</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Accessibility in real-world enterprise applications.
+              </p>
+              <a 
+                href="https://frontendmasters.com/courses/enterprise-accessibility/accessibility-in-the-wild/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="View Enterprise Accessibility Course (opens in new tab)"
+              >
+                View Course →
+              </a>
+            </article>
+
+            <article className="learning-card">
+              <h3 className="text-lg font-semibold mb-3">How Browsers Work</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                Deep dive into browser rendering and accessibility tree.
+              </p>
+              <a 
+                href="https://web.dev/articles/howbrowserswork#introduction" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="Read How Browsers Work article (opens in new tab)"
+              >
+                Read Article →
+              </a>
+            </article>
+
+            <article className="learning-card">
+              <h3 className="text-lg font-semibold mb-3">Alt Text Decision Tree</h3>
+              <p className="text-gray-700 mb-4 text-sm">
+                W3C's interactive guide for writing appropriate alt text.
+              </p>
+              <a 
+                href="https://www.w3.org/WAI/tutorials/images/decision-tree/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1 py-0.5"
+                aria-label="View Alt Text Decision Tree (opens in new tab)"
+              >
+                View Decision Tree →
+              </a>
+            </article>
           </div>
         </section>
 
