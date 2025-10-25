@@ -42,7 +42,6 @@ const MenuWithOverlay = () => {
   return (
     <div style={{ padding: "50px" }}>
       <Checkpoints />
-      <h3 style={{ marginBottom: "20px" }}>Menu with Popup</h3>
 
       <Button
         variant="secondary"
