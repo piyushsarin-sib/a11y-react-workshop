@@ -32,7 +32,7 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
         {/* ✅ Fixed 1: using semantic heading <h2> */}
         <h2 id={titleId} className="text-lg font-semibold line-clamp-1">{title}</h2>
 
-       {/* ✅ Fixed 1: using <p> for description */}
+        {/* ✅ Fixed 1: using <p> for description */}
         <p id={descriptionId} className="mb-2 text-sm line-clamp-2 h-12 overflow-hidden">
           {description}
         </p>
@@ -82,18 +82,21 @@ const CardWrapper = () => {
   ];
 
   return (
-    <ul className="flex flex-wrap justify-center items-start gap-8 py-10">
-      {products.map((product) => (
-        <Card
-          key={product.id}
-          id={product.id}
-          title={product.title}
-          description={product.description}
-          price={product.price}
-          imageSrc={product.imageSrc}
-        />
-      ))}
-    </ul>
+    <div className="ex1-card-wrapper p-4">
+      <h1 className="text-xl font-semibold m-1">Product List</h1>
+      <ul className="flex flex-wrap justify-center items-start gap-8 py-10">
+        {products.map((product) => (
+          <Card
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            description={product.description}
+            price={product.price}
+            imageSrc={product.imageSrc}
+          />
+        ))}
+      </ul>
+    </div>
   );
 };
 

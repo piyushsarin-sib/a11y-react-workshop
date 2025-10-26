@@ -75,18 +75,21 @@ const CardWrapper = () => {
   ];
 
   return (
-    <ul className="flex flex-wrap justify-center items-start gap-8 py-10">
-      {products.map((product) => (
-        <Card
-          key={product.id}
-          id={product.id}
-          title={product.title}
-          description={product.description}
-          price={product.price}
-          imageSrc={product.imageSrc}
-        />
-      ))}
-    </ul>
+    <div className="ex1-card-wrapper p-4">
+      <h1 className="text-xl font-semibold m-1">Product List</h1>
+      <ul className="flex flex-wrap justify-center items-start gap-8 py-10">
+        {products.map((product) => (
+          <Card
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            description={product.description}
+            price={product.price}
+            imageSrc={product.imageSrc}
+          />
+        ))}
+      </ul>
+    </div>
   );
 };
 
