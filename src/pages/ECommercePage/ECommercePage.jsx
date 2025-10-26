@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 
 import AddToCartModal from "@components/features/AddToCart";
 import AccessibilityBanner from "@components/features/AccessibilityBanner";
@@ -107,18 +107,29 @@ const ECommerce = () => {
   const [filters, setFilters] = useState({ categories: [], prices: [] });
   const { addToCart } = useContext(CartContext);
 
+  // Track refs for all "Add to Cart" buttons to restore focus
+  const buttonRefs = useRef({});
+
   const addToCartModalState = useDialog({
     bodyId: 'add-to-cart-modal',
   });
 
   const handleOpenModal = (product) => {
+    // Set the trigger ref to the button that was clicked
+    // This allows useRestoreFocus to restore focus to the correct button
+    addToCartModalState.trigger.ref.current = buttonRefs.current[product.id];
     setSelectedProduct(product);
     addToCartModalState.open();
   };
 
   const handleCloseModal = () => {
-    setSelectedProduct(null);
+    // Close the modal first (triggers focus restoration)
     addToCartModalState.close();
+    // Then clear the selected product after a brief delay
+    // This allows useRestoreFocus to restore focus before unmounting
+    setTimeout(() => {
+      setSelectedProduct(null);
+    }, 50);
   };
 
   const handleAddToCart = (product, quantity) => {
@@ -189,7 +200,18 @@ const ECommerce = () => {
         </Panel>
 
         {/* Product List Component */}
-        <ProductList products={filteredProducts} onAddToCart={handleOpenModal} />
+        <ProductList
+          products={filteredProducts}
+          onAddToCart={handleOpenModal}
+          getButtonRef={(productId) => (el) => {
+            // Store/remove button ref in our map for focus restoration
+            if (el) {
+              buttonRefs.current[productId] = el;
+            } else {
+              delete buttonRefs.current[productId];
+            }
+          }}
+        />
       </div>
 
       {selectedProduct && (
