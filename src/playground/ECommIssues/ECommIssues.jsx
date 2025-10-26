@@ -112,24 +112,18 @@ const ECommContainer = ({ cartContext }) => {
 
         {/* No results message */}
         {filteredProducts.length === 0 && (
-          <div className="text-center py-8" aria-live="polite">
+          <div className="text-center py-8">
             <p className="text-lg text-gray-600">No products match your search criteria.</p>
             <p className="mt-2">Try adjusting your filters or search terms.</p>
           </div>
         )}
 
         {/* Results count for screen readers */}
-        {filteredProducts.length > 0 && (
-          <div className="sr-only" aria-live="polite">
-            {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"} found
-          </div>
-        )}
-
-        <ul className="grid grid-cols-2  gap-4">
+        <div className="grid grid-cols-2  gap-4">
           {filteredProducts.map((product) => (
-            <li
+            <div
               key={product.id}
-              className="border rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow focus-within:ring-2 focus-within:ring-blue-500"
+              className="border rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow"
             >
               <img
                 src={product.image}
@@ -144,13 +138,13 @@ const ECommContainer = ({ cartContext }) => {
               <button
                 onClick={() => handleOpenModal(product)}
                 className="bg-blue-600 text-white w-full px-3 py-1.5 rounded text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label={`Add ${product.name} to cart`}
+                aria-label={'Add'}
               >
                 Add to Cart
               </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </main>
       <AddToCartModal
         product={selectedProduct}
