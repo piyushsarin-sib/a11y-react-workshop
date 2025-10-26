@@ -122,17 +122,24 @@ accessible-react-workshop/
 │   │   │   │   └── collectionNavigation.js
 │   │   │   └── index.js              # Collection exports
 │   │   ├── 📁 interactions/          # Interaction pattern libraries
+│   │   │   ├── 📁 expansion/         # Expansion/collapse patterns
+│   │   │   │   └── useExpansion.js   # Expansion state management
 │   │   │   ├── 📁 keyboard/          # Keyboard navigation patterns
-│   │   │   │   └── 📁 hooks/
-│   │   │   │       └── useKeyboardNavigation.js # Unified keyboard navigation
+│   │   │   │   ├── 📁 delegates/     # Navigation delegates
+│   │   │   │   │   ├── grid2DDelegate.js      # 2D grid navigation
+│   │   │   │   │   ├── horizontalDelegate.js  # Horizontal navigation
+│   │   │   │   │   ├── linear1DDelegate.js    # Linear navigation
+│   │   │   │   │   └── index.js
+│   │   │   │   ├── 📁 hooks/
+│   │   │   │   │   ├── helpers.js
+│   │   │   │   │   ├── useFocusActiveElement.js
+│   │   │   │   │   ├── useGridLayout.js
+│   │   │   │   │   ├── useKeyboardNavigation.js  # Unified keyboard navigation
+│   │   │   │   │   └── useRovingTabIndex.js
+│   │   │   │   └── 📁 utils/
+│   │   │   │       └── keyboardPrimitives.js
 │   │   │   └── 📁 selection/         # Selection patterns
 │   │   │       └── useSelection.js   # Selection state management
-│   │   ├── 📁 Menu/                  # Menu component library
-│   │   │   ├── index.js              # Menu exports
-│   │   │   ├── MenuList.jsx          # Standalone menu list
-│   │   │   ├── MenuList.css          # Menu styles
-│   │   │   ├── MenuOption.jsx        # Menu item component
-│   │   │   └── MenuSection.jsx       # Menu section component
 │   │   ├── 📁 Tree/                  # Tree component library
 │   │   │   ├── index.js
 │   │   │   ├── Tree.css
@@ -422,6 +429,52 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 
 ## 🌟 Recent Enhancements
 
+### **Best Practices Page Improvements**
+
+- ✅ Reorganized page structure with WCAG POUR principles at the top
+- ✅ Added comprehensive official guidelines and references section
+- ✅ Added development resources (personas, color contrast, screen readers)
+- ✅ Added learning resources (Frontend Masters courses)
+- ✅ Enhanced implementation principles with icons and visual hierarchy
+- ✅ VoiceOver moved to first position in screen reader shortcuts with VO explanation
+- ✅ Manual Testing Methods and Recommended Tools moved above keyboard shortcuts
+- ✅ Smooth scrolling and anchor links for better navigation
+
+### **Color Contrast Improvements**
+
+- ✅ Fixed color contrast ratios across the entire repository to meet WCAG AA standards
+- ✅ Updated text colors in footers, headers, modals, and components
+- ✅ Enhanced search and filter components with better contrast
+- ✅ Improved input field contrast for better visibility
+
+### **ARIA Compliance Enhancements**
+
+- ✅ Fixed inappropriate ARIA roles on semantic HTML elements
+- ✅ Removed `role="rowheader"` from `<article>` elements in ProductList
+- ✅ Changed `<div role="region">` to semantic `<section>` elements
+- ✅ Fixed `aria-orientation` attribute to only apply when explicit ARIA roles are present
+- ✅ Added proper `aria-labelledby` and `aria-describedby` support in Collection component
+
+### **UX and Functional Improvements**
+
+- ✅ Cart now clears immediately on order placement (not on modal close)
+- ✅ Filter removal updates menu and selected filters correctly
+- ✅ Added "Skip to footer" link in ECommercePage header
+- ✅ Cart icon now displays count without parentheses (e.g., "1" instead of "(1)")
+- ✅ Cart icon announces proper grammar: "1 item" (singular) vs "2 items" (plural)
+- ✅ Skip links enhanced with better visibility and proper width
+
+### **Code Organization**
+
+- ✅ ECommIssues component broken into smaller, maintainable modules:
+  - `SearchAndFilter.jsx` - Product search and filtering
+  - `Modal.jsx` - Generic modal component
+  - `CheckoutModal.jsx` - Checkout process
+  - `AddToCartModal.jsx` - Add to cart functionality
+  - `CartModal.jsx` - Shopping cart display
+  - `productsData.js` - Product data
+  - `Layout/Layout.jsx` - Page layout structure
+
 ### **Focus Management Improvements**
 
 - ✅ Enhanced focus trap with dynamic disabled element detection
@@ -432,24 +485,31 @@ Visit the live workshop at: [https://accessible-react-workshop-99af.vercel.app](
 
 ### **Product Grid Accessibility**
 
-- ✅ Adobe spec-compliant card grid pattern
-- ✅ `role="grid"` with `role="row"` and `role="rowheader"` structure
-- ✅ Proper ARIA attributes: `aria-rowindex`, `aria-colindex`, `aria-labelledby`, `aria-describedby`
+- ✅ Adobe spec-compliant card grid pattern (updated to semantic approach)
+- ✅ Proper ARIA attributes: `aria-labelledby`, `aria-describedby`
 - ✅ Dual navigation support: Tab for sequential navigation, Arrow keys for 2D navigation
 - ✅ Collection component handles both navigation patterns automatically
-
-### **E-Commerce UX Improvements**
-
-- ✅ Streamlined checkout modal (immediate order placement)
-- ✅ Enhanced AddToCart modal with "Go to Cart" link (keyboard-inaccessible by design)
-- ✅ Dynamic button states based on quantity and cart status
-- ✅ Larger, consistent modal sizes across playground and solved pages
-- ✅ Updated footer links: Home, Best Practices, Reference links
+- ✅ Semantic HTML (`<section>`) instead of `<div role="region">`
 
 ### **Accessibility Banner**
 
 - ✅ Non-button styling for disability type tags (Motor, Visual, Hearing, Cognitive)
 - ✅ Pill-shaped badges with subtle borders instead of clickable-looking boxes
+
+## ⚠️ Known Issues
+
+### **Menu Component Missing**
+
+The `@lib/Menu` component library was removed during refactoring but is still referenced in several playground exercises:
+
+- `src/playground/Ex3-FilterMenu/` (all step files and solved version)
+- `src/components/features/SearchAndFilter/FilterMenu.jsx`
+
+**Impact**: Build may fail when importing these files.
+
+**Workaround**: The main e-commerce page uses an alternative filter implementation that doesn't rely on the Menu library.
+
+**Status**: The Menu component needs to be either restored or the playground exercises need to be updated to use the alternative implementation.
 
 ---
 

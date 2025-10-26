@@ -1,6 +1,3 @@
-// Main Collection Component (legacy - uses createCollectionAria internally)
-export { default as Collection } from "./classic/Collection";
-
 // Modern Components
 export { ItemRenderer } from "./components/ItemRenderer";
 export { default as Item } from "./components/Item";
@@ -13,5 +10,3 @@ export { useCollectionState } from "./hooks/useCollectionState";
 export { buildCollectionAriaProps } from "./utils/buildCollectionAriaProps";
 export { buildNodeAriaProps } from "./utils/buildNodeAriaProps";
 
-// Legacy utility (used by legacy Collection.jsx - kept for backward compatibility)
-export { createCollectionAria } from "./classic/createCollectionAria";
