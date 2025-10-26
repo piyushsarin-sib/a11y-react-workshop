@@ -1,0 +1,65 @@
+/* Base overlay styles */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Elevation (shadow) */
+.overlay--elevation {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Border */
+.overlay--border {
+  border: 1px solid #e1e5e9;
+}
+
+/* Modal (centered) variant */
+.overlay--modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Backdrop */
+.overlay__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  outline: none;
+  pointer-events: auto; /* Ensure backdrop captures all pointer events */
+}
+
+/* Dialog Overlay Content */
+.dialog-overlay__content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  outline: none;
+}
+
+/* Popup Overlay - Applied directly to BaseOverlay wrapper */
+.popup-overlay {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e1e5e9;
+  position: absolute;
+  outline: none;
+  min-width: 200px;
+}
+
+/* Popup Dialog - For non-modal dialog popovers (when trapFocus=true) */
+.popup-dialog {
+  padding: 16px;
+  outline: none;
+}

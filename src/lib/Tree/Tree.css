@@ -1,0 +1,68 @@
+/* Tree Component Styles */
+
+.tree {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tree ul[role="group"] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tree-section-heading {
+  padding: 8px 4px 4px 4px;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Remove outline from tree container */
+.tree:focus {
+  outline: none;
+}
+
+/* Tree focus styles - remove all outlines from structural elements */
+.tree *:focus {
+  outline: none;
+}
+
+/* Default tree item content styling */
+.tree [role="treeitem"] > div {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 3px;
+  transition: background-color 0.15s ease;
+}
+
+.tree [role="treeitem"] > div:hover {
+  background-color: #f5f5f5;
+}
+
+/* Selection styling */
+.tree [role="treeitem"][aria-selected="true"] > div {
+  background-color: #e3f2fd;
+  border-left: 3px solid #1976d2;
+  padding-left: 5px;
+}
+
+/* Focus outline on content div */
+.tree [role="treeitem"]:focus > div {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Custom item styling classes */
+.featured-location {
+  color: green;
+  font-weight: 600;
+}
+
+.highlighted-item {
+  color: blue;
+  font-weight: bold;
+}
