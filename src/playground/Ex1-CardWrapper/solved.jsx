@@ -43,7 +43,6 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
         {/* ✅ Fixed 1: using <button> and removing the alt */}
         <button
           onClick={handleAddToCart}
-          aria-label={`Add ${title} to cart`}
           className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 text-sm w-full transition-colors rounded"
         >
           Add to Cart

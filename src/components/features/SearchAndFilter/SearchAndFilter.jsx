@@ -81,9 +81,9 @@ const SearchAndFilter = ({ onSearchChange, onFilterChange }) => {
 
   return (
     <div className="mb-8">
-      <h3 id="search-filter-heading" className="sr-only">
+      <p id="search-filter-heading" className="sr-only">
         Search and Filter Options
-      </h3>
+      </p>
 
       {/* Main search and filter container */}
       <div className="flex flex-col md:flex-row gap-4">

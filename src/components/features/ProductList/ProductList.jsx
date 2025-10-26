@@ -51,18 +51,20 @@ const ProductGrid = ({ products, onAddToCart, baseId, getButtonRef }) => {
     children: products.map((product) => {
       const titleId = `${baseId}-title-${product.id}`;
       const descId = `${baseId}-desc-${product.id}`;
+      const priceId = `${baseId}-price-${product.id}`;
 
       return (
         <Item
           key={product.id}
           aria-labelledby={titleId}
-          aria-describedby={descId}
+          aria-describedby={`${descId} ${priceId}`}
         >
           <ProductCard
             product={product}
             onAddToCart={onAddToCart}
             titleId={titleId}
             descId={descId}
+            priceId={priceId}
             buttonRef={getButtonRef?.(product.id)}
           />
         </Item>
@@ -98,7 +100,7 @@ const ProductGrid = ({ products, onAddToCart, baseId, getButtonRef }) => {
 /**
  * ProductCard - Renders individual product content
  */
-const ProductCard = ({ product, onAddToCart, titleId, descId, buttonRef }) => {
+const ProductCard = ({ product, priceId, onAddToCart, titleId, descId, buttonRef }) => {
   return (
     <>
       <img
@@ -113,12 +115,11 @@ const ProductCard = ({ product, onAddToCart, titleId, descId, buttonRef }) => {
       <p id={descId} className="mb-2 text-sm line-clamp-2 h-10 overflow-hidden">
         {product.description}
       </p>
-      <span className="block font-bold mb-2 text-blue-700">{product.price}</span>
+      <p id={priceId} className="block font-bold mb-2 text-blue-700">{product.price}</p>
       <Button
         ref={buttonRef}
         onClick={() => onAddToCart(product)}
         className="w-full px-3 py-1.5 text-sm"
-        aria-label={`Add ${product.name} to cart`}
         variant="primary"
       >
         Add to Cart
@@ -155,6 +156,7 @@ ProductCard.propTypes = {
   onAddToCart: PropTypes.func.isRequired,
   titleId: PropTypes.string.isRequired,
   descId: PropTypes.string.isRequired,
+  priceId: PropTypes.string.isRequired,
   buttonRef: PropTypes.func,
 };
 

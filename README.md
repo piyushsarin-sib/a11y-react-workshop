@@ -91,12 +91,6 @@ accessible-react-workshop/
 │   │   │   ├── 📁 Footer/            # Site footer
 │   │   │   ├── 📁 Header/            # Site header with navigation
 │   │   │   └── 📁 Layout/            # Main layout wrapper
-│   │   ├── 📁 refernces/             # Reference implementations
-│   │   │   ├── FocusTrapFixed.jsx    # Focus trap example
-│   │   │   ├── FocusTrapFixed0.jsx   # Focus trap variation 0
-│   │   │   ├── FocusTrapFixed1.jsx   # Focus trap variation 1
-│   │   │   ├── FocusTrapFixed2.jsx   # Focus trap variation 2
-│   │   │   └── FocusTrapFixed3.jsx   # Focus trap variation 3
 │   │   ├── Footer.jsx                # Legacy footer (deprecated)
 │   │   ├── Header.css                # Header styles
 │   │   ├── Header.jsx                # Legacy header (deprecated)
@@ -113,15 +107,6 @@ accessible-react-workshop/
 │   │   └── index.js                  # Demo exports
 │   ├── 📁 lib/                       # Reusable libraries and utilities
 │   │   ├── 📁 Collections/           # Collection management system
-│   │   │   ├── 📁 classic/    # Legacy collection system (deprecated)
-│   │   │   │   ├── Collection.jsx    # Legacy collection with grid support
-│   │   │   │   ├── CollectionContext.js  # Legacy collection context
-│   │   │   │   ├── CollectionLegacy.css  # Legacy collection styles
-│   │   │   │   ├── createCollectionAria.js  # Legacy ARIA factory function
-│   │   │   │   ├── Item.jsx          # Legacy item component (renders elements)
-│   │   │   │   ├── Section.jsx       # Legacy section component
-│   │   │   │   ├── Nested.jsx        # Legacy nested collections
-│   │   │   │   └── Title.jsx         # Legacy title component
 │   │   │   ├── 📁 components/        # Modern collection components
 │   │   │   │   ├── Item.jsx          # Modern item (metadata only)
 │   │   │   │   ├── Section.jsx       # Modern section (metadata only)
