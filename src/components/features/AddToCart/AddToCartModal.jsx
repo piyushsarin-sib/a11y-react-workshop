@@ -7,6 +7,7 @@ import QuantitySelector from '@common/QuantitySelector';
 
 const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
   const [quantity, setQuantity] = useState(0);
+  const [errorMessage, setErrorMessage] = useState('');
   const { openCartModal, cart, removeFromCart } = useContext(CartContext);
   
   // Check if product is already in cart and set initial quantity
@@ -19,6 +20,13 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
     }
   }, [product, cart]);
 
+  // Clear error message when quantity changes
+  useEffect(() => {
+    if (quantity > 0 || cart.some(item => item.id === product.id)) {
+      setErrorMessage('');
+    }
+  }, [quantity, cart, product]);
+
   const handleIncrease = () => {
     setQuantity(quantity + 1);
   };
@@ -30,10 +38,19 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
   };
 
   const handleClose = () => {
+    setErrorMessage(''); // Clear error on close
     onClose();
   };
 
   const handleAddToCart = () => {
+    // Check if action is valid
+    const isInCart = cart.some(item => item.id === product.id);
+    if (quantity === 0 && !isInCart) {
+      // Show error message instead of disabling
+      setErrorMessage('Please select a quantity before adding to cart');
+      return;
+    }
+
     if (quantity === 0) {
       // If quantity is zero, remove item from cart
       console.log('Removing product from cart:', product.id);
@@ -47,6 +64,14 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
   };
 
   const handleGoToCart = () => {
+    // Check if action is valid
+    const isInCart = cart.some(item => item.id === product.id);
+    if (quantity === 0 && !isInCart) {
+      // Show error message instead of disabling
+      setErrorMessage('Please select a quantity before proceeding to cart');
+      return;
+    }
+
     if (quantity === 0) {
       // If quantity is zero, remove item from cart
       console.log('Removing product from cart in handleGoToCart:', product.id);
@@ -68,14 +93,13 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
     if (quantity === 0 && cart.some(item => item.id === product.id)) {
       return 'Remove from Cart';
     } else if (quantity === 0 && !cart.some(item => item.id === product.id)) {
-      return 'Select Quantity';
+      return 'Add to Cart';
     } else {
-      return quantity > 0 ? 'Update Cart (' + quantity + ')' : 'Update Cart';
+      return quantity > 0 ? `Update Cart (${quantity})` : 'Update Cart';
     }
   };
 
-  const isGoToCartDisabled = quantity === 0 && !cart.some(item => item.id === product.id);
-  const isAddToCartDisabled = quantity === 0 && !cart.some(item => item.id === product.id);
+  const isInCart = cart.some(item => item.id === product.id);
 
   return (
     <DialogOverlay
@@ -100,18 +124,27 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
           />
         </div>
         
+        {/* Error message for accessibility (instead of disabled buttons) */}
+        {errorMessage && (
+          <div
+            className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm"
+            role="alert"
+            aria-live="assertive"
+          >
+            {errorMessage}
+          </div>
+        )}
+        
         {/* Live region for quantity updates */}
         <div className="sr-only" aria-live="polite" aria-atomic="true">
           {quantity > 0 && `${product.name} quantity: ${quantity}`}
-          {quantity === 0 && cart.some(item => item.id === product.id) && `${product.name} will be removed from cart`}
+          {quantity === 0 && isInCart && `${product.name} will be removed from cart`}
         </div>
         
         <div className="flex justify-end mb-4">
           <Button
             onClick={handleAddToCart}
-            variant={isAddToCartDisabled ? "secondary" : "primary"}
-            className={isAddToCartDisabled ? "opacity-50" : ""}
-            disabled={isAddToCartDisabled}
+            variant={quantity === 0 && !isInCart ? "secondary" : "primary"}
             ariaLabel={getButtonText()}
           >
             {getButtonText()}
@@ -121,8 +154,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
           <Button
             onClick={handleGoToCart}
             variant="ghost"
-            className={`text-lg ${isGoToCartDisabled ? 'text-gray-600 cursor-not-allowed' : 'text-blue-600 hover:text-blue-800 underline'}`}
-            disabled={isGoToCartDisabled}
+            className="text-lg text-blue-600 hover:text-blue-800 underline"
             ariaLabel="Go to Cart"
           >
             Go to Cart
