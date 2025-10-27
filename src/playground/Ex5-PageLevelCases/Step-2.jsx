@@ -1,6 +1,9 @@
-// STEP: 2 - Fix skip link accessibility issues
+// Ex5-PageLevelCases/PageLevelCases.jsx : Step 1 - Fix proper heading hierarchy
+
+/* eslint-disable no-unused-vars */
 import { useState, useRef, useEffect } from "react";
 import Button from "@components/common/Button";
+import Checkpoints from "./Checkpoints";
 
 export default function PageLevelCases() {
   const [cartCount, setCartCount] = useState(0);
@@ -8,19 +11,34 @@ export default function PageLevelCases() {
   const cartRef = useRef(null);
   const cartButtonRef = useRef(null);
   const firstAddToCartRef = useRef(null); // for skip link
+  const liveRegionRef = useRef(null); // live region for screen readers
 
   const products = [
     { id: 1, name: "Braille Keyboard", price: "Rs 45000" },
     { id: 2, name: "Wheelchair", price: "Rs 2500" },
   ];
 
-  // Skip link handler
-  const handleSkipToContent = (e) => {
-    e.preventDefault();
-    firstAddToCartRef.current?.focus();
-  };
+  {/* ✅ DONE STEP 1: Add proper skip handler for keyboard navigation. 
+      Create a function `handleSkipToContent` that focuses the main content area when the skip link is activated. 
+      Uncomment the skip link in the JSX below and attach this handler to it.
+  */}
+    const handleSkipToContent = (e) => {
+      e.preventDefault();
+      firstAddToCartRef.current?.focus();
+    };
 
- // Focus trap inside modal
+
+  {/* ✏️ TODO STEP 3: Add missing live region for screen readers to announce not handled by the component itself. 
+      1. Create a live region div with `aria-live="polite"` and `aria-atomic="true"` attributes.
+      2. Use a useEffect hook to update the live region text content whenever `cartCount` changes.
+      Uncomment the useEffect code below and the live region div in the JSX.
+  */}
+  // useEffect(() => {
+  //   if (liveRegionRef.current) {
+  //     liveRegionRef.current.textContent = `Cart updated: ${cartCount} item${cartCount !== 1 ? 's' : ''}`;
+  //   }
+  // }, [cartCount]);
+
   useEffect(() => {
     if (!cartOpen || !cartRef.current) return;
 
@@ -67,10 +85,8 @@ export default function PageLevelCases() {
       }
     };
 
-    // Add event listener
     modalNode.addEventListener("keydown", handleKeyDown);
     
-    // Focus first focusable element after a small delay to ensure rendering
     setTimeout(() => {
       const focusableEls = getFocusableElements();
       if (focusableEls.length > 0) {
@@ -78,19 +94,20 @@ export default function PageLevelCases() {
       }
     }, 0);
 
-    // Cleanup: restore focus to previously focused element
     return () => {
       modalNode.removeEventListener("keydown", handleKeyDown);
-      // Restore focus to the element that was focused before opening modal
       previouslyFocused?.focus?.();
     };
   }, [cartOpen]);
 
   return (
-    <div>
+    <>
+    <div className="ex5-page-level">
       {/* Header Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        {/* Skip Link */}
+        {/* ✅ DONE STEP 1: Add proper skip handler for keyboard navigation. 
+            Uncomment the skip link in the JSX below and attach this handler to it.
+        */}
         <a
           href="#mainContent"
           onClick={handleSkipToContent}
@@ -142,7 +159,20 @@ export default function PageLevelCases() {
 
       {/* Main Content */}
       <main id="mainContent" className="container mx-auto px-4 py-8">
+        {/* ✅ DONE: Add proper heading hierarchy.
+            Change the h3 below to h1 to an appropriate heading level considering the page structure.
+        */}
         <h1 className="text-3xl font-bold mb-4">Shop Products</h1>
+
+        {/* ✏️ TODO STEP 3: Add missing live region for screen readers to announce not handled by the component itself. 
+            Uncomment the the live region div in the JSX.
+        */}
+        {/* <div
+          ref={liveRegionRef}
+          className="sr-only"
+          aria-live="polite"
+          aria-atomic="true"
+        /> */}
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
@@ -161,7 +191,7 @@ export default function PageLevelCases() {
               <p>{product.price}</p>
 
               <Button
-                ref={index === 0 ? firstAddToCartRef : null} // first button for skip link
+                ref={index === 0 ? firstAddToCartRef : null}
                 className="mt-2"
                 size="small"
                 onClick={() => setCartCount(cartCount + 1)}
@@ -204,7 +234,7 @@ export default function PageLevelCases() {
           }}
         >
           <div className="flex flex-col gap-4">
-            <h2 className="text-xl font-semibold">Cart</h2>
+            <h3 className="text-xl font-semibold">Cart</h3>
             <p>Items in your cart: {cartCount}</p>
             <div className="flex justify-between">
               <Button
@@ -220,7 +250,7 @@ export default function PageLevelCases() {
 
               <Button
                 variant="secondary"
-                 onClick={() => setCartOpen(false)}
+                onClick={() => setCartOpen(false)}
               >
                 Close Cart
               </Button>
@@ -229,12 +259,14 @@ export default function PageLevelCases() {
         </dialog>
       )}
     </div>
+    <Checkpoints />
+    </>
   );
 }
 
-/* 
-  Page Level Issues:
-  1. ✅ Proper heading hierarchy: <h1> → <h2> for product sections → <h3> for modal
-  2. ✅ Skip link added to jump to main content
+/*
+  PAGE LEVEL Issues Demo
+  1. ✅ Added skip link for keyboard users
+  2. ✅ Proper heading hierarchy
   3. ❌ No live region for screen readers
 */
