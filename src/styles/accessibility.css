@@ -1,0 +1,80 @@
+/* 
+ * accessibility.css 
+ * Enhanced accessibility styles for form inputs and interactive elements
+ */
+
+/* High contrast focus styles */
+.accessible-focus:focus {
+  outline: 3px solid var(--brand-sky-blue-700);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--brand-sky-blue-700);
+  border-color: var(--brand-sky-blue-700);
+  color: #000000;
+}
+
+/* Improved input text contrast */
+.accessible-input {
+  color: #000000;
+  font-size: 1rem;
+  border: 2px solid var(--brand-charcoal-grey-300, #d1d5db);
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+/* Apply padding only when no custom padding is specified */
+input.accessible-input:not([class*="pl-"]):not([class*="pr-"]):not([class*="py-"]):not([class*="px-"]):not([class*="p-"]) {
+  padding: 0.75rem 1rem;
+}
+
+.accessible-input::placeholder {
+  color: #767676;
+  opacity: 0.8;
+}
+
+/* Error state with enhanced accessibility */
+.accessible-input-error {
+  border-color: var(--sib-color_negative-default);
+  background-color: var(--brand-tulip-red-50, #fff5f5);
+  color: #000000;
+}
+
+/* Active input state */
+.accessible-input:focus {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Ensure high contrast for all inputs */
+input.accessible-input, 
+textarea.accessible-input, 
+select.accessible-input {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Label styles for better visibility */
+.accessible-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--sib-color_content-primary);
+}
+
+/* Error message styles */
+.accessible-error-text {
+  color: var(--sib-color_negative-default);
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* Description text for form fields */
+.accessible-description {
+  color: var(--sib-color_content-secondary);
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Focus visible utility for keyboard-only focus styling */
+.focus-visible:focus-visible {
+  outline: 3px solid var(--brand-sky-blue-700);
+  outline-offset: 2px;
+}

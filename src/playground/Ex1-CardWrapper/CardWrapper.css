@@ -1,0 +1,135 @@
+/* CardWrapper Exercise - Common Styles */
+/* These styles are extracted to reduce duplication across exercise files */
+/* Focus, focus-within, focus-visible, and motion-reduce styles remain inline for demo purposes */
+
+/* Card list item */
+.ex1-card-list-item {
+  flex-shrink: 0;
+}
+
+/* Card container base styles */
+.ex1-card {
+  border-width: 1px;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transform: scale(1);
+  transition-property: transform;
+  width: 480px;
+}
+
+.ex1-card:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .ex1-card {
+    width: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ex1-card {
+    width: 620px;
+  }
+}
+
+/* Card image */
+.ex1-card-image {
+  width: 100%;
+  height: 5rem; /* 80px */
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .ex1-card-image {
+    height: 7rem; /* 112px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .ex1-card-image {
+    height: 8rem; /* 128px */
+  }
+}
+
+/* Card title */
+.ex1-card-title {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card description */
+.ex1-card-description {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 3rem;
+}
+
+/* Card price */
+.ex1-card-price {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: rgb(29 78 216); /* blue-700 */
+}
+
+/* Card button base */
+.ex1-card-button {
+  background-color: rgb(37 99 235); /* blue-600 */
+  color: white;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 100%;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.ex1-card-button:hover {
+  background-color: rgb(29 78 216); /* blue-700 */
+}
+
+/* Wrapper title */
+.ex1-card-wrapper-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin: 0.25rem;
+}
+
+/* Card list container */
+.ex1-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+/* Wrapper container */
+.ex1-card-wrapper {
+  padding: 50px;
+}
+
