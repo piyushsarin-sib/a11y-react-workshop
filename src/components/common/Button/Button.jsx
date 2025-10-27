@@ -26,15 +26,30 @@ const Button = React.forwardRef(({
     large: 'px-6 py-3 text-lg',
   };
 
-  const styles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
+  // Check if aria-disabled is passed (for better accessibility)
+  const isAriaDisabled = props['aria-disabled'] === true || props['aria-disabled'] === 'true';
+
+  const styles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+
+  const handleClick = (e) => {
+    // If aria-disabled is used, prevent action but allow focus
+    if (isAriaDisabled) {
+      e.preventDefault();
+      return;
+    }
+    // Call onClick if provided and not disabled
+    if (onClick && !disabled) {
+      onClick(e);
+    }
+  };
 
   return (
     <button
       ref={ref}
-      onClick={onClick}
+      onClick={handleClick}
       className={styles}
       aria-label={ariaLabel}
-      disabled={disabled}
+      disabled={disabled && !isAriaDisabled} // Only use disabled if not using aria-disabled
       type={type}
       {...props}
     >
@@ -54,6 +69,7 @@ Button.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  'aria-disabled': PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default Button;

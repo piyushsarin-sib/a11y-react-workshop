@@ -145,6 +145,7 @@ const AddToCartModal = ({ product, onAddToCart, onClose, modalState }) => {
           <Button
             onClick={handleAddToCart}
             variant={quantity === 0 && !isInCart ? "secondary" : "primary"}
+            className={quantity === 0 && isInCart ? "bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700" : ""}
             ariaLabel={getButtonText()}
           >
             {getButtonText()}
