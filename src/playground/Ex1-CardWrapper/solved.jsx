@@ -37,7 +37,6 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
           motion-reduce:transition-none"
         aria-labelledby={titleId}
         aria-describedby={`${descriptionId} ${priceId}`}
-        data-motion-reduce="true"
       >
         <img
           src={imageSrc}

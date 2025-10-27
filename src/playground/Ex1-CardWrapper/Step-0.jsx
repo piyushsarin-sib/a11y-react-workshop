@@ -34,7 +34,6 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
         className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 focus:ring-2 focus:ring-blue-500 w-[480px] md:w-[600px] lg:w-[620px]"
         // aria-labelledby={titleId}
         // aria-describedby={`${descriptionId} ${priceId}`}
-        data-motion-reduce="true"
       >
         <img
           src={imageSrc}
