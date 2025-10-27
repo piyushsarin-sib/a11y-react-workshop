@@ -1,19 +1,40 @@
-// STEP: 0 - CardWrapper component with accessibility issues
+// Ex1 CardWrapper.jsx
+
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import PropTypes from "prop-types";
+import Checkpoints from "./Checkpoints";
 
 export const Card = ({ id, title, description, price, imageSrc }) => {
   const handleAddToCart = () => {
     alert("Success");
   };
 
+
+  const titleId = `card-title-${id}`;
+  const descriptionId = `card-desc-${id}`;
+  const priceId = `card-price-${id}`;
+
   return (
     <li className="flex-shrink-0" id={`card-${id}`}>
-      {/* ❌ ISSUE 1: using a div instead of article */}
-      <div
+      {/* ✏️ TODO STEP 2: Improve keyboard navigation by using `focus-within` on parent. 
+          Replace the existing className with:
+          className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 focus-within:ring-2 focus-within:ring-blue-500 w-[480px] md:w-[600px] lg:w-[620px]"
+      */}
+      {/* ✏️ TODO STEP 3: aria label associations. 
+        Use the above IDs to add `aria-labelledby` and `aria-describedby` to the <article> element by uncommenting the lines 35 and 36 */
+      }
+      {/* ✏️ TODO STEP 4: Improve motion reduction support by leveraging prefers-reduced-motion media query by replacing the existing className with below:
+          className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 focus:ring-2 focus:ring-blue-500 w-[480px] md:w-[600px] lg:w-[620px]
+          motion-reduce:transform-none
+          motion-reduce:hover:scale-100
+          motion-reduce:transition-none" */
+      }
+      <article
         className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 focus:ring-2 focus:ring-blue-500 w-[480px] md:w-[600px] lg:w-[620px]"
+        // aria-labelledby={titleId}
+        // aria-describedby={`${descriptionId} ${priceId}`}
+        data-motion-reduce="true"
       >
         <img
           src={imageSrc}
@@ -21,18 +42,21 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
           className="w-full h-20 md:h-28 lg:h-32 object-cover mb-3 rounded"
         />
 
-        {/* ❌ ISSUE 1: using a div instead of h2 */}
-        <div className="text-lg font-semibold line-clamp-1">{title}</div>
+        {/* ✏️ TODO STEP 1: Use a semantic heading tag (<h2>) instead of <div> for better accessibility and page hierarchy */}
+        <div id={titleId} className="text-lg font-semibold line-clamp-1">{title}</div>
 
-        {/* ❌ ISSUE 1: using a div instead of p */}
-        <div className="mb-2 text-sm line-clamp-2 h-12 overflow-hidden">
+        <p id={descriptionId} className="mb-2 text-sm line-clamp-2 h-12 overflow-hidden">
           {description}
-        </div>
+        </p>
 
-        {/* ❌ ISSUE 1: using a div instead of p */}
-        <div className="block font-bold mb-2 text-blue-700">{price}</div>
+        {/* ✏️ TODO STEP 1: Use a semantic paragraph tag (<p>) instead of <div> for better accessibility and page hierarchy */}
+        <div id={priceId} className="block font-bold mb-2 text-blue-700">{price}</div>
 
-        {/* ❌ ISSUE 1: using a div instead of p */}
+        {/* ✏️ TODO STEP 1: Use a semantic button tag (<button>) instead of <div> with proper readable text and without aria-label for better accessibility and page hierarchy */}
+        {/* ✏️ TODO STEP 2: Improve keyboard navigation by using `focus-visible`. 
+            Replace the existing className with:
+            className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 text-sm w-full transition-colors rounded"
+        */}
         <div
           onClick={handleAddToCart}
           aria-label="add"
@@ -40,10 +64,7 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
         >
           Add to Cart
         </div>
-        {/* ❌ ISSUE 2: Focus-visible not used, outline-none hides focus */}
-        {/* ❌ ISSUE 3: No ARIA associations (aria-labelledby/aria-describedby) */}
-        {/* ❌ ISSUE 4: Motion-reduce preference ignored in transitions */}
-      </div>
+      </article>
     </li>
   );
 };
@@ -75,7 +96,7 @@ const CardWrapper = () => {
   ];
 
   return (
-    <div className="ex1-card-wrapper p-4">
+    <div className="ex1-card-wrapper p-4" style={{ padding: "50px" }}>
       <h1 className="text-xl font-semibold m-1">Product List</h1>
       <ul className="flex flex-wrap justify-center items-start gap-8 py-10">
         {products.map((product) => (
@@ -89,6 +110,7 @@ const CardWrapper = () => {
           />
         ))}
       </ul>
+      <Checkpoints />
     </div>
   );
 };
