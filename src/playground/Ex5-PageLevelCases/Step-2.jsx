@@ -1,4 +1,4 @@
-// Ex5-PageLevelCases/PageLevelCases.jsx : Step 1 - Fix proper heading hierarchy
+// Ex5-PageLevelCases/PageLevelCases.jsx : Step 2 - Fix proper heading hierarchy
 
 /* eslint-disable no-unused-vars */
 import { useState, useRef, useEffect } from "react";

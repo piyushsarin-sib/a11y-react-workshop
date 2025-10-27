@@ -1,4 +1,4 @@
-// Ex5-PageLevelCases/PageLevelCases.jsx : Step 2 - Added the missing live region for screen readers to announce cart updates
+// Ex5-PageLevelCases/PageLevelCases.jsx : Step 3 - Added the missing live region for screen readers to announce cart updates
 
 /* eslint-disable no-unused-vars */
 import { useState, useRef, useEffect } from "react";
