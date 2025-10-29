@@ -85,7 +85,7 @@ const Tree = React.forwardRef(
       { ref, ...props },
     );
 
-    // Render tree items and nested tree itens from hierarchical collection
+    // ✅ STEP 5: Merge all props using mergeProps utility Render tree items and nested tree itens from hierarchical collection
     // using ItemRenderer component
     return (
       <WrapperElement {...wrapperProps}>
