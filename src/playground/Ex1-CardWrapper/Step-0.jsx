@@ -26,10 +26,7 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
         Use the above IDs to add `aria-labelledby` and `aria-describedby` to the <article> element by uncommenting the lines 35 and 36 */
       }
       {/* ✏️ TODO STEP 4: Improve motion reduction support by leveraging prefers-reduced-motion media query by replacing the existing className with below:
-          className="ex1-card focus-within:ring-2 focus-within:ring-blue-500
-          motion-reduce:transform-none
-          motion-reduce:hover:scale-100
-          motion-reduce:transition-none" */
+          className="ex1-card focus-within:ring-2 focus-within:ring-blue-500 reduce-motion" */
       }
       <article
         className="ex1-card focus:ring-2 focus:ring-blue-500"
@@ -49,8 +46,7 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
           {description}
         </p>
 
-        {/* ✏️ TODO STEP 1: Use a semantic paragraph tag (<p>) instead of <div> for better accessibility and page hierarchy */}
-        <div id={priceId} className="ex1-card-price">{price}</div>
+        <p id={priceId} className="ex1-card-price">{price}</p>
 
         {/* ✏️ TODO STEP 1: Use a semantic button tag (<button>) instead of <div> with proper readable text and without aria-label for better accessibility and page hierarchy */}
         {/* ✏️ TODO STEP 2: Improve keyboard navigation by using `focus-visible`. 

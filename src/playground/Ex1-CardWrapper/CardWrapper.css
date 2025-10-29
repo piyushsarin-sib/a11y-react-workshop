@@ -133,3 +133,22 @@
   padding: 50px;
 }
 
+
+/* Also respect prefers-reduced-motion when class is present */
+@media (prefers-reduced-motion: reduce) {
+  .ex1-card.reduce-motion {
+    transform: none !important;
+    transition: none !important;
+    transition-property: none !important;
+  }
+
+  .ex1-card.reduce-motion:hover {
+    transform: scale(1) !important;
+  }
+
+  .ex1-card-button.reduce-motion {
+    transition: none !important;
+    transition-property: none !important;
+  }
+}
+

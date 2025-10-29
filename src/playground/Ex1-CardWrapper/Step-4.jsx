@@ -24,17 +24,11 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
       {/* ✅ Done STEP 3: aria label associations. 
         Use the above IDs to add `aria-labelledby` and `aria-describedby` to the <article> element by uncommenting the lines 35 and 36 */
       }
-      {/* ✅ Done STEP 4: Improve motion reduction support by leveraging prefers-reduced-motion media query by replacing the existing className with below:
-          className="ex1-card focus-within:ring-2 focus-within:ring-blue-500
-          motion-reduce:transform-none
-          motion-reduce:hover:scale-100
-          motion-reduce:transition-none" */
+      {/* ✏️ TODO STEP 4: Improve motion reduction support by leveraging prefers-reduced-motion media query by replacing the existing className with below:
+          className="ex1-card focus-within:ring-2 focus-within:ring-blue-500 reduce-motion" */
       }
       <article
-        className="ex1-card focus-within:ring-2 focus-within:ring-blue-500
-          motion-reduce:transform-none
-          motion-reduce:hover:scale-100
-          motion-reduce:transition-none"
+        className="ex1-card focus-within:ring-2 focus-within:ring-blue-500 reduce-motion"
         aria-labelledby={titleId}
         aria-describedby={`${descriptionId} ${priceId}`}
       >
@@ -51,7 +45,6 @@ export const Card = ({ id, title, description, price, imageSrc }) => {
           {description}
         </p>
 
-        {/* ✅ DONE STEP 1: Use a semantic paragraph tag (<p>) instead of <div> for better accessibility and page hierarchy */}
         <p id={priceId} className="ex1-card-price">{price}</p>
 
         {/* ✅ DONE STEP 1: Use a semantic button tag (<button>) instead of <div> with proper readable text and without aria-label for better accessibility and page hierarchy */}
