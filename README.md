@@ -4,7 +4,14 @@ A comprehensive workshop and learning platform focused on building accessible Re
 
 ## 🎯 Overview
 
+This repository serves as a **basic example of how to structure and architect React applications while considering accessibility from day one**. Rather than retrofitting accessibility features, this project demonstrates how to embed accessibility considerations into your development workflow from the very beginning.
+
 This workshop is designed to teach developers how to build truly accessible web applications using React. Through hands-on examples, interactive demos, and real-world scenarios, participants learn to identify and fix accessibility barriers that prevent users with disabilities from effectively using web applications.
+
+## 📺 Reference Video
+
+Learn more about accessibility-first development in this comprehensive video tutorial:
+**[Accessibility from Day One: React Development Done Right](https://www.youtube.com/watch?v=oAhUoBAtgxM)**
 
 ### Key Features
 
@@ -44,6 +51,30 @@ yarn start
 ```
 
 The application will be available at `http://localhost:3009`
+
+## 🏗️ Architecture Philosophy: Accessibility from Day One
+
+This project demonstrates a **fundamental architectural approach**: building accessibility into your React application from the ground up, rather than adding it as an afterthought. Here's how this philosophy is implemented:
+
+### Core Architectural Principles
+
+1. **Accessibility-First Components**: Every component in `/src/components/common/` is built with ARIA attributes, proper semantic HTML, and keyboard navigation as primary concerns.
+
+2. **Structured Navigation Patterns**: The `/src/lib/interactions/` directory contains reusable patterns for keyboard navigation, focus management, and selection states that can be applied consistently across your application.
+
+3. **Semantic Information Architecture**: Components are organized by function and accessibility patterns, making it easy for developers to find and reuse accessible implementations.
+
+4. **Progressive Enhancement**: Basic functionality works without JavaScript, with enhanced interactions layered on top using proper ARIA live regions and state management.
+
+5. **Consistent Design System**: All components use design tokens and consistent styling approaches that maintain accessibility standards across color contrast, spacing, and typography.
+
+### Why This Matters
+
+Building accessibility into your architecture from day one means:
+- **Lower Technical Debt**: No need to retrofit accessibility features later
+- **Consistent User Experience**: All users get the same quality of interaction
+- **Faster Development**: Reusable accessible patterns speed up feature development
+- **Compliance by Design**: WCAG guidelines are met naturally, not forced
 
 ## 📁 Project Structure
 
